@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/firstFragment"
+        android:icon="@drawable/vector_inicio"
+        android:title="Inicio"
+    />
+    <item
+        android:id="@+id/firstFragment2"
+        android:icon="@drawable/staffgroup"
+        android:title="Staff"
+        />
+    <item
+        android:id="@+id/firstFragment3"
+        android:icon="@drawable/fluent_news_16_regular"
+        android:title="Novedades"
+        />
+    <item
+        android:id="@+id/firstFragment4"
+        android:icon="@drawable/contribuir"
+        android:title="Contribuir"
+        />
+    <item
+        android:id="@+id/firstFragment5"
+        android:icon="@drawable/contacto"
+        android:title="Contacto"
+        />
+
+</menu>
