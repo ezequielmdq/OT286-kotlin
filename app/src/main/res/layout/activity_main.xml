@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
@@ -28,6 +29,18 @@
         android:layout_alignParentRight="true"
         app:labelVisibilityMode="selected"
         />
+
+
+    <!-- contenedor de fragmentos temporal hasta tener la navegacion-->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:name="com.melvin.ongandroid.view.HomeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </RelativeLayout>
