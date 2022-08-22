@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val BASE_URL = "https://api.themoviedb.org/3/"
+const val BASE_URL = "https://ongapi.alkemy.org/api/"
 
 object AlkemyAPIClient {
     fun getClient(): AlkemyAPIInterface {
