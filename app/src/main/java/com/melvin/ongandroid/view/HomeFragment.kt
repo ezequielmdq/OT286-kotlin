@@ -6,18 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.melvin.ongandroid.databinding.FragmentHomeBinding
+
+import com.melvin.ongandroid.model.Novedad
+
 import com.melvin.ongandroid.model.AlkemyAPIClient
 import com.melvin.ongandroid.model.data.WelcomeImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var novedadAdapter : NovedadAdapter
+
     private var adapter = ListAdapter()
     private var dataslide = mutableListOf<WelcomeImage>()
-
 
 
 
@@ -28,15 +34,46 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.rv.adapter = adapter
 
+
         loadSlide()
         configLists()
         configObservers()
+        iniciarRecyclerViewNovedades()
+        crearYCargarListaNovedades()
+
 
         return binding.root
 
     }
 
     private fun configObservers() {
+
+    }
+
+
+    
+
+    //Configuracion del Recycler view
+    private fun iniciarRecyclerViewNovedades() {
+        novedadAdapter = NovedadAdapter()
+
+        binding.rvNovedades.apply {
+
+            adapter = novedadAdapter
+
+        }
+    }
+
+    //Carga las listas con imagenes random
+    private fun crearYCargarListaNovedades() {
+        val novedades = listOf(
+            Novedad("Novedad 1", "https://loremflickr.com/320/240", "descripcion 1"),
+            Novedad("Novedad 2", "https://loremflickr.com/320/240/dog", "descripcion 2"),
+            Novedad("Novedad 3", "https://loremflickr.com/g/320/240/paris", "descripcion 3"),
+            Novedad("Novedad 4", "https://loremflickr.com/g/320/240/roma", "descripcion 4")
+        )
+
+        novedadAdapter.actualizarData(novedades)
 
     }
 
@@ -62,6 +99,7 @@ class HomeFragment : Fragment() {
 
    }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -69,3 +107,4 @@ class HomeFragment : Fragment() {
 
 
 }
+
