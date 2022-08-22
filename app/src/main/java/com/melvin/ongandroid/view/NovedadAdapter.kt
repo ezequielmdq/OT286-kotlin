@@ -9,8 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
-import com.melvin.ongandroid.databinding.FlechaBinding
-import com.melvin.ongandroid.databinding.ItemNovedadBinding
+import com.melvin.ongandroid.model.Novedad
 
 
 class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {
