@@ -31,6 +31,9 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
     class WelcomeViewHolder(private val binding: CardviewBienvenidosBinding):
         RecyclerView.ViewHolder(binding.root) {
 
+        /**
+         * enlaza el objeto WelcomeImage pasado como argumento con este Holder
+         */
         fun bind(item: WelcomeImage, context: Context){
 
             binding.apply {
