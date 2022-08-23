@@ -15,7 +15,7 @@
                 android:id="@+id/tvTittleTestimonio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_margin="8dp"
                 android:text="@string/tittleTestimonio"
                 android:textSize="30sp"
@@ -38,7 +38,7 @@
                     layout="@layout/cardview_item_testimonio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/espacioDeSeparacion"/>
+                    android:layout_marginVertical="@dimen/espacioDeSeparacion"/>
 
                 <include
                     android:id="@+id/cardTestimonio2"

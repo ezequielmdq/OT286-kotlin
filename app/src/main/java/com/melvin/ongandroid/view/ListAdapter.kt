@@ -5,12 +5,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.CardviewBienvenidosBinding
-import com.melvin.ongandroid.model.WelcomeImage
+import com.melvin.ongandroid.model.data.WelcomeImage
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
 
-    val list = mutableListOf<WelcomeImage>()
+     var list = mutableListOf<WelcomeImage>()
+
+    // Carga repositorio slide
+    fun loadDataSlide(data : List<WelcomeImage>){
+        list.clear()
+        list.addAll(data)
+        notifyDataSetChanged()
+
+    }
+
     lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WelcomeViewHolder {
@@ -40,6 +50,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
                 welcomeImage = item
                 Glide.with(context)
                     .load(item.image)
+                    .placeholder(R.drawable.loading_animation)
                     .into(imageView)
             }
         }
