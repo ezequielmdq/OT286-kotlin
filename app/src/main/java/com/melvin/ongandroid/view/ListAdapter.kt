@@ -15,10 +15,13 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
 
      private var list = mutableListOf<WelcomeImage>()
 
-
     // Carga repositorio slide
 
-    fun loadDataSlide(data: List<WelcomeImage>){
+
+    
+
+    fun loadDataSlide(data : List<WelcomeImage>){
+
         list.clear()
         list.addAll(data)
         notifyDataSetChanged()
@@ -51,6 +54,13 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
 
     class WelcomeViewHolder(private val binding: CardviewBienvenidosBinding):
         RecyclerView.ViewHolder(binding.root) {
+
+
+
+        /**
+         * enlaza el objeto WelcomeImage pasado como argumento con este Holder
+         */
+        fun bind(item: WelcomeImage, context: Context){
 
 
         fun bind(item: WelcomeImage, context: Context){

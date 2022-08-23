@@ -2,4 +2,5 @@
 <resources>
     <dimen name="cardElevation">8dp</dimen>
     <dimen name="cardCornerRadius">8dp</dimen>
+    <dimen name="espacioDeSeparacion">1dp</dimen>
 </resources>

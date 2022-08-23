@@ -7,4 +7,7 @@
 
     <string name="mensaje_Bienvenidos">Bienvenidos</string>
 
+    <string name="tittleTestimonio">Testimonios</string>
+    <string name="ver_mas_testimonios">Ver mas testimonios</string>
+
 </resources>
