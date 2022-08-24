@@ -5,33 +5,47 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.melvin.ongandroid.databinding.FragmentHomeBinding
 import com.melvin.ongandroid.bindTestimonio
 import com.melvin.ongandroid.databinding.FragmentHomeBinding
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.AlkemyAPIClient
-import com.melvin.ongandroid.model.data.WelcomeImage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.melvin.ongandroid.viewmodel.OngViewModel
+import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 
 class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
     private lateinit var novedadAdapter : NovedadAdapter
     private var adapter = ListAdapter()
-    private var dataslide = mutableListOf<WelcomeImage>()
+
+
+    private val viewModel : OngViewModel by activityViewModels(
+        factoryProducer = {OngViewModelFactory()}
+    )
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
 
         configWelcomeList()
         configTestimonios()
         configObservers()
 
-        loadSlide()
+
+
+
+
+        configLists()
+        configObservers()
+
+        
+
         iniciarRecyclerViewNovedades()
         crearYCargarListaNovedades()
 
@@ -64,6 +78,9 @@ class HomeFragment : Fragment() {
      * configura todos los observadores que se asocian al fragment
      */
     private fun configObservers() {
+        viewModel.listaSlide.observe(viewLifecycleOwner){
+            viewModel.listaSlide.value?.let { it1 -> adapter.loadDataSlide(it1) }
+        }
     }
 
     /**
@@ -116,29 +133,30 @@ class HomeFragment : Fragment() {
 
     //Carga las listas con imagenes random
     private fun crearYCargarListaNovedades() {
-        val novedades = listOf(
-            Novedad("Novedad 1", "https://loremflickr.com/320/240", "descripcion 1"),
-            Novedad("Novedad 2", "https://loremflickr.com/320/240/dog", "descripcion 2"),
-            Novedad("Novedad 3", "https://loremflickr.com/g/320/240/paris", "descripcion 3"),
-            Novedad("Novedad 4", "https://loremflickr.com/g/320/240/roma", "descripcion 4")
-        )
+      //  val novedades = listOf(
+     //       Novedad("Novedad 1", "https://loremflickr.com/320/240", "descripcion 1"),
+     //       Novedad("Novedad 2", "https://loremflickr.com/320/240/dog", "descripcion 2"),
+     //       Novedad("Novedad 3", "https://loremflickr.com/g/320/240/paris", "descripcion 3"),
+     //       Novedad("Novedad 4", "https://loremflickr.com/g/320/240/roma", "descripcion 4")
+     //   )
+        viewModel.loadNovedades()
 
-        novedadAdapter.actualizarData(novedades)
-
-    }
-
-    // Llamado a servicio Retrofit
-    fun loadSlide(){
-        CoroutineScope(Dispatchers.Main).launch {
-            val servicio = AlkemyAPIClient.getClient().getData().body()
-            val data = servicio?.data
-                dataslide.clear()
-                if (data != null) {
-                    dataslide.addAll(data)
-                    adapter.loadDataSlide(dataslide)
-                }
+        viewModel.listaNovedad.observe(viewLifecycleOwner){
+            viewModel.listaNovedad.value?.let { it1 -> novedadAdapter.actualizarData(it1) }
         }
+
+
     }
+    
+
+   private fun configLists(){
+
+       viewModel.loadSlide()
+       binding.rv.adapter = adapter
+
+   }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
