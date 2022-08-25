@@ -1,3 +1,12 @@
 package com.melvin.ongandroid.model
 
-data class Novedad(val titulo: String, val imagen: String, val descripcion: String )
+import com.google.gson.annotations.SerializedName
+
+data class Novedad(
+    @SerializedName("name")
+    val titulo: String,
+    @SerializedName("image")
+    val imagen: String,
+    @SerializedName("content")
+    val descripcion: String
+    )
