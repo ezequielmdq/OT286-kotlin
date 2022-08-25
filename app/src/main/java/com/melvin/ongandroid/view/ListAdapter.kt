@@ -3,6 +3,7 @@ package com.melvin.ongandroid.view
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
@@ -31,6 +32,11 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: WelcomeViewHolder, position: Int) {
+        if (list == emptyList<WelcomeImage>()) {
+            holder.itemView.isVisible = false
+
+        }
+
         holder.bind(list[position], context)
     }
 
