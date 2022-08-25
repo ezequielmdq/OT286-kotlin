@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.melvin.ongandroid.bindTestimonio
 import com.melvin.ongandroid.databinding.FragmentHomeBinding
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.AlkemyAPIClient
 import com.melvin.ongandroid.model.data.WelcomeImage
+import com.melvin.ongandroid.viewmodel.OngViewModel
+import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +23,9 @@ class HomeFragment : Fragment() {
     private lateinit var novedadAdapter : NovedadAdapter
     private var adapter = ListAdapter()
     private var dataslide = mutableListOf<WelcomeImage>()
+    private val viewModel : OngViewModel by activityViewModels(
+        factoryProducer = { OngViewModelFactory() }
+    )
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -31,9 +37,12 @@ class HomeFragment : Fragment() {
         configTestimonios()
         configObservers()
 
-        loadSlide()
+
         iniciarRecyclerViewNovedades()
         crearYCargarListaNovedades()
+
+        cargaListaSlide()
+        cargaListaNovedades()
 
         return binding?.root
     }
@@ -139,6 +148,47 @@ class HomeFragment : Fragment() {
                 }
         }
     }
+
+    // Carga la lista en recycler de slider
+    private fun cargaListaSlide(){
+
+        binding?.let { binding ->
+            binding.rvWelcome.adapter = adapter
+        }
+
+        viewModel.loadSlide()
+
+        viewModel.listaSlide.observe(viewLifecycleOwner){try {
+
+
+           viewModel.listaSlide.value?.let { it1 -> adapter.loadDataSlide(it1) }
+        }catch (e : Exception){
+            adapter.loadDataSlide(emptyList())
+        } }
+    }
+
+    // Carga la lista en recycler de novedad
+
+    private fun cargaListaNovedades(){
+
+        binding?.let { binding ->
+            binding.rvNovedades.apply { adapter = novedadAdapter
+            }
+        }
+
+        viewModel.loadNovedades()
+
+                viewModel.listaNovedad.observe(viewLifecycleOwner) {try {
+
+                  viewModel.listaNovedad.value?.let { it1 -> novedadAdapter.actualizarData(it1) }
+                }catch (e : Exception){
+                      novedadAdapter.actualizarData(emptyList())
+                 }
+                }
+    }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
