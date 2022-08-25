@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 import com.melvin.ongandroid.R
-//import com.melvin.ongandroid.bindTestimonio
 import com.melvin.ongandroid.bindTestimonio
 import com.melvin.ongandroid.databinding.FragmentHomeBinding
 import com.melvin.ongandroid.model.Testimonio
@@ -20,13 +19,15 @@ import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
-    private lateinit var novedadAdapter : NovedadAdapter
+    private lateinit var novedadAdapter: NovedadAdapter
     private var adapter = ListAdapter()
     private var dataslide = mutableListOf<WelcomeImage>()
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -42,15 +43,31 @@ class HomeFragment : Fragment() {
         return binding?.root
     }
 
+
     /**
      * descarga la lista de testimonio y presenta en la cardview de testimonios
      */
     private fun configTestimonios() {
         val list = listOf(
-            Testimonio("Jose", "Lo mejor", " Todos en el Privilege Club se esmeraron y nos mimaron. Hemos recibido de ellos el mejor de los tratos y la mejor voluntad para solucionar unos pequeños problemas personales. Gustavo, Carlos, José y Morgan nos consintieron, junto a Lorena y el resto de los chicos del bar.", "https://loremflickr.com/320/240/dog"),
+            Testimonio(
+                "Jose",
+                "Lo mejor",
+                " Todos en el Privilege Club se esmeraron y nos mimaron. Hemos recibido de ellos el mejor de los tratos y la mejor voluntad para solucionar unos pequeños problemas personales. Gustavo, Carlos, José y Morgan nos consintieron, junto a Lorena y el resto de los chicos del bar.",
+                "https://loremflickr.com/320/240/dog"
+            ),
             Testimonio("Gaston", "Lo Peorsito", "  bla bla", "https://loremflickr.com/320/240"),
-            Testimonio("Mica", "Majomeno", "Como estan bla bla", "https://loremflickr.com/g/320/240/paris"),
-            Testimonio("Nose", "Ahi", "Como estan bla bla", "https://loremflickr.com/320/240/brazil,rio"),
+            Testimonio(
+                "Mica",
+                "Majomeno",
+                "Como estan bla bla",
+                "https://loremflickr.com/g/320/240/paris"
+            ),
+            Testimonio(
+                "Nose",
+                "Ahi",
+                "Como estan bla bla",
+                "https://loremflickr.com/320/240/brazil,rio"
+            ),
         )
 
         binding?.let { it ->
@@ -80,12 +97,16 @@ class HomeFragment : Fragment() {
                 "Hola",
                 "Todos en el Privilege Club se esmeraron y nos mimaron. Hemos recibido de ellos el mejor de los tratos y la mejor voluntad para solucionar unos pequeños problemas personales. Gustavo, Carlos, José y Morgan nos consintieron, junto a Lorena y el resto de los chicos del bar."
             ),
-            WelcomeImage("https://loremflickr.com/320/240/dog",
+            WelcomeImage(
+                "https://loremflickr.com/320/240/dog",
                 "Hola",
-                "Como estan bla bla"),
-            WelcomeImage("https://loremflickr.com/g/320/240/paris",
+                "Como estan bla bla"
+            ),
+            WelcomeImage(
+                "https://loremflickr.com/g/320/240/paris",
                 "Hola",
-                "Como estan bla bla"),
+                "Como estan bla bla"
+            ),
             WelcomeImage(
                 "https://loremflickr.com/320/240/brazil,rio",
                 "Hola",
@@ -136,39 +157,35 @@ class HomeFragment : Fragment() {
 
 
     fun loadSlide() {
-    fun loadSlide(){
-        CoroutineScope(Dispatchers.Main).launch {
-            val servicio = AlkemyAPIClient.getClient().getData().body()
-            val data = servicio?.data
-            dataslide.clear()
-            if (data != null) {
-                dataslide.addAll(data)
-                adapter.loadDataSlide(dataslide)
+            CoroutineScope(Dispatchers.Main).launch {
+                val servicio = AlkemyAPIClient.getClient().getData().body()
+                val data = servicio?.data
+                dataslide.clear()
+                if (data != null) {
+                    dataslide.addAll(data)
+                    adapter.loadDataSlide(dataslide)
+                }
             }
         }
+
+        fun onLoadError(message: String, retryRecycler: () -> Unit) {
+            binding?.let {
+                Snackbar.make(it.root, message, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(resources.getString(R.string.retry)) { retryRecycler() }
+                    .show()
+            }
+        }
+        fun configLists() {
+
+
+        }
+
+
+        override fun onDestroyView() {
+            super.onDestroyView()
+            binding = null
+        }
+
     }
 
-
-
-   private fun configLists(){
-
-
-   }
-
-
-    fun onLoadError(message: String, retryRecycler: () -> Unit) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE)
-            .setAction(resources.getString(R.string.retry)) { retryRecycler() }
-            .show()
-    }
-
-
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
-}
 
