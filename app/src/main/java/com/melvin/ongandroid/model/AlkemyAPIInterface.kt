@@ -1,6 +1,9 @@
 package com.melvin.ongandroid.model
 
+
 import com.melvin.ongandroid.model.data.Novedad
+
+
 import com.melvin.ongandroid.model.data.NovedadData
 import com.melvin.ongandroid.model.data.WelcomeData
 import retrofit2.Response

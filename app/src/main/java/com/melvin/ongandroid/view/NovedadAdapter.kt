@@ -54,8 +54,13 @@ class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() 
     override fun onBindViewHolder(holder: NovedadViewHolder, position: Int) {
 
         if(novedades == emptyList<Novedad>()){
+
              holder.itemView.isVisible = false
         }
+
+
+
+
         if(position == novedades.size){
             //aca iria la implementacion de la flecha que permite pasar a otra pantalla
         }else{
@@ -77,11 +82,13 @@ class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() 
 
     //Recibe una lista y la carga en el recycler view
     fun actualizarData(data: List<Novedad>) {
-       // if(data.size <= 4){
-        novedades.clear()
-        for (a in 0..3) {
-            novedades.add(data[a])
-            notifyDataSetChanged()
+
+        //if(data.size <= 4){
+            novedades.clear()
+            for (a in 0..3) {
+                novedades.add(data[a])
+                notifyDataSetChanged()
+
         }
       //  }
 

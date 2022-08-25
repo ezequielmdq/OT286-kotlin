@@ -40,10 +40,14 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
 
     override fun onBindViewHolder(holder: WelcomeViewHolder, position: Int) {
 
-        if (list == emptyList<WelcomeImage>()){
+
+
+        if (list == emptyList<WelcomeImage>()) {
             holder.itemView.isVisible = false
 
         }
+
+
         holder.bind(list[position], context)
 
     }
@@ -75,4 +79,4 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
         }
 
     }
-}
+}}
