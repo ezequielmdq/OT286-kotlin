@@ -242,7 +242,7 @@ class HomeFragment : Fragment() {
                       novedadAdapter.actualizarData(emptyList())
                  }
                 }
-    }
+    
 
 
 
