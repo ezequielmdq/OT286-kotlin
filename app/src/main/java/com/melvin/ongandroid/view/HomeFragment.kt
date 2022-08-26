@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
 
     private lateinit var novedadAdapter: NovedadAdapter
-    private var adapter = ListAdapter()
+    private lateinit var welcomeImagesAdapter: ListAdapter
 
     private val viewModel: OngViewModel by activityViewModels(
         factoryProducer = {
@@ -35,13 +35,15 @@ class HomeFragment : Fragment() {
         }
     )
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
 
+        //inflo en binding
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        //inicializo observadores
         configObservers()
-        //onLoadError(" ", { Unit })
 
         return binding?.root
     }
@@ -55,7 +57,7 @@ class HomeFragment : Fragment() {
             //observador a la lista de welcomeImages
             listaSlide.observe(viewLifecycleOwner, Observer { welcomeImages ->
                 welcomeImages?.let {
-                    configWelcomeList(welcomeImages)
+                    configWelcomeImages(welcomeImages)
                 }
             })
 
@@ -69,8 +71,14 @@ class HomeFragment : Fragment() {
             //observador a la lista de novedades
             listaNovedad.observe(viewLifecycleOwner, Observer { novedades ->
                 novedades?.let {
-                    iniciarRecyclerViewNovedades()
-                    crearYCargarListaNovedades(novedades)
+                    configNovedades(novedades)
+                }
+            })
+
+            //observador del liveData "error" que me avisara cuando haya un error
+            error.observe(viewLifecycleOwner, Observer { error ->
+                error?.let {
+                    onLoadError()
                 }
             })
 
@@ -94,89 +102,43 @@ class HomeFragment : Fragment() {
     /**
      * configura configura la lista de Bienvenida
      */
-    private fun configWelcomeList(welcomeImages: List<WelcomeImage>) {
+    private fun configWelcomeImages(welcomeImages: List<WelcomeImage>) {
         //instancio el adapter
-        val adapter = ListAdapter()
+        welcomeImagesAdapter = ListAdapter()
         //seteo la lista al adapter
-        adapter.list.addAll(welcomeImages)
+        welcomeImagesAdapter.list.addAll(welcomeImages)
         //seteo el adapter al recyclerView "Binenvenidos"
         binding?.let { binding ->
-            binding.rvWelcome.adapter = adapter
+            binding.rvWelcome.adapter = welcomeImagesAdapter
         }
     }
 
     /**
-     *Configuracion del Recycler view
+     * configura la lista de novedades
      */
-    private fun iniciarRecyclerViewNovedades() {
+    private fun configNovedades(novedades: List<Novedad>){
         novedadAdapter = NovedadAdapter()
         binding?.let { binding ->
             binding.rvNovedades.apply {
                 adapter = novedadAdapter
             }
         }
+        novedadAdapter.actualizarData(novedades)
     }
 
     /**
-     *Carga las listas con imagenes random
+     * crea un snackBar presentando un mensaje de error y da la opcion de reintentar cargar
      */
-    private fun crearYCargarListaNovedades(novedades: List<Novedad>) {
-        novedadAdapter.actualizarData(novedades)
-    }
-
-    fun onLoadError(message: String, retryRecycler: () -> Unit) {
+    fun onLoadError() {
         binding?.let {
-            Snackbar.make(it.root, message, Snackbar.LENGTH_INDEFINITE)
-                .setAction(resources.getString(R.string.retry)) {
-                    retryRecycler()
+            Snackbar
+                .make(it.root, resources.getString(R.string.retry), Snackbar.LENGTH_INDEFINITE)
+                .setAction("Reintentar") {
+                    //el boton reintentar ejecutara el metodo "retry" implementado en el viewModel
+                    viewModel.retry()
                 }
                 .show()
         }
-    }
-
-    // Carga la lista en recycler de slider
-    //ya estaba la funcion "configWelcomeList" que hacia esto
-    //el observador esta en configObservers
-    private fun cargaListaSlide() {
-
-        binding?.let { binding ->
-            binding.rvWelcome.adapter = adapter
-        }
-
-        /*viewModel.listaSlide.observe(viewLifecycleOwner) {
-            try {
-                viewModel.listaSlide.value?.let {
-                        it1 -> adapter.loadDataSlide(it1)
-                }
-            } catch (e: Exception) {
-                adapter.loadDataSlide(emptyList())
-            }
-        }*/
-    }
-
-    //se supone que las funciones iniciarRecyclerViewNovedades y crearYCargarListaNovedades
-    //ya hacian esto
-    //el observador lo movi a configObservers
-    // Carga la lista en recycler de novedad
-    private fun cargaListaNovedades(novedades: List<Novedad>) {
-
-        binding?.let { binding ->
-            binding.rvNovedades.apply {
-                adapter = novedadAdapter
-            }
-        }
-        novedadAdapter.actualizarData(novedades)
-
-        //el observador lo puse en configObservers//
-        /*viewModel.listaNovedad.observe(viewLifecycleOwner) {
-            try {
-                viewModel.listaNovedad.value?.let {
-                        it1 -> novedadAdapter.actualizarData(it1)
-                }
-            } catch (e: Exception) {
-                novedadAdapter.actualizarData(emptyList())
-            }
-        }*/
     }
 
     override fun onDestroyView() {

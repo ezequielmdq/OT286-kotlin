@@ -31,6 +31,7 @@ object AlkemyAPIClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
     fun getClient(): AlkemyAPIInterface {
         return getClient
     }

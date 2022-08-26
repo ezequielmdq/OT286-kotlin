@@ -28,8 +28,11 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
 
     //lista de testimonios observable
     private val _listaTestimonios = MutableLiveData<List<Testimonio>?>()
-        val listaTestimonios : LiveData<List<Testimonio>?> = _listaTestimonios
+    val listaTestimonios : LiveData<List<Testimonio>?> = _listaTestimonios
 
+    //observable que se cambiara a true si hay un error de carga
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> = _error
 
     val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         // handle thrown exceptions from coroutine scope
@@ -37,43 +40,72 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
     }
 
     init {
+       loadAll()
+    }
+
+    private fun loadAll(){
         loadSlide()
         loadTestimonios()
         loadNovedades()
     }
 
-    //Carga slide
+    /**
+     * hace la peticion de WelcomeImages con su repository correspondiente
+     * en caso de error setea el liveData "_onErrorLoad" en true
+     * para que los observadores se enteren del error
+     */
     private fun loadSlide() {
         viewModelScope.launch(coroutineExceptionHandler){
             try {
                 val list = repositoryWelcomeImages.getWellcomeImages()
                 _listaSlide.value = list
             }catch (e : Exception){
+                //seteo el observable error en true
+                _error.value = true
                 _listaSlide.value = emptyList()
             }
         }
     }
 
-    //Carga novedades
+    /**
+     * hace la peticion de novedades con su repository correspondiente
+     * en caso de error setea el liveData "_onErrorLoad" en true
+     * para que los observadores se enteren del error
+     */
     private fun loadNovedades() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryNovedades.getNovedades()
                 _listaNovedad.value = list
             }catch (e : Exception){
+                //seteo el observable error en true
+                _error.value = true
                 _listaNovedad.value = emptyList()
             }}
     }
 
-    //carga testimonios
+    /**
+     * hace la peticion de tertimonios con su repository correspondiente
+     * en caso de error setea el liveData "_onErrorLoad" en true
+     * para que los observadores se enteren del error
+     */
     private fun loadTestimonios() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryTestimonios.getTestimonios()
                 _listaTestimonios.value = list
             }catch (e : Exception){
+                //seteo el observable error en true
+                _error.value = true
                 _listaTestimonios.value = emptyList()
             }}
     }
 
+    /**
+     * vuelve a intentar cargar todos los datos de los reposiorios
+     */
+    fun retry(){
+        //lo hice temporalmente asi, no estoy muy seguro que decia el ticket de respuesta de error
+        loadAll()
+    }
 }
