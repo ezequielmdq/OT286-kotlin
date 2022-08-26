@@ -8,5 +8,4 @@ data class NovedadData(
     val data : List<Novedad>,
     val image : String
 
-
 )
