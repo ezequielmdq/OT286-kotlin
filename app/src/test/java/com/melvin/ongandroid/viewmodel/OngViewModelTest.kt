@@ -2,6 +2,7 @@ package com.melvin.ongandroid.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.melvin.ongandroid.model.Novedad
+import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.WelcomeImage
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
@@ -9,12 +10,11 @@ import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepos
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
-import kotlinx.coroutines.Dispatchers
+
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.resetMain
+
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
+
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -162,6 +162,61 @@ class OngViewModelTest{
 
         //Then
         assert(emptyList == ongViewModel.listaNovedad.value)
+    }
+
+
+    /** CASO EXITO
+     * Este test comprueba que cada vez que se llama al metodo que hace la consulta a la api en repositorio
+     *  y este trae la lista, esta se guarda efectivamente en el LiveData
+     */
+    @Test
+    fun `when getTestimonios return a list of images set on the LiveData`() = runTest{
+        //Given
+        val list = listOf(Testimonio(1, "Testimonio 1", "example.png", "descripcion 1"))
+        coEvery {repositoryTestimonio.getTestimonios()} returns list
+
+        //When
+        ongViewModel.loadTestimonios()
+
+        //Then
+        assert(ongViewModel.listaTestimonios.value == list)
+
+    }
+
+    /** CASO ERROR
+     * Este test comprueba que cada vez que se llama al metodo que hace la consulta a la api en repositorio
+     *  y este falla trayendo una lista vacia, esta se guarda efectivamente en el LiveData
+     */
+    @Test
+    fun `when getTestimonios return a empty list set on the LiveData`(){
+
+        val emptyList = emptyList<Testimonio>()
+
+        //Given
+        coEvery { repositoryTestimonio.getTestimonios() } returns emptyList()
+        //When
+        ongViewModel.loadTestimonios()
+
+        //Then
+        assert(emptyList == ongViewModel.listaTestimonios.value)
+
+    }
+
+    /** CASO ERROR
+     * Este test comprueba que cada vez que se llama al metodo que hace la consulta a la api en repositorio
+     *  y este trae un null, en el LiveData se deberia guardar una lista vacia.
+     */
+    @Test
+    fun `if getTestimonios return a null set a empty list on the LiveData`(){
+        val emptyList = emptyList<WelcomeImage>()
+
+        //Given
+        coEvery { repositoryTestimonio.getTestimonios() } returns null
+        //When
+        ongViewModel.loadTestimonios()
+
+        //Then
+        assert(emptyList == ongViewModel.listaTestimonios.value)
     }
 
 
