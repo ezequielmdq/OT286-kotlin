@@ -20,7 +20,6 @@ import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepos
 import com.melvin.ongandroid.viewmodel.OngViewModel
 import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 
-
 class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
 
@@ -141,9 +140,15 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Usar esta Funcion spinner cada vez estamos cargando datos
+    private fun progressBarLoading (show: Boolean){
+        with(binding){
+            binding?.spinnerCarga1?.spinnerApi?.visibility = if(show) View.VISIBLE else View.GONE
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
 }
-
