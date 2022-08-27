@@ -114,6 +114,7 @@ class HomeFragment : Fragment() {
         //seteo la lista al adapter
         welcomeImagesAdapter.list.addAll(welcomeImages)
 
+
         //seteo el adapter al recyclerView "Binenvenidos"
         binding?.let { binding ->
             binding.rvWelcome.adapter = welcomeImagesAdapter
@@ -130,6 +131,7 @@ class HomeFragment : Fragment() {
                 adapter = novedadAdapter
             }
         }
+
         novedadAdapter.actualizarData(novedades)
     }
 
@@ -144,6 +146,7 @@ class HomeFragment : Fragment() {
                 .setAction("Reintentar") {
                     //el boton reintentar ejecutara el metodo "retry" implementado en el viewModel
                     viewModel.retry()
+
                 }
                 .show()
         }

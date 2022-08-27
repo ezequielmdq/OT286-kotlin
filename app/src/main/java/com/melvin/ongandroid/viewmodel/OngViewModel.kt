@@ -58,7 +58,15 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         viewModelScope.launch(coroutineExceptionHandler){
             try {
                 val list = repositoryWelcomeImages.getWellcomeImages()
-                _listaSlide.value = list
+
+                if(list.isNullOrEmpty()){
+                    _listaSlide.value = emptyList()
+                    _error.value = true
+                }else{
+                    _listaSlide.value = list
+                }
+
+
             }catch (e : Exception){
                 //seteo el observable error en true
                 _error.value = true
@@ -76,7 +84,15 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryNovedades.getNovedades()
-                _listaNovedad.value = list
+
+                if(list.isNullOrEmpty()){
+                    _listaNovedad.value = emptyList()
+                    _error.value = true
+                }else{
+                    _listaNovedad.value = list
+                }
+
+
             }catch (e : Exception){
                 //seteo el observable error en true
                 _error.value = true
@@ -93,7 +109,13 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryTestimonios.getTestimonios()
+
+                if(list.isNullOrEmpty()){
+                    _listaTestimonios.value = emptyList()
+                    _error.value = true
+                }else{
                 _listaTestimonios.value = list
+                }
             }catch (e : Exception){
                 //seteo el observable error en true
                 _error.value = true
