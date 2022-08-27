@@ -100,39 +100,11 @@ class HomeFragment : Fragment() {
      * configura configura la lista de Bienvenida
      */
     private fun configWelcomeList() {
-        val list = listOf(
-            WelcomeImage(
-                "https://loremflickr.com/320/240",
-                "Hola",
-                "Todos en el Privilege Club se esmeraron y nos mimaron. Hemos recibido de ellos el mejor de los tratos y la mejor voluntad para solucionar unos pequeños problemas personales. Gustavo, Carlos, José y Morgan nos consintieron, junto a Lorena y el resto de los chicos del bar."
-            ),
-            WelcomeImage(
-                "https://loremflickr.com/320/240/dog",
-                "Hola",
-                "Como estan bla bla"
-            ),
-            WelcomeImage(
-                "https://loremflickr.com/g/320/240/paris",
-                "Hola",
-                "Como estan bla bla"
-            ),
-            WelcomeImage(
-                "https://loremflickr.com/320/240/brazil,rio",
-                "Hola",
-                "Como estan bla bla"
-            ),
-            WelcomeImage(
-                "https://loremflickr.com/g/320/240/paris,girl/all",
-                "Hola",
-                "Como estan bla bla"
-            )
-        )
-
 
         //instancio el adapter
-        val adapter = ListAdapter()
+
         //seteo la lista al adapter
-        adapter.list.addAll(list)
+
         //seteo el adapter al recyclerView "Binenvenidos"
         binding?.let { binding ->
             binding.rvWelcome.adapter = adapter
@@ -208,8 +180,6 @@ class HomeFragment : Fragment() {
 
         viewModel.listaSlide.observe(viewLifecycleOwner) {
             try {
-
-
                 viewModel.listaSlide.value?.let { it1 -> adapter.loadDataSlide(it1) }
             } catch (e: Exception) {
                 adapter.loadDataSlide(emptyList())
