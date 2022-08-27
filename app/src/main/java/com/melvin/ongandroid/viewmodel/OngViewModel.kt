@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+//import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.data.NovedadDataRepositorio
+import com.melvin.ongandroid.model.data.NovedadData
 import com.melvin.ongandroid.model.data.WelcomeDataRepositorio
 import com.melvin.ongandroid.model.data.WelcomeImage
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -16,6 +18,9 @@ class OngViewModel(private val repositoryWelcome : WelcomeDataRepositorio, priva
 
     private val _listaSlide = MutableLiveData<List<WelcomeImage>>()
     private val _listaNovedad = MutableLiveData<List<Novedad>>()
+
+
+
 
     val listaSlide : LiveData<List<WelcomeImage>> = _listaSlide
     val listaNovedad : LiveData<List<Novedad>> = _listaNovedad
@@ -32,6 +37,7 @@ class OngViewModel(private val repositoryWelcome : WelcomeDataRepositorio, priva
                 _listaSlide.value = repositoryWelcome.getDataSlide()
             }catch (e : Exception){
                 _listaSlide.value = emptyList()
+
             }
         }
     }
@@ -44,6 +50,14 @@ class OngViewModel(private val repositoryWelcome : WelcomeDataRepositorio, priva
                 _listaNovedad.value = repositoryNovedad.getDataNovedad()
             }catch (e : Exception){
                 _listaNovedad.value = emptyList()
+
             }}
     }
+
+
+
+
+
 }
+
+

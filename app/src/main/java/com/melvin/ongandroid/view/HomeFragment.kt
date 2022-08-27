@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.internal.bind.ArrayTypeAdapter
@@ -27,7 +28,7 @@ class HomeFragment : Fragment() {
     private lateinit var novedadAdapter: NovedadAdapter
     private var adapter = ListAdapter()
     private var dataslide = mutableListOf<WelcomeImage>()
-    private val viewModel : OngViewModel by activityViewModels(
+    private val viewModel: OngViewModel by activityViewModels(
         factoryProducer = { OngViewModelFactory() }
     )
 
@@ -54,7 +55,7 @@ class HomeFragment : Fragment() {
         cargaListaSlide()
         cargaListaNovedades()
 
-        progressBarLoading(false)
+
 
 
 
@@ -103,6 +104,7 @@ class HomeFragment : Fragment() {
      * configura todos los observadores que se asocian al fragment
      */
     private fun configObservers() {
+
     }
 
     /**
@@ -160,14 +162,14 @@ class HomeFragment : Fragment() {
 
     //Carga las listas con imagenes random
     private fun crearYCargarListaNovedades() {
-        val novedades = listOf(
-            Novedad("Novedad 1", "https://loremflickr.com/320/240", "descripcion 1"),
-            Novedad("Novedad 2", "https://loremflickr.com/320/240/dog", "descripcion 2"),
-            Novedad("Novedad 3", "https://loremflickr.com/g/320/240/paris", "descripcion 3"),
-            Novedad("Novedad 4", "https://loremflickr.com/g/320/240/roma", "descripcion 4")
-        )
+//        val novedades = listOf(
+//            Novedad("Novedad 1", "https://loremflickr.com/320/240", "descripcion 1"),
+//            Novedad("Novedad 2", "https://loremflickr.com/320/240/dog", "descripcion 2"),
+//            Novedad("Novedad 3", "https://loremflickr.com/g/320/240/paris", "descripcion 3"),
+//            Novedad("Novedad 4", "https://loremflickr.com/g/320/240/roma", "descripcion 4")
+//        )
 
-        novedadAdapter.actualizarData(novedades)
+     //   novedadAdapter.actualizarData(viewModel.listaNovedad.value)
 
     }
 
@@ -175,38 +177,39 @@ class HomeFragment : Fragment() {
 
 
     fun loadSlide() {
-            CoroutineScope(Dispatchers.Main).launch {
-                val servicio = AlkemyAPIClient.getClient().getData().body()
-                val data = servicio?.data
-                dataslide.clear()
-                if (data != null) {
-                    dataslide.addAll(data)
-                    adapter.loadDataSlide(dataslide)
-                }
+        CoroutineScope(Dispatchers.Main).launch {
+            val servicio = AlkemyAPIClient.getClient().getData().body()
+            val data = servicio?.data
+            dataslide.clear()
+            if (data != null) {
+                dataslide.addAll(data)
+                adapter.loadDataSlide(dataslide)
             }
         }
+    }
 
-        fun onLoadError(message: String, retryRecycler: () -> Unit) {
-            binding?.let {
-                Snackbar.make(it.root, message, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(resources.getString(R.string.retry)) { retryRecycler() }
-                    .show()
-            }
+    fun onLoadError(message: String, retryRecycler: () -> Unit) {
+        binding?.let {
+            Snackbar.make(it.root, message, Snackbar.LENGTH_INDEFINITE)
+                .setAction(resources.getString(R.string.retry)) { retryRecycler() }
+                .show()
         }
-        fun configLists() {
+    }
+
+    fun configLists() {
 
 
-        }
+    }
 
 
-        override fun onDestroyView() {
-            super.onDestroyView()
-            binding = null
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 
 
     // Carga la lista en recycler de slider
-    private fun cargaListaSlide(){
+    private fun cargaListaSlide() {
 
         binding?.let { binding ->
             binding.rvWelcome.adapter = adapter
@@ -214,55 +217,52 @@ class HomeFragment : Fragment() {
 
         viewModel.loadSlide()
 
-        viewModel.listaSlide.observe(viewLifecycleOwner){try {
+        viewModel.listaSlide.observe(viewLifecycleOwner) {
+            try {
 
 
-           viewModel.listaSlide.value?.let { it1 -> adapter.loadDataSlide(it1) }
-        }catch (e : Exception){
-            adapter.loadDataSlide(emptyList())
-        } }
+                viewModel.listaSlide.value?.let { it1 -> adapter.loadDataSlide(it1) }
+            } catch (e: Exception) {
+                adapter.loadDataSlide(emptyList())
+            }
+        }
     }
 
 
     // Carga la lista en recycler de novedad
 
-    private fun cargaListaNovedades(){
+    private fun cargaListaNovedades() {
 
         binding?.let { binding ->
-            binding.rvNovedades.apply { adapter = novedadAdapter
+            binding.rvNovedades.apply {
+                adapter = novedadAdapter
             }
         }
 
         viewModel.loadNovedades()
 
-                viewModel.listaNovedad.observe(viewLifecycleOwner) {try {
+        viewModel.listaNovedad.observe(viewLifecycleOwner) {
+            try {
 
-                  viewModel.listaNovedad.value?.let { it1 -> novedadAdapter.actualizarData(it1) }
-                }catch (e : Exception){
-                      novedadAdapter.actualizarData(emptyList())
-                 }
-                }
-    
-
-
-
-
-
-
-
-    // Usar esta Funcion spinner cada vez estamos cargando datos
-
-
-       private fun progressBarLoading (show: Boolean){
-            with(binding){
-                binding?.spinnerCarga1?.spinnerApi?.visibility = if(show) View.VISIBLE else View.GONE
+                viewModel.listaNovedad.value?.let { it1 -> novedadAdapter.actualizarData(it1) }
+            } catch (e: Exception) {
+                novedadAdapter.actualizarData(emptyList())
             }
-
-
-
         }
 
 
+    }
+
+    // Usar esta Funcion spinner cada vez estamos cargando datos
+
+    private fun progressBarLoading(show: Boolean) {
+        with(binding) {
+            binding?.spinnerCarga1?.spinnerApi?.visibility =
+                if (show) View.VISIBLE else View.GONE
+        }
+
+
+    }
 
 
 
