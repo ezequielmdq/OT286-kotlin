@@ -1,7 +1,7 @@
 package com.melvin.ongandroid.model
 
-data class Testimonio(val name: String,
-                      val epigrafe: String,
-                      val text: String,
+data class Testimonio(val id: Int,
+                      val name: String,
                       val image: String,
+                      val description: String,
 )

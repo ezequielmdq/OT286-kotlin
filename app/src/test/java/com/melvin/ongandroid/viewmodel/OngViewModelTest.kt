@@ -2,10 +2,10 @@ package com.melvin.ongandroid.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.melvin.ongandroid.model.Novedad
-import com.melvin.ongandroid.model.data.NovedadData
-import com.melvin.ongandroid.model.data.NovedadDataRepositorio
-import com.melvin.ongandroid.model.data.WelcomeDataRepositorio
-import com.melvin.ongandroid.model.data.WelcomeImage
+import com.melvin.ongandroid.model.WelcomeImage
+import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
+import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
+import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
@@ -23,15 +23,24 @@ import org.junit.Test
 class OngViewModelTest{
 
     @RelaxedMockK
-    private lateinit var repositoryWelcome : WelcomeDataRepositorio
+    private lateinit var repositoryWelcome : WelcomeDataRepository
 
     @RelaxedMockK
-    private lateinit var repositoryNovedad : NovedadDataRepositorio
+    private lateinit var repositoryNovedad : NovedadDataRepository
+
+    @RelaxedMockK
+    private lateinit var repositoryTestimonio : TestimonioDataRepository
 
     private lateinit var ongViewModel: OngViewModel
 
+    /**
+     * Estas dos reglas son necesarias para que funcionen las corrutinas
+     */
     @get:Rule
     var rule: InstantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    var mainDispatcherRule = MainDispatcherRule()
 
     /**
      * Aca se prepara la configuracion inicial para hacer los tests, esto se ejecuta antes de los tests
@@ -39,17 +48,11 @@ class OngViewModelTest{
     @Before
     fun onBefore(){
         MockKAnnotations.init(this)
-        ongViewModel = OngViewModel(repositoryWelcome, repositoryNovedad)
-        Dispatchers.setMain(Dispatchers.Unconfined)
+        ongViewModel = OngViewModel(repositoryWelcome, repositoryNovedad, repositoryTestimonio)
+
     }
 
-    /**
-     * Este metodo se ejecuta luego de los tests y es para resetear el Dispatcher que nos sirvio para trabajar con corutinas
-     */
-    @After
-    fun onAfter() {
-        Dispatchers.resetMain()
-    }
+
 
 
     /** CASO EXITO
@@ -57,10 +60,10 @@ class OngViewModelTest{
      *  y este trae la lista, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getDataSlide return a list of images set on the LiveData`() = runTest{
+    fun `when getWellcomeImages return a list of images set on the LiveData`() = runTest{
     //Given
         val list = listOf(WelcomeImage("example.png", "Imagen 1", "Descripcion 1"))
-        coEvery {repositoryWelcome.getDataSlide()} returns list
+        coEvery {repositoryWelcome.getWellcomeImages()} returns list
 
     //When
         ongViewModel.loadSlide()
@@ -75,12 +78,12 @@ class OngViewModelTest{
      *  y este falla trayendo una lista vacia, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getDataSlide return a empty list set on the LiveData`(){
+    fun `when getWellcomeImages return a empty list set on the LiveData`(){
 
         val emptyList = emptyList<WelcomeImage>()
 
         //Given
-        coEvery { repositoryWelcome.getDataSlide() } returns emptyList()
+        coEvery { repositoryWelcome.getWellcomeImages() } returns emptyList()
         //When
         ongViewModel.loadSlide()
 
@@ -94,11 +97,11 @@ class OngViewModelTest{
      *  y este trae un null, en el LiveData se deberia guardar una lista vacia.
      */
     @Test
-    fun `if getDataSlide return a null set a empty list on the LiveData`(){
+    fun `if getWellcomeImages return a null set a empty list on the LiveData`(){
         val emptyList = emptyList<WelcomeImage>()
 
         //Given
-        coEvery { repositoryWelcome.getDataSlide() } returns null
+        coEvery { repositoryWelcome.getWellcomeImages() } returns null
         //When
         ongViewModel.loadSlide()
 
@@ -112,10 +115,10 @@ class OngViewModelTest{
      *  y este trae la lista con valores, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getDataNovedad return a list of images set on the LiveData`() = runTest{
+    fun `when getNovedades return a list of images set on the LiveData`() = runTest{
         //Given
         val list = listOf(Novedad("example.png", "Imagen 1", "Descripcion 1"))
-        coEvery {repositoryNovedad.getDataNovedad()} returns list
+        coEvery {repositoryNovedad.getNovedades()} returns list
 
         //When
         ongViewModel.loadNovedades()
@@ -130,12 +133,12 @@ class OngViewModelTest{
      *  y este falla trayendo una lista vacia, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getDataNovedad return a empty list set on the LiveData`(){
+    fun `when getNovedades return a empty list set on the LiveData`(){
 
         val emptyList = emptyList<Novedad>()
 
         //Given
-        coEvery { repositoryNovedad.getDataNovedad() } returns emptyList()
+        coEvery { repositoryNovedad.getNovedades() } returns emptyList()
         //When
         ongViewModel.loadNovedades()
 
@@ -149,11 +152,11 @@ class OngViewModelTest{
      *  y este trae un null, en el LiveData se deberia guardar una lista vacia.
      */
     @Test
-    fun `if getDataNovedad return a null set a empty list on the LiveData`(){
+    fun `if getNovedades return a null set a empty list on the LiveData`(){
         val emptyList = emptyList<Novedad>()
 
         //Given
-        coEvery { repositoryNovedad.getDataNovedad() } returns null
+        coEvery { repositoryNovedad.getNovedades() } returns null
         //When
         ongViewModel.loadNovedades()
 
