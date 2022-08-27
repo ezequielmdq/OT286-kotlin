@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.internal.bind.ArrayTypeAdapter
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.bindTestimonio
 import com.melvin.ongandroid.databinding.FragmentHomeBinding
@@ -37,6 +39,9 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
+
+
         configWelcomeList()
         configTestimonios()
         configObservers()
@@ -48,6 +53,10 @@ class HomeFragment : Fragment() {
 
         cargaListaSlide()
         cargaListaNovedades()
+
+        progressBarLoading(false)
+
+
 
         return binding?.root
     }
@@ -187,6 +196,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+
     // Carga la lista en recycler de novedad
 
     private fun cargaListaNovedades() {
@@ -202,6 +212,7 @@ class HomeFragment : Fragment() {
         viewModel.listaNovedad.observe(viewLifecycleOwner) {
             try {
 
+
                 viewModel.listaNovedad.value?.let { it1 -> novedadAdapter.actualizarData(it1) }
             } catch (e: Exception) {
                 novedadAdapter.actualizarData(emptyList())
@@ -209,7 +220,22 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Usar esta Funcion spinner cada vez estamos cargando datos
+
+
+    private fun progressBarLoading (show: Boolean){
+        with(binding){
+            binding?.spinnerCarga1?.spinnerApi?.visibility = if(show) View.VISIBLE else View.GONE
+        }
+
+
+
+    }
+    
+
+
 }
+
 
 
 
