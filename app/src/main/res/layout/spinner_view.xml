@@ -26,6 +26,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/spinnerApi"
         app:layout_constraintTop_toBottomOf="@+id/spinnerApi"
-        tools:text="Cargando....." />
+        tools:text="Cargando..." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.model.data
+package com.melvin.ongandroid.model
 
 import com.google.gson.annotations.SerializedName
 
