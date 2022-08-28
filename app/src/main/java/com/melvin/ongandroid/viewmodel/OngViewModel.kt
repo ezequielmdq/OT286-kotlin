@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.melvin.ongandroid.FirebaseLog
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.WelcomeImage
@@ -59,10 +60,15 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
             try {
                 val list = repositoryWelcomeImages.getWellcomeImages()
                 _listaSlide.value = list
+                /**se genera el log de evento de conexion exitosa*/
+                FirebaseLog.logSliderSuccess()
             }catch (e : Exception){
+                /**se genera el log de evento de error de conexion*/
+                FirebaseLog.logSliderError()
                 //seteo el observable error en true
                 _error.value = true
                 _listaSlide.value = emptyList()
+
             }
         }
     }
@@ -77,10 +83,15 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
             try {
                 val list = repositoryNovedades.getNovedades()
                 _listaNovedad.value = list
+                /**se genera el log de evento de conexion exitosa*/
+                FirebaseLog.logNovedadesSuccess()
             }catch (e : Exception){
+                /**se genera el log de evento de error de conexion*/
+                FirebaseLog.logNovedadesError()
                 //seteo el observable error en true
                 _error.value = true
                 _listaNovedad.value = emptyList()
+
             }}
     }
 
@@ -94,10 +105,15 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
             try {
                 val list = repositoryTestimonios.getTestimonios()
                 _listaTestimonios.value = list
+                /**se genera el log de evento de conexion exitosa*/
+                FirebaseLog.logTestimonioSuccess()
             }catch (e : Exception){
+                /**se genera el log de evento de error de conexion*/
+                FirebaseLog.logTestimonioError()
                 //seteo el observable error en true
                 _error.value = true
                 _listaTestimonios.value = emptyList()
+
             }}
     }
 
