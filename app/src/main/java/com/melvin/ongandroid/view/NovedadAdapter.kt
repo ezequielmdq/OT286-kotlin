@@ -77,7 +77,7 @@ class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() 
 
     //Recibe una lista y la carga en el recycler view
     fun actualizarData(data: List<Novedad>) {
-        //if(data.size <= 4){
+
             novedades.clear()
             for (a in 0..3) {
                 novedades.add(data[a])
