@@ -89,6 +89,13 @@ class HomeFragment : Fragment() {
 
         }
     }
+    // funcion para el spinner en la seccion de inicio
+    private fun progressBarVisibility(show: Boolean){
+        with(binding){
+          binding?.spLoading?.progressBar?.visibility = if (show)View.VISIBLE else View.GONE
+
+        }
+    }
 
     /**
      * descarga la lista de testimonio y presenta en la cardview de testimonios
