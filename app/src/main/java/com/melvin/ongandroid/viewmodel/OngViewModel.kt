@@ -54,11 +54,19 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
      * en caso de error setea el liveData "_onErrorLoad" en true
      * para que los observadores se enteren del error
      */
-    private fun loadSlide() {
+     fun loadSlide() {
         viewModelScope.launch(coroutineExceptionHandler){
             try {
                 val list = repositoryWelcomeImages.getWellcomeImages()
-                _listaSlide.value = list
+
+                if(list.isNullOrEmpty()){
+                    _listaSlide.value = emptyList()
+                    _error.value = true
+                }else{
+                    _listaSlide.value = list
+                }
+
+
             }catch (e : Exception){
                 //seteo el observable error en true
                 _error.value = true
@@ -72,11 +80,19 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
      * en caso de error setea el liveData "_onErrorLoad" en true
      * para que los observadores se enteren del error
      */
-    private fun loadNovedades() {
+     fun loadNovedades() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryNovedades.getNovedades()
-                _listaNovedad.value = list
+
+                if(list.isNullOrEmpty()){
+                    _listaNovedad.value = emptyList()
+                    _error.value = true
+                }else{
+                    _listaNovedad.value = list
+                }
+
+
             }catch (e : Exception){
                 //seteo el observable error en true
                 _error.value = true
@@ -89,11 +105,17 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
      * en caso de error setea el liveData "_onErrorLoad" en true
      * para que los observadores se enteren del error
      */
-    private fun loadTestimonios() {
+     fun loadTestimonios() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryTestimonios.getTestimonios()
+
+                if(list.isNullOrEmpty()){
+                    _listaTestimonios.value = emptyList()
+                    _error.value = true
+                }else{
                 _listaTestimonios.value = list
+                }
             }catch (e : Exception){
                 //seteo el observable error en true
                 _error.value = true

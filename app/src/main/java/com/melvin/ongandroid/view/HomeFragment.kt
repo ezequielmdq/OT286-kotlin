@@ -24,19 +24,25 @@ class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
 
     private lateinit var novedadAdapter: NovedadAdapter
+
     private lateinit var welcomeImagesAdapter: ListAdapter
 
     private val viewModel: OngViewModel by activityViewModels(
         factoryProducer = {
-            OngViewModelFactory(WelcomeDataRepository(),
-                                NovedadDataRepository(),
-                                TestimonioDataRepository())
+            OngViewModelFactory(
+                WelcomeDataRepository(),
+                NovedadDataRepository(),
+                TestimonioDataRepository()
+            )
         }
+
     )
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         //inflo en binding
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -101,11 +107,14 @@ class HomeFragment : Fragment() {
     /**
      * configura configura la lista de Bienvenida
      */
+
     private fun configWelcomeImages(welcomeImages: List<WelcomeImage>) {
         //instancio el adapter
         welcomeImagesAdapter = ListAdapter()
         //seteo la lista al adapter
         welcomeImagesAdapter.list.addAll(welcomeImages)
+
+
         //seteo el adapter al recyclerView "Binenvenidos"
         binding?.let { binding ->
             binding.rvWelcome.adapter = welcomeImagesAdapter
@@ -115,15 +124,17 @@ class HomeFragment : Fragment() {
     /**
      * configura la lista de novedades
      */
-    private fun configNovedades(novedades: List<Novedad>){
+    private fun configNovedades(novedades: List<Novedad>) {
         novedadAdapter = NovedadAdapter()
         binding?.let { binding ->
             binding.rvNovedades.apply {
                 adapter = novedadAdapter
             }
         }
+
         novedadAdapter.actualizarData(novedades)
     }
+
 
     /**
      * crea un snackBar presentando un mensaje de error y da la opcion de reintentar cargar
@@ -135,20 +146,35 @@ class HomeFragment : Fragment() {
                 .setAction("Reintentar") {
                     //el boton reintentar ejecutara el metodo "retry" implementado en el viewModel
                     viewModel.retry()
+
                 }
                 .show()
         }
     }
 
     // Usar esta Funcion spinner cada vez estamos cargando datos
-    private fun progressBarLoading (show: Boolean){
-        with(binding){
-            binding?.spinnerCarga1?.spinnerApi?.visibility = if(show) View.VISIBLE else View.GONE
+
+    private fun progressBarLoading(show: Boolean) {
+        with(binding) {
+            binding?.spinnerCarga1?.spinnerApi?.visibility = if (show) View.VISIBLE else View.GONE
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
+
+
 }
+    
+
+
+
+
+
+
+
+
+
