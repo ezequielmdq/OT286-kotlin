@@ -2,17 +2,20 @@ package com.melvin.ongandroid.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.melvin.ongandroid.model.data.NovedadDataRepositorio
-import com.melvin.ongandroid.model.data.WelcomeDataRepositorio
+import com.melvin.ongandroid.model.repository.Network.interfaces.INovedadDataRepository
+import com.melvin.ongandroid.model.repository.Network.interfaces.ITestimonioDataRepository
+import com.melvin.ongandroid.model.repository.Network.interfaces.IWelcomeDataRepository
 
-class OngViewModelFactory : ViewModelProvider.Factory {
+class OngViewModelFactory(private val repositoryWelcomeImages: IWelcomeDataRepository,
+                          private val repotoryNovedades: INovedadDataRepository,
+                          private val repositoryTestimonios: ITestimonioDataRepository)
+    : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-
-
-        val repositoryWelcome = WelcomeDataRepositorio()
-        val repositoryNovedad = NovedadDataRepositorio()
-        return OngViewModel(repositoryWelcome, repositoryNovedad) as T
+        return OngViewModel(
+            repositoryWelcomeImages,
+            repotoryNovedades,
+            repositoryTestimonios) as T
     }
 
 
