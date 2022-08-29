@@ -18,6 +18,10 @@ class OngViewModel(private val repositoryWelcome : WelcomeDataRepositorio, priva
 
     private val _listaSlide = MutableLiveData<List<WelcomeImage>>()
     private val _listaNovedad = MutableLiveData<List<Novedad>>()
+    private val errorTestimonio = MutableLiveData(false)
+    private val errorNovedades = MutableLiveData(false)
+    private val errorActividades = MutableLiveData(false)
+    val errorMassiva = MutableLiveData(false)
 
 
 
@@ -37,6 +41,7 @@ class OngViewModel(private val repositoryWelcome : WelcomeDataRepositorio, priva
                 _listaSlide.value = repositoryWelcome.getDataSlide()
             }catch (e : Exception){
                 _listaSlide.value = emptyList()
+                errorTestimonio.value = true
 
             }
         }
@@ -51,10 +56,17 @@ class OngViewModel(private val repositoryWelcome : WelcomeDataRepositorio, priva
             }catch (e : Exception){
                 _listaNovedad.value = emptyList()
 
-            }}
+                errorNovedades.value = true
+            }
+        }
     }
 
+    fun checkErrorMassiva(){
+        if(errorActividades.value == true && errorNovedades.value == true){
+            errorMassiva.value == true
 
+        }
+    }
 
 
 

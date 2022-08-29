@@ -104,7 +104,12 @@ class HomeFragment : Fragment() {
      * configura todos los observadores que se asocian al fragment
      */
     private fun configObservers() {
+        viewModel.errorMassiva.observe(viewLifecycleOwner){
+            binding?.errorMassivaShow?.textViewErrorMassiva?.isVisible = it
+            binding?.errorMassivaShow?.errorMassivaBtn?.setOnClickListener {
 
+            }
+        }
     }
 
     /**
