@@ -1,5 +1,6 @@
 package com.melvin.ongandroid.model.repository.Network.retrofit
 
+import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.data.NovedadData
 import com.melvin.ongandroid.model.data.TestimonioData
 import com.melvin.ongandroid.model.data.WelcomeData
