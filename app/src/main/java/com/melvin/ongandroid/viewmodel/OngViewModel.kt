@@ -76,7 +76,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryNovedades.getNovedades()
-                _listaNovedad.value = list
+                 _listaNovedad.value = list
             }catch (e : Exception){
                 //seteo el observable error en true
                 _error.value = true
@@ -92,7 +92,8 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
     private fun loadTestimonios() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
-                val list = repositoryTestimonios.getTestimonios()
+                val list = repositoryTestimonios
+                    .getTestimonios()
                 _listaTestimonios.value = list
             }catch (e : Exception){
                 //seteo el observable error en true
