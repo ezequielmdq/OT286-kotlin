@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
@@ -84,6 +85,13 @@ class HomeFragment : Fragment() {
             error.observe(viewLifecycleOwner, Observer { error ->
                 error?.let {
                     onLoadError()
+                }
+            })
+
+            // observador cuando se falla los tres servicios
+       errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
+                errorMassiva.let {
+                    checkErrorMassiva()
                 }
             })
 
