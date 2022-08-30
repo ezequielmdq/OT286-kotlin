@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.melvin.ongandroid.FirebaseLog
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.WelcomeImage
@@ -54,15 +55,26 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
      * en caso de error setea el liveData "_onErrorLoad" en true
      * para que los observadores se enteren del error
      */
-    private fun loadSlide() {
+     fun loadSlide() {
         viewModelScope.launch(coroutineExceptionHandler){
             try {
                 val list = repositoryWelcomeImages.getWellcomeImages()
                 _listaSlide.value = list
+                /**se genera el log de evento de conexion exitosa*/
+                FirebaseLog.logSliderSuccess()
+                if(list.isNullOrEmpty()){
+                    _listaSlide.value = emptyList()
+                    
+                }else{
+                    _listaSlide.value = list
+                }
             }catch (e : Exception){
+                /**se genera el log de evento de error de conexion*/
+                FirebaseLog.logSliderError()
                 //seteo el observable error en true
                 _error.value = true
                 _listaSlide.value = emptyList()
+
             }
         }
     }
@@ -72,15 +84,27 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
      * en caso de error setea el liveData "_onErrorLoad" en true
      * para que los observadores se enteren del error
      */
-    private fun loadNovedades() {
+     fun loadNovedades() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryNovedades.getNovedades()
                  _listaNovedad.value = list
+    
+                /**se genera el log de evento de conexion exitosa*/
+                FirebaseLog.logNovedadesSuccess()
+                if(list.isNullOrEmpty()){
+                    _listaNovedad.value = emptyList()
+                }else{
+                    _listaNovedad.value = list
+                }
+                
             }catch (e : Exception){
+                /**se genera el log de evento de error de conexion*/
+                FirebaseLog.logNovedadesError()
                 //seteo el observable error en true
                 _error.value = true
                 _listaNovedad.value = emptyList()
+
             }}
     }
 
@@ -89,16 +113,29 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
      * en caso de error setea el liveData "_onErrorLoad" en true
      * para que los observadores se enteren del error
      */
-    private fun loadTestimonios() {
+     fun loadTestimonios() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
+            
                 val list = repositoryTestimonios
                     .getTestimonios()
                 _listaTestimonios.value = list
+                
+                 /**se genera el log de evento de conexion exitosa*/
+                FirebaseLog.logTestimonioSuccess()
+                if(list.isNullOrEmpty()){
+                    _listaTestimonios.value = emptyList()
+                }else{
+                    _listaTestimonios.value = list 
+                }
+
             }catch (e : Exception){
+                /**se genera el log de evento de error de conexion*/
+                FirebaseLog.logTestimonioError()
                 //seteo el observable error en true
                 _error.value = true
                 _listaTestimonios.value = emptyList()
+
             }}
     }
 
