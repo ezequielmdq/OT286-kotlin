@@ -17,6 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
                 <TextView
                     android:id="@+id/tvBienvenida"
                     android:layout_width="match_parent"
@@ -31,13 +32,25 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
+                    android:id="@+id/errorMassivaLayout"
+                    layout="@layout/error_massiva"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvWelcome"
+                    />
+
+                <include
                     android:id="@+id/spinnerCarga1"
                     layout="@layout/spinner_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rvWelcome"/>
+                    app:layout_constraintTop_toBottomOf="@id/rvWelcome"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvWelcome"

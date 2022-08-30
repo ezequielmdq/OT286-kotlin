@@ -19,6 +19,11 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                    private val repositoryNovedades : INovedadDataRepository,
                    private val repositoryTestimonios : ITestimonioDataRepository) : ViewModel() {
 
+    private val errorTestimonio = MutableLiveData(false)
+    private val errorNovedades = MutableLiveData(false)
+    private val errorActividades = MutableLiveData(false)
+    val errorMassiva = MutableLiveData(false)
+
     //lista de welcomeImages observable
     private val _listaSlide = MutableLiveData<List<WelcomeImage>?>()
     val listaSlide : LiveData<List<WelcomeImage>?> = _listaSlide
@@ -138,6 +143,12 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
 
             }}
     }
+        // funcion a llamar cuando se falla los tres servicios
+    fun checkErrorMassiva(){
+        if(errorNovedades.value == true && errorActividades.value == true && errorTestimonio.value == true){
+            errorMassiva.value = true
+        }
+    }
 
     /**
      * vuelve a intentar cargar todos los datos de los reposiorios
@@ -146,4 +157,6 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         //lo hice temporalmente asi, no estoy muy seguro que decia el ticket de respuesta de error
         loadAll()
     }
+
+
 }
