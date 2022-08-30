@@ -5,8 +5,13 @@ import com.melvin.ongandroid.model.repository.Network.interfaces.IActividadesDat
 import com.melvin.ongandroid.model.repository.Network.retrofit.AlkemyAPIClient
 
 class ActividadesDataRepository: IActividadesDataRepository {
+
     override suspend fun getActividadesData(): List<Actividad>? {
-        val actividadesData = AlkemyAPIClient.getClient().getDataActividades().body()
+        val actividadesData = AlkemyAPIClient
+            .getClient()
+            .getDataActividades()
+            .body()
         return actividadesData?.data
     }
+
 }

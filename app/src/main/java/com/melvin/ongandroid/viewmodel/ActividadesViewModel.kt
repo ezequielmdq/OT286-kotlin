@@ -20,19 +20,26 @@ class ActividadesViewModel(val actividadesRepository: IActividadesDataRepository
     val _isLoad: MutableLiveData<Boolean> = MutableLiveData()
     val isLoad: LiveData<Boolean> = _isLoad
 
-    init {
-        loadActividades()
-    }
+    //observable de estado de error
+    val _error: MutableLiveData<Boolean> = MutableLiveData()
+    val error: LiveData<Boolean> = _error
 
     fun loadActividades(){
         viewModelScope.launch {
             try {
                 val list = actividadesRepository.getActividadesData()
                 _actividades.value = list
+                if(list?.isEmpty() == true){
+                    showError()
+                }
             }catch (e: Exception){
-
+                showError()
             }
         }
+    }
+
+    private fun showError(){
+        _error.value = true
     }
 
 }
