@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mi_navegacion"
+    app:startDestination="@id/firstFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.melvin.ongandroid.view.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_actividadFragment"
+            app:destination="@id/firstFragment2" />
+        <action
+            android:id="@+id/action_firstFragment_to_novedadFragment"
+            app:destination="@id/novedadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstFragment2"
+        android:name="com.melvin.ongandroid.ActividadFragment"
+        android:label="fragment_actividad"
+        tools:layout="@layout/fragment_actividad" >
+        <action
+            android:id="@+id/action_actividadFragment_to_homeFragment"
+            app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_firstFragment2_to_novedadFragment"
+            app:destination="@id/novedadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/novedadFragment"
+        android:name="com.melvin.ongandroid.NovedadFragment"
+        android:label="fragment_novedad"
+        tools:layout="@layout/fragment_novedad" >
+        <action
+            android:id="@+id/action_novedadFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_novedadFragment_to_firstFragment2"
+            app:destination="@id/firstFragment2" />
+    </fragment>
+</navigation>
