@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#F1F6FA"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="12dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:text="ActividadNombre"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ivFoto"
+            app:layout_constraintEnd_toEndOf="@+id/ivFoto"
+            app:layout_constraintStart_toStartOf="@+id/ivFoto"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.36" />
+
+        <ImageView
+            android:id="@+id/ivFoto"
+            android:layout_width="150dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/tvNameDescripcion"
+            app:layout_constraintEnd_toEndOf="@+id/tvNameDescripcion"
+            app:layout_constraintStart_toStartOf="@+id/tvNameDescripcion"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombre"
+            tools:srcCompat= "@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tvNameDescripcion"
+            android:layout_width="233dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvFecha"
+            app:layout_constraintEnd_toEndOf="@+id/tvFecha"
+            app:layout_constraintStart_toStartOf="@+id/tvFecha"
+            app:layout_constraintTop_toBottomOf="@+id/ivFoto"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla..." />
+
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameDescripcion"
+            tools:text="Fecha de publicación: 26/08/2022" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
