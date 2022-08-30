@@ -13,7 +13,7 @@ interface AlkemyAPIInterface {
     suspend fun getDataWelcomeImages() : Response<WelcomeData>
 
     @GET("news")
-    suspend fun getDataNovedades() : Response<NovedadData>
+    suspend fun getDataNovedades() : Response<NovedadData<List<Novedad>>>
 
     @GET("testimonials")
     suspend fun getDataTestimonios() : Response<TestimonioData>
