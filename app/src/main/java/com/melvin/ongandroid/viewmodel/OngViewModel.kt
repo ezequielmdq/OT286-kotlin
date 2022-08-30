@@ -64,7 +64,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 FirebaseLog.logSliderSuccess()
                 if(list.isNullOrEmpty()){
                     _listaSlide.value = emptyList()
-                    
+
                 }else{
                     _listaSlide.value = list
                 }
