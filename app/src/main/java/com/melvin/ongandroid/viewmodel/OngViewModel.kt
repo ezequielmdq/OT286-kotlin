@@ -64,7 +64,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 FirebaseLog.logSliderSuccess()
                 if(list.isNullOrEmpty()){
                     _listaSlide.value = emptyList()
-                    _error.value = true
+                    
                 }else{
                     _listaSlide.value = list
                 }
@@ -93,7 +93,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 FirebaseLog.logNovedadesSuccess()
                 if(list.isNullOrEmpty()){
                     _listaNovedad.value = emptyList()
-                    _error.value = true
+
                 }else{
                     _listaNovedad.value = list
                 }
@@ -120,7 +120,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 FirebaseLog.logTestimonioSuccess()
                 if(list.isNullOrEmpty()){
                     _listaTestimonios.value = emptyList()
-                    _error.value = true
+
                 }else{
                 _listaTestimonios.value = list 
                 }
