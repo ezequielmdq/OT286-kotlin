@@ -87,7 +87,6 @@ class HomeFragment : Fragment() {
                     onLoadError()
                 }
             })
-
             // observador cuando se falla los tres servicios
        errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
                 errorMassiva.let {
@@ -174,7 +173,6 @@ class HomeFragment : Fragment() {
             binding?.spinnerCarga1?.spinnerApi?.visibility = if (show) View.VISIBLE else View.GONE
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
