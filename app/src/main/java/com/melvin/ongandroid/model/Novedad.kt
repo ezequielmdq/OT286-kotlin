@@ -8,5 +8,10 @@ data class Novedad(
     @SerializedName("image")
     val imagen: String,
     @SerializedName("content")
-    val descripcion: String
+    val descripcion: String,
+
+    // Añadir más campos para mostrar la lista de novedades
+
+    @SerializedName("id") val id: Int
+
     )

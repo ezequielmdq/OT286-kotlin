@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.model.Novedad
+import com.melvin.ongandroid.model.data.NovedadData
 
 
 class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {
@@ -24,6 +25,7 @@ class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() 
         private val ivNovedad = view.findViewById<ImageView>(R.id.iv_novedad)
         private val tvTitulo = view.findViewById<TextView>(R.id.tv_titulo)
         private val tvDescripcion = view.findViewById<TextView>(R.id.tv_descripcion)
+
 
 
         fun bind(novedad: Novedad, context: Context){

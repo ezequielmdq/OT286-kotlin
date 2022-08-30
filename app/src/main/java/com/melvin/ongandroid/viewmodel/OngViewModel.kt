@@ -19,6 +19,11 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                    private val repositoryNovedades : INovedadDataRepository,
                    private val repositoryTestimonios : ITestimonioDataRepository) : ViewModel() {
 
+    private val errorTestimonio = MutableLiveData(false)
+    private val errorNovedades = MutableLiveData(false)
+    private val errorActividades = MutableLiveData(false)
+    val errorMassiva = MutableLiveData(false)
+
     //lista de welcomeImages observable
     private val _listaSlide = MutableLiveData<List<WelcomeImage>?>()
     val listaSlide : LiveData<List<WelcomeImage>?> = _listaSlide
@@ -88,15 +93,16 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
                 val list = repositoryNovedades.getNovedades()
-                _listaNovedad.value = list
+                 _listaNovedad.value = list
+    
                 /**se genera el log de evento de conexion exitosa*/
                 FirebaseLog.logNovedadesSuccess()
                 if(list.isNullOrEmpty()){
                     _listaNovedad.value = emptyList()
-
                 }else{
                     _listaNovedad.value = list
                 }
+                
             }catch (e : Exception){
                 /**se genera el log de evento de error de conexion*/
                 FirebaseLog.logNovedadesError()
@@ -115,15 +121,19 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
      fun loadTestimonios() {
         viewModelScope.launch(coroutineExceptionHandler) {
             try {
-                val list = repositoryTestimonios.getTestimonios()
+            
+                val list = repositoryTestimonios
+                    .getTestimonios()
+                _listaTestimonios.value = list
+                
                  /**se genera el log de evento de conexion exitosa*/
                 FirebaseLog.logTestimonioSuccess()
                 if(list.isNullOrEmpty()){
                     _listaTestimonios.value = emptyList()
-
                 }else{
-                _listaTestimonios.value = list 
+                    _listaTestimonios.value = list 
                 }
+
             }catch (e : Exception){
                 /**se genera el log de evento de error de conexion*/
                 FirebaseLog.logTestimonioError()
@@ -133,6 +143,12 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
 
             }}
     }
+        // funcion a llamar cuando se falla los tres servicios
+    fun checkErrorMassiva(){
+        if(errorNovedades.value == true && errorActividades.value == true && errorTestimonio.value == true){
+            errorMassiva.value = true
+        }
+    }
 
     /**
      * vuelve a intentar cargar todos los datos de los reposiorios
@@ -141,4 +157,6 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         //lo hice temporalmente asi, no estoy muy seguro que decia el ticket de respuesta de error
         loadAll()
     }
+
+
 }
