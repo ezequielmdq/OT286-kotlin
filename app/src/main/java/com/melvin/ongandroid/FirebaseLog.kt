@@ -1,6 +1,5 @@
 package com.melvin.ongandroid
 
-
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
@@ -51,6 +50,5 @@ object FirebaseLog{
             param("text", "La conexión con el servidor no pudo ser establecida.")
         }
     }
-
 
 }
