@@ -16,6 +16,10 @@
             android:id="@+id/action_firstFragment_to_novedadFragment"
             app:destination="@id/novedadFragment" />
     </fragment>
+            android:id="@+id/action_firstFragment_to_contactoFragment"
+            app:destination="@id/contactoFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/firstFragment2"
         android:name="com.melvin.ongandroid.ActividadFragment"
@@ -40,4 +44,15 @@
             android:id="@+id/action_novedadFragment_to_firstFragment2"
             app:destination="@id/firstFragment2" />
     </fragment>
+
+    <fragment
+        android:id="@+id/contactoFragment"
+        android:name="com.melvin.ongandroid.view.contacto.ContactoFragment"
+        android:label="fragment_contacto"
+        tools:layout="@layout/fragment_contacto" >
+        <action
+            android:id="@+id/action_contactoFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
+    </fragment>
+
 </navigation>
