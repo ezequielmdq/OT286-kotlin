@@ -11,6 +11,7 @@
 
     <string name="tittleTestimonio">Testimonios</string>
     <string name="ver_mas_testimonios">Ver mas testimonios</string>
+    <string name="novedades">Novedades</string>
     <string name="contribuir">¿Quieres Contribuir?</string>
     <string name="donar">donar</string>
     <string name="contactate">¡Contactate con nosotros!</string>
@@ -18,5 +19,6 @@
     <string name="email">Email</string>
     <string name="mensaje">Mensaje</string>
     <string name="enviar">Enviar mensaje</string>
+
 
 </resources>

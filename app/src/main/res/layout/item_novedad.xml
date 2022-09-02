@@ -10,7 +10,6 @@
         android:layout_height="450dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,7 +22,7 @@
                 android:id="@+id/iv_novedad"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-
+                android:src="@mipmap/ic_launcher"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,9 +34,7 @@
                 android:textSize="40sp"
                 tools:text="Titulo"
                 app:layout_constraintTop_toBottomOf="@+id/iv_novedad"
-                app:layout_constraintStart_toStartOf="parent"
-
-                />
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_descripcion"
@@ -45,7 +42,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet lectus ac aliquet auctor. In non tristique dolor. Ut ut hendrerit mi. Phasellus ac pharetra ligula. Aenean bibendum, tellus ut gravida auctor, velit nunc interdum tortor, eu convallis nulla nulla sed ligula. Proin orci diam, malesuada ornare elementum sed, scelerisque at dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur sagittis euismod. Fusce vitae pulvinar erat, euismod condimentum erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos." />
