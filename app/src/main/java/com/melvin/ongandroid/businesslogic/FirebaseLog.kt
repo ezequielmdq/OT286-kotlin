@@ -1,4 +1,4 @@
-package com.melvin.ongandroid
+package com.melvin.ongandroid.businesslogic
 
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
