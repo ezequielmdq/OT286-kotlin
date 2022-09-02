@@ -1,4 +1,4 @@
-package com.melvin.ongandroid
+package com.melvin.ongandroid.businesslogic
 
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -47,6 +47,20 @@ object FirebaseLog{
     fun logTestimonioError(){
         Firebase.analytics.logEvent("testimonies_retrieve_error") {
             param("log_testimonios", "Log Testimonios")
+            param("text", "La conexión con el servidor no pudo ser establecida.")
+        }
+    }
+
+    fun logMiembrosSuccess(){
+        Firebase.analytics.logEvent("miembros_retrieve_success") {
+            param("log_miembros", "Log Miembros")
+            param("text", "La conexión con el servidor fue satisfactoria.")
+        }
+    }
+
+    fun logMiembrosError(){
+        Firebase.analytics.logEvent("miembros_retrieve_error") {
+            param("log_miembros", "Log Miembros")
             param("text", "La conexión con el servidor no pudo ser establecida.")
         }
     }
