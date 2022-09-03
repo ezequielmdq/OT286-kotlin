@@ -1,10 +1,11 @@
-package com.melvin.ongandroid
+package com.melvin.ongandroid.view.Novedades
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.melvin.ongandroid.R
 
 class NovedadFragment : Fragment() {
 

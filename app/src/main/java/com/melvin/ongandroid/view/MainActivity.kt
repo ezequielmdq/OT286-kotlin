@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -18,24 +19,34 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //referencio al navHost
+        val hostFragment = supportFragmentManager
+            .findFragmentById(R.id.NavHostFragment) as NavHostFragment
+        //referencio el navControler
+        navController = hostFragment.navController
 
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        navController = findNavController(R.id.NavHostFragment)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.firstFragment2, R.id.firstFragment3))
-        setupActionBarWithNavController(navController,appBarConfiguration)
-
-        binding.bottomNavigation.setupWithNavController(findNavController(R.id.NavHostFragment))
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.NavHostFragment) as NavHostFragment
-        navController = navHostFragment.navController
+        //configuro los destinos en un mismo nivel
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment,
+                R.id.nosotrosFragment,
+                R.id.novedadFragment,
+                R.id.actividadFragment,
+                R.id.contactoFragment
+            )
+        )
+        //configuro el navControler con el actionBar
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        //configuro el bottomNavigation con el navControler
         binding.bottomNavigation.setupWithNavController(navController)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.NavHostFragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        return navController
+            .navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

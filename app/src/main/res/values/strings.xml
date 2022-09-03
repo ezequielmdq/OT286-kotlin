@@ -9,6 +9,8 @@
 
     <string name="retry">Ha ocurrido un error obteniendo la información</string>
 
+    <string name="nosotros">Nosotros</string>
+
     <string name="tittleTestimonio">Testimonios</string>
     <string name="ver_mas_testimonios">Ver mas testimonios</string>
     <string name="novedades">Novedades</string>
