@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#F1F6FA"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="399dp"
+        android:padding="12dp"
+        tools:srcCompat="@mipmap/ic_launcher">
+
+        <ImageView
+            android:id="@+id/nostrosFotos"
+            android:layout_width="157dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/nosotros_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="@+id/nostrosFotos"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nostrosFotos"
+            tools:text="Titulo" />
+
+        <TextView
+            android:id="@+id/nostros_descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginTop="32dp"
+            android:text="Descripcion"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintEnd_toEndOf="@+id/nosotros_titulo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/nosotros_titulo"
+            app:layout_constraintTop_toBottomOf="@+id/nosotros_titulo" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
