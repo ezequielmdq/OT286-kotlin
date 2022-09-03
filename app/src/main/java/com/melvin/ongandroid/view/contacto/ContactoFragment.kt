@@ -17,10 +17,14 @@ import com.melvin.ongandroid.databinding.FragmentContactoBinding
 import kotlinx.coroutines.launch
 
 
+
 class ContactoFragment() : Fragment() {
     private lateinit var binding : FragmentContactoBinding
     private val viewModel: ContactoViewModel by activityViewModels(factoryProducer = {
         ContactoViewModelFactory(ContactosDto())})
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
