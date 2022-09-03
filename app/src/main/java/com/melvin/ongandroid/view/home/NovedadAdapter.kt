@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.home
+package com.melvin.ongandroid.view.Home
 
 import android.content.Context
 import android.view.LayoutInflater
