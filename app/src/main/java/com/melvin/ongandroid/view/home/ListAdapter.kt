@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.home
+package com.melvin.ongandroid.view.Home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,14 +12,13 @@ import com.melvin.ongandroid.model.WelcomeImage
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
 
-     var list = mutableListOf<WelcomeImage>()
+    var list = mutableListOf<WelcomeImage>()
 
     // Carga repositorio slide
     fun loadDataSlide(data : List<WelcomeImage>){
         list.clear()
         list.addAll(data)
         notifyDataSetChanged()
-
     }
 
     lateinit var context: Context

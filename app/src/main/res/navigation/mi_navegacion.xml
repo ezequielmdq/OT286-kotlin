@@ -3,56 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mi_navegacion"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.melvin.ongandroid.view.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_actividadFragment"
-            app:destination="@id/firstFragment2" />
-        <action
-            android:id="@+id/action_firstFragment_to_novedadFragment"
-            app:destination="@id/novedadFragment" />
-    </fragment>
-            android:id="@+id/action_firstFragment_to_contactoFragment"
-            app:destination="@id/contactoFragment" />
-    </fragment>
+        android:id="@+id/actividadFragment"
+        android:name="com.melvin.ongandroid.view.Actividades.ActividadFragment"
+        android:label="Actividades" />
 
     <fragment
-        android:id="@+id/firstFragment2"
-        android:name="com.melvin.ongandroid.ActividadFragment"
-        android:label="fragment_actividad"
-        tools:layout="@layout/fragment_actividad" >
-        <action
-            android:id="@+id/action_actividadFragment_to_homeFragment"
-            app:destination="@id/firstFragment" />
-        <action
-            android:id="@+id/action_firstFragment2_to_novedadFragment"
-            app:destination="@id/novedadFragment" />
-    </fragment>
+        android:id="@+id/homeFragment"
+        android:name="com.melvin.ongandroid.view.Home.HomeFragment"
+        android:label="Home" />
+    <fragment
+        android:id="@+id/nosotrosFragment"
+        android:name="com.melvin.ongandroid.view.Nosotros.NosotrosFragment"
+        android:label="Nosotros" />
     <fragment
         android:id="@+id/novedadFragment"
-        android:name="com.melvin.ongandroid.NovedadFragment"
-        android:label="fragment_novedad"
-        tools:layout="@layout/fragment_novedad" >
-        <action
-            android:id="@+id/action_novedadFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
-        <action
-            android:id="@+id/action_novedadFragment_to_firstFragment2"
-            app:destination="@id/firstFragment2" />
-    </fragment>
-
+        android:name="com.melvin.ongandroid.view.Novedades.NovedadFragment"
+        android:label="Novedades" />
     <fragment
         android:id="@+id/contactoFragment"
         android:name="com.melvin.ongandroid.view.contacto.ContactoFragment"
-        android:label="fragment_contacto"
-        tools:layout="@layout/fragment_contacto" >
-        <action
-            android:id="@+id/action_contactoFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
-    </fragment>
-
+        android:label="Contacto"
+        tools:layout="@layout/fragment_contacto" />
 </navigation>
