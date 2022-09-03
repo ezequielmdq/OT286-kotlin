@@ -117,7 +117,7 @@ class OngViewModelTest{
     @Test
     fun `when getNovedades return a list of images set on the LiveData`() = runTest{
         //Given
-        val list = listOf(Novedad("example.png", "Imagen 1", "Descripcion 1"))
+        val list = listOf(Novedad("example.png", "Imagen 1", "Descripcion 1", 1))
         coEvery {repositoryNovedad.getNovedades()} returns list
 
         //When
