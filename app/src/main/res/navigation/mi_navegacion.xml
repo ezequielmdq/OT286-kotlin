@@ -7,38 +7,42 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.melvin.ongandroid.view.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:name="com.melvin.ongandroid.view.Home.HomeFragment"
+        android:label="Home" >
 
         <action
             android:id="@+id/action_homeFragment_to_novedadFragment"
             app:popUpTo="@id/homeFragment"
-            
+
             app:popUpToInclusive="true"
             app:destination="@id/novedadFragment" />
-    </fragment>
 
+    </fragment>
     <fragment
         android:id="@+id/nosotrosFragment"
-        android:name="com.melvin.ongandroid.ActividadFragment"
-        android:label="fragment_actividad"
-        tools:layout="@layout/fragment_actividad" >
+        android:name="com.melvin.ongandroid.view.Nosotros.NosotrosFragment"
+        android:label="Nosotros"
+        tools:layout="@layout/fragment_nosotros"
+        />
 
-    </fragment>
     <fragment
         android:id="@+id/novedadFragment"
-        android:name="com.melvin.ongandroid.NovedadFragment"
-        android:label="fragment_novedad"
-        tools:layout="@layout/fragment_novedad" >
+        android:name="com.melvin.ongandroid.view.Novedades.NovedadFragment"
+        android:label="Novedades"
+        tools:layout="@layout/fragment_novedad"
+        />
 
-    </fragment>
+    <fragment
+        android:id="@+id/actividadFragment"
+        android:name="com.melvin.ongandroid.view.Actividades.ActividadFragment"
+        android:label="Actividades"
+        tools:layout="@layout/fragment_actividad"
+        />
 
     <fragment
         android:id="@+id/contactoFragment"
         android:name="com.melvin.ongandroid.view.contacto.ContactoFragment"
-        android:label="fragment_contacto"
-        tools:layout="@layout/fragment_contacto" >
-
-    </fragment>
+        android:label="Contacto"
+        tools:layout="@layout/fragment_contacto" />
 
 </navigation>

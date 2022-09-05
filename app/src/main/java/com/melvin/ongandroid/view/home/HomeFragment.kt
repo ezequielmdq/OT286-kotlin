@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.home
+package com.melvin.ongandroid.view.Home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,6 +18,7 @@ import com.melvin.ongandroid.model.WelcomeImage
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
+import com.melvin.ongandroid.view.home.NovedadListener
 import com.melvin.ongandroid.viewmodel.OngViewModel
 import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 

@@ -17,7 +17,6 @@ import com.melvin.ongandroid.databinding.FragmentContactoBinding
 class ContactoFragment : Fragment() {
     private var binding : FragmentContactoBinding? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

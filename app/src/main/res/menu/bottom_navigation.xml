@@ -16,7 +16,7 @@
         android:title="Novedades"
         />
     <item
-        android:id="@+id/firstFragment4"
+        android:id="@+id/actividadFragment"
         android:icon="@drawable/contribuir"
         android:title="Contribuir"
         />

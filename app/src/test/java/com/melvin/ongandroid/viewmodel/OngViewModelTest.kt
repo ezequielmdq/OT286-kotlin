@@ -1,9 +1,11 @@
 package com.melvin.ongandroid.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.melvin.ongandroid.model.Miembros
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.WelcomeImage
+import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
@@ -31,6 +33,9 @@ class OngViewModelTest{
     @RelaxedMockK
     private lateinit var repositoryTestimonio : TestimonioDataRepository
 
+    @RelaxedMockK
+    private lateinit var repositoryMiembros: MiembrosDataRepository
+
     private lateinit var ongViewModel: OngViewModel
 
     /**
@@ -48,7 +53,7 @@ class OngViewModelTest{
     @Before
     fun onBefore(){
         MockKAnnotations.init(this)
-        ongViewModel = OngViewModel(repositoryWelcome, repositoryNovedad, repositoryTestimonio)
+        ongViewModel = OngViewModel(repositoryWelcome, repositoryNovedad, repositoryTestimonio, repositoryMiembros)
 
     }
 
@@ -221,6 +226,46 @@ class OngViewModelTest{
 
 
 
+    @Test
+    fun `when onCreateMiembros recovers a members empty list from  miembrosDataRepository`() = runTest {
+          //GIVEN
+          val listOfMiembrosDataModel = listOf(Miembros(0,
+            "Angie",
+            "imagen",
+            "descripcion",
+            "facebookUrl",
+            "linkedinUrl",
+             "",
+             "",
+             ""
+            ))
+        coEvery { repositoryMiembros.getMiembros() } returns listOfMiembrosDataModel
+
+        //WHEN
+        ongViewModel.loadMiembros()
+
+        //THEN
+        assert(ongViewModel.listaMiembros.value == listOfMiembrosDataModel)
+    }
+
+    @Test
+    fun `when getMiembros return a list of images set on the LiveData`() = runTest {
+        //Given
+        val list = listOf(
+            Miembros(
+                0,
+                "", "", "", "", "",
+                "", "", ""
+            )
+        )
+        coEvery { repositoryMiembros.getMiembros() } returns list
+
+        //When
+        ongViewModel.loadMiembros()
+
+        //Then
+        assert(ongViewModel.listaMiembros.value == list)
+    }
 
 
 }
