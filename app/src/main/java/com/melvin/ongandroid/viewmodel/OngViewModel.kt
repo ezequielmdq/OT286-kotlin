@@ -6,9 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.melvin.ongandroid.businesslogic.FirebaseLog
+
+import com.melvin.ongandroid.model.Miembros
+
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.WelcomeImage
+import com.melvin.ongandroid.model.repository.Network.interfaces.IMiembrosDataRepository
 import com.melvin.ongandroid.model.repository.Network.interfaces.INovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.interfaces.ITestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.interfaces.IWelcomeDataRepository
@@ -17,7 +21,9 @@ import kotlinx.coroutines.launch
 
 class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                    private val repositoryNovedades : INovedadDataRepository,
-                   private val repositoryTestimonios : ITestimonioDataRepository) : ViewModel() {
+                   private val repositoryTestimonios : ITestimonioDataRepository,
+                   private val repositoryMiembros: IMiembrosDataRepository
+) : ViewModel() {
 
     private val errorTestimonio = MutableLiveData(false)
     private val errorNovedades = MutableLiveData(false)
@@ -36,6 +42,10 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
     private val _listaTestimonios = MutableLiveData<List<Testimonio>?>()
     val listaTestimonios : LiveData<List<Testimonio>?> = _listaTestimonios
 
+    //lista de miembros observable
+    private val _listaMiembros = MutableLiveData<List<Miembros>?>()
+    val listaMiembros : LiveData<List<Miembros>?> = _listaMiembros
+
     //observable que se cambiara a true si hay un error de carga
     private val _error = MutableLiveData<Boolean>()
     val error: LiveData<Boolean> = _error
@@ -53,6 +63,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         loadSlide()
         loadTestimonios()
         loadNovedades()
+        loadMiembros()
     }
 
     /**
@@ -140,6 +151,37 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 //seteo el observable error en true
                 _error.value = true
                 _listaTestimonios.value = emptyList()
+
+            }}
+    }
+
+    /**
+     * hace la peticion de miembros con su repository correspondiente
+     * en caso de error setea el liveData "_onErrorLoad" en true
+     * para que los observadores se enteren del error
+     */
+    fun loadMiembros() {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            try {
+
+                val list = repositoryMiembros
+                    .getMiembros()
+                _listaMiembros.value = list
+
+                /**se genera el log de evento de conexion exitosa*/
+                FirebaseLog.logMiembrosSuccess()
+                if(list.isNullOrEmpty()){
+                    _listaMiembros.value = emptyList()
+                }else{
+                    _listaMiembros.value = list
+                }
+
+            }catch (e : Exception){
+                /**se genera el log de evento de error de conexion*/
+                FirebaseLog.logMiembrosError()
+                //seteo el observable error en true
+                _error.value = true
+                _listaMiembros.value = emptyList()
 
             }}
     }

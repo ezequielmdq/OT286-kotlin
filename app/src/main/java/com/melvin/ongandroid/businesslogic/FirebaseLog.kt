@@ -51,4 +51,19 @@ object FirebaseLog{
         }
     }
 
+    fun logMiembrosSuccess(){
+        Firebase.analytics.logEvent("miembros_retrieve_success") {
+            param("log_miembros", "Log Miembros")
+            param("text", "La conexión con el servidor fue satisfactoria.")
+        }
+    }
+
+    fun logMiembrosError(){
+        Firebase.analytics.logEvent("miembros_retrieve_error") {
+            param("log_miembros", "Log Miembros")
+            param("text", "La conexión con el servidor no pudo ser establecida.")
+        }
+    }
+
+
 }
