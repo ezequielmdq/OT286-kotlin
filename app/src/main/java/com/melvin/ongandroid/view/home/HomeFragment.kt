@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.home
+package com.melvin.ongandroid.view.Home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

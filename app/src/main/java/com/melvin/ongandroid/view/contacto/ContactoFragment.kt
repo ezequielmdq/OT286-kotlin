@@ -7,15 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.Validator
-
 import com.melvin.ongandroid.databinding.FragmentContactoBinding
+import kotlinx.coroutines.launch
 
 
 
-class ContactoFragment : Fragment() {
-    private var binding : FragmentContactoBinding? = null
+class ContactoFragment() : Fragment() {
+    private lateinit var binding : FragmentContactoBinding
+    private val viewModel: ContactoViewModel by activityViewModels(factoryProducer = {
+        ContactoViewModelFactory(ContactosDto())})
+
+
 
 
     override fun onCreateView(
@@ -23,14 +31,29 @@ class ContactoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentContactoBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_contacto, container,false)
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
 
         botonEnviarEstaActivado(false)
 
         validarCampos()
 
-        return binding?.root
+        /** Listener que envia los datos cuando se activa el boton */
+
+        binding.btnSubmit.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                viewModel._spinnervisible.value = true
+                viewModel.viewModelScope.launch {
+                   viewModel.enviarDatos()
+                    dialogCartel()
+                    }}})
+
+        return binding.root
+
+
     }
+
 
     /**
      * Esta variable fue necesaria porque sino hubiese tenido que repetir el textWatcher en cada uno de los EditText
@@ -60,6 +83,7 @@ class ContactoFragment : Fragment() {
             botonEnviarEstaActivado(etNombreYApellido.isNotEmpty() && etEmail.isNotEmpty()
                     && Validator.isEmailValid(etEmail) && etMensaje.isNotEmpty())
 
+
         }
 
     }
@@ -85,5 +109,19 @@ class ContactoFragment : Fragment() {
         }
     }
 
+    /** Modal dialog que indica que el mensaje fue enviado exitosamente*/
 
+    fun dialogCartel(){
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle("¡Gracias!")
+                .setMessage("Sus datos se han enviado.")
+                .setPositiveButton("Aceptar") { dialog, which ->
+                    viewModel._spinnervisible.value = false
+                }
+                .show()
+        }
+    }
 }
+
+
