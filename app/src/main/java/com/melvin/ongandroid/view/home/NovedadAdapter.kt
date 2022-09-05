@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.model.Novedad
+import com.melvin.ongandroid.view.home.NovedadListener
 
 
-class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {
+class NovedadAdapter(val novedadListener: NovedadListener) : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {
 
     private var novedades = ArrayList<Novedad>()
     private lateinit var context : Context
@@ -59,6 +60,9 @@ class NovedadAdapter : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() 
 
         if(position == novedades.size){
             //aca iria la implementacion de la flecha que permite pasar a otra pantalla
+            holder.itemView.setOnClickListener{
+                novedadListener.onFlechaClick()
+            }
         }else{
             val item = novedades[position]
             holder.bind(item, context)

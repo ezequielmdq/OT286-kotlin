@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="¡Contactate con nosotro!"
+            android:text="@string/contactate"
             android:textColor="@color/black"
             android:textSize="27sp"
             android:textStyle="bold"
@@ -136,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.65"
+            app:layout_constraintGuide_percent="0.80"/>
 
     <Button
         android:id="@+id/btn_submit"
@@ -147,9 +147,6 @@
         android:text="@string/enviar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
-
-
-            />
 
 
        
