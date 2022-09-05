@@ -148,11 +148,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
-
-            />
-
-
-       
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
