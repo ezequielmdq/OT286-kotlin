@@ -5,7 +5,8 @@ import com.melvin.ongandroid.model.Miembros
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.WelcomeImage
-import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDataRepository
+import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDatarepository
+
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
@@ -34,7 +35,7 @@ class OngViewModelTest{
 
 
     @RelaxedMockK
-    private lateinit var repositoryMiembros: MiembrosDataRepository
+    private lateinit var repositoryMiembros: MiembrosDatarepository
 
 
     private lateinit var ongViewModel: OngViewModel
