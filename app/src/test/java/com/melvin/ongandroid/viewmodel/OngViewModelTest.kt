@@ -12,16 +12,15 @@ import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepos
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
-
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-
 import kotlinx.coroutines.test.runTest
-
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+
 @ExperimentalCoroutinesApi
+
 class OngViewModelTest{
 
     @RelaxedMockK
@@ -33,8 +32,10 @@ class OngViewModelTest{
     @RelaxedMockK
     private lateinit var repositoryTestimonio : TestimonioDataRepository
 
+
     @RelaxedMockK
     private lateinit var repositoryMiembros: MiembrosDataRepository
+
 
     private lateinit var ongViewModel: OngViewModel
 
@@ -123,7 +124,9 @@ class OngViewModelTest{
     fun `when getNovedades return a list of images set on the LiveData`() = runTest{
         //Given
         val list = listOf(Novedad("example.png", "Imagen 1", "Descripcion 1", 1))
-        coEvery {repositoryNovedad.getNovedades()} returns list
+
+         coEvery {repositoryNovedad.getNovedades()} returns list
+
 
         //When
         ongViewModel.loadNovedades()
