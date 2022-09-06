@@ -42,7 +42,8 @@ class LoginActivity : AppCompatActivity() {
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
-            setTheme(R.style.Theme_AppCompat_Light_NoActionBar)
+            //setTheme(R.style.Theme_AppCompat_Light_NoActionBar)
+            supportActionBar?.hide()
 
             // [START config_signin]
             // Configure Google Sign In

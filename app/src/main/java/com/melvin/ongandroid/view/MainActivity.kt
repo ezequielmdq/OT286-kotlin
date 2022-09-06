@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         Thread.sleep(1000)
-        setTheme(R.style.Theme_AppCompat_Light_NoActionBar)
+
+        supportActionBar?.hide()
 
         super.onCreate(savedInstanceState)
 

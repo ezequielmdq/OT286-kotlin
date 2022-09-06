@@ -18,7 +18,8 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setTheme(R.style.SplashTheme_NoActionBar)
+        //setTheme(R.style.SplashTheme_NoActionBar)
+        supportActionBar?.hide()
 
         activityScope.launch {
             //delay(1000)

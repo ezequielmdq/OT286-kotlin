@@ -16,7 +16,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/pale_grey"
             android:padding="20dp">
 
             <ImageView
@@ -35,10 +34,11 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="120dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/white"
                 android:hint="Email"
+                app:layout_constraintTop_toBottomOf="@+id/login_logo"
                 app:layout_constraintBottom_toTopOf="@+id/login_password_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -62,7 +62,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/white"
-                android:hint="Password"
+                android:hint="Contraseña"
                 app:layout_constraintBottom_toTopOf="@+id/login_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,15 +85,18 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/btn_login"
+                android:backgroundTint="@color/botom_disable"
                 android:enabled="false"
                 android:text="Login"
                 android:textAllCaps="false"
-                android:textColor="#fff"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/second_login"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!---->
+
 
 
                 <LinearLayout
@@ -133,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/text_ha_olvidado_su_contrase_a"
+                android:text="@string/cuenta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
