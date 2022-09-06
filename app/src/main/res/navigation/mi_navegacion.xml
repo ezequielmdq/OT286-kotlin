@@ -8,27 +8,41 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.melvin.ongandroid.view.Home.HomeFragment"
-        android:label="Home" />
+        android:label="Home" >
 
+        <action
+            android:id="@+id/action_homeFragment_to_novedadFragment"
+            app:popUpTo="@id/homeFragment"
+
+            app:popUpToInclusive="true"
+            app:destination="@id/novedadFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/nosotrosFragment"
         android:name="com.melvin.ongandroid.view.Nosotros.NosotrosFragment"
-        android:label="Nosotros" />
-    
+        android:label="Nosotros"
+        tools:layout="@layout/fragment_nosotros"
+        />
+
     <fragment
         android:id="@+id/novedadFragment"
         android:name="com.melvin.ongandroid.view.Novedades.NovedadFragment"
-        android:label="Novedades" />
+        android:label="Novedades"
+        tools:layout="@layout/fragment_novedad"
+        />
 
-    <!-- fragmento home-->
     <fragment
         android:id="@+id/actividadFragment"
         android:name="com.melvin.ongandroid.view.Actividades.ActividadFragment"
-        android:label="Actividades" />
+        android:label="Actividades"
+        tools:layout="@layout/fragment_actividad"
+        />
 
     <fragment
         android:id="@+id/contactoFragment"
         android:name="com.melvin.ongandroid.view.contacto.ContactoFragment"
         android:label="Contacto"
         tools:layout="@layout/fragment_contacto" />
+
 </navigation>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.bindTestimonio
@@ -17,10 +18,11 @@ import com.melvin.ongandroid.model.WelcomeImage
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
+import com.melvin.ongandroid.view.home.NovedadListener
 import com.melvin.ongandroid.viewmodel.OngViewModel
 import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NovedadListener {
     private var binding: FragmentHomeBinding? = null
 
     private lateinit var novedadAdapter: NovedadAdapter
@@ -50,8 +52,11 @@ class HomeFragment : Fragment() {
         //inicializo observadores
         configObservers()
 
+
         return binding?.root
     }
+
+
 
     /**
      * configura todos los observadores que se asocian al fragment
@@ -89,7 +94,7 @@ class HomeFragment : Fragment() {
             })
 
             // observador cuando se falla los tres servicios
-       errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
+           errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
                 errorMassiva.let {
                     checkErrorMassiva()
                 }
@@ -97,6 +102,11 @@ class HomeFragment : Fragment() {
 
         }
     }
+
+
+
+
+
     // funcion para el spinner en la seccion de inicio
     private fun progressBarVisibility(show: Boolean){
         with(binding){
@@ -140,7 +150,7 @@ class HomeFragment : Fragment() {
      * configura la lista de novedades
      */
     private fun configNovedades(novedades: List<Novedad>) {
-        novedadAdapter = NovedadAdapter()
+        novedadAdapter = NovedadAdapter(this)
         binding?.let { binding ->
             binding.rvNovedades.apply {
                 adapter = novedadAdapter
@@ -177,6 +187,13 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    /**
+     * Setea la flecha para que te diriga al fragment novedades
+     */
+    override fun onFlechaClick() {
+        findNavController().navigate(R.id.action_homeFragment_to_novedadFragment)
     }
 
 
