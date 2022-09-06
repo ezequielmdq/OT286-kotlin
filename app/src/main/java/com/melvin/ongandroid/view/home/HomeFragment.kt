@@ -94,7 +94,7 @@ class HomeFragment : Fragment(), NovedadListener {
                 }
             })
             // observador cuando se falla los tres servicios
-       errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
+           errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
                 errorMassiva.let {
                     checkErrorMassiva()
                 }

@@ -11,7 +11,9 @@ import com.melvin.ongandroid.model.repository.Network.interfaces.IWelcomeDataRep
 class OngViewModelFactory(private val repositoryWelcomeImages: IWelcomeDataRepository,
                           private val repotoryNovedades: INovedadDataRepository,
                           private val repositoryTestimonios: ITestimonioDataRepository,
-                          private val repositoryMiembros: IMiembrosDataRepository)
+                          private val repositoryMiembros: IMiembrosDataRepository
+                          )
+
     : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
