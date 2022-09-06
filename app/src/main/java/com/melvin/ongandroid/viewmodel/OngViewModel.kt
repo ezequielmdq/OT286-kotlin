@@ -47,8 +47,8 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
     val listaMiembros : LiveData<List<Miembros>?> = _listaMiembros
 
     //observable que se cambiara a true si hay un error de carga
-    private val _error = MutableLiveData<Boolean>()
-    val error: LiveData<Boolean> = _error
+    private val _error = MutableLiveData<Boolean?>()
+    val error: LiveData<Boolean?> = _error
 
     val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         // handle thrown exceptions from coroutine scope
@@ -199,6 +199,10 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
     fun retry(){
         //lo hice temporalmente asi, no estoy muy seguro que decia el ticket de respuesta de error
         loadAll()
+    }
+
+    fun doneError(){
+        _error.value = null
     }
 
 
