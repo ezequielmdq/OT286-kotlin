@@ -15,6 +15,7 @@ import com.melvin.ongandroid.databinding.FragmentHomeBinding
 import com.melvin.ongandroid.model.Testimonio
 import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.model.WelcomeImage
+import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDatarepository
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
@@ -34,8 +35,8 @@ class HomeFragment : Fragment(), NovedadListener {
             OngViewModelFactory(
                 WelcomeDataRepository(),
                 NovedadDataRepository(),
-                TestimonioDataRepository()
-            )
+                TestimonioDataRepository(),
+                MiembrosDatarepository())
         }
 
     )
