@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.melvin.ongandroid.view.Nosotros.NosotrosFragment">
+        tools:context="com.melvin.ongandroid.view.nosotros.NosotrosFragment">
 
         <View
             android:id="@+id/linea"
