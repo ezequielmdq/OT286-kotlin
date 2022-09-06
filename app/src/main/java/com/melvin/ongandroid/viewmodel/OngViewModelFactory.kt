@@ -11,6 +11,7 @@ class OngViewModelFactory(private val repositoryWelcomeImages: IWelcomeDataRepos
                           private val repotoryNovedades: INovedadDataRepository,
                           private val repositoryTestimonios: ITestimonioDataRepository,
                           private val repositoryMiembros: IMiembrosDataRepository)
+
     : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -18,7 +19,11 @@ class OngViewModelFactory(private val repositoryWelcomeImages: IWelcomeDataRepos
             repositoryWelcomeImages,
             repotoryNovedades,
             repositoryTestimonios,
+
             repositoryMiembros ) as T
+
+        
+
     }
 
 

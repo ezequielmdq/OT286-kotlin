@@ -22,16 +22,16 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 
-class OngViewModelTest{
+class OngViewModelTest {
 
     @RelaxedMockK
-    private lateinit var repositoryWelcome : WelcomeDataRepository
+    private lateinit var repositoryWelcome: WelcomeDataRepository
 
     @RelaxedMockK
-    private lateinit var repositoryNovedad : NovedadDataRepository
+    private lateinit var repositoryNovedad: NovedadDataRepository
 
     @RelaxedMockK
-    private lateinit var repositoryTestimonio : TestimonioDataRepository
+    private lateinit var repositoryTestimonio: TestimonioDataRepository
 
 
     @RelaxedMockK
@@ -53,13 +53,11 @@ class OngViewModelTest{
      * Aca se prepara la configuracion inicial para hacer los tests, esto se ejecuta antes de los tests
      */
     @Before
-    fun onBefore(){
+      fun onBefore(){
         MockKAnnotations.init(this)
         ongViewModel = OngViewModel(repositoryWelcome, repositoryNovedad, repositoryTestimonio, repositoryMiembros)
 
     }
-
-
 
 
     /** CASO EXITO
@@ -67,15 +65,15 @@ class OngViewModelTest{
      *  y este trae la lista, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getWellcomeImages return a list of images set on the LiveData`() = runTest{
-    //Given
+    fun `when getWellcomeImages return a list of images set on the LiveData`() = runTest {
+        //Given
         val list = listOf(WelcomeImage("example.png", "Imagen 1", "Descripcion 1"))
-        coEvery {repositoryWelcome.getWellcomeImages()} returns list
+        coEvery { repositoryWelcome.getWellcomeImages() } returns list
 
-    //When
+        //When
         ongViewModel.loadSlide()
 
-    //Then
+        //Then
         assert(ongViewModel.listaSlide.value == list)
 
     }
@@ -85,7 +83,7 @@ class OngViewModelTest{
      *  y este falla trayendo una lista vacia, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getWellcomeImages return a empty list set on the LiveData`(){
+    fun `when getWellcomeImages return a empty list set on the LiveData`() {
 
         val emptyList = emptyList<WelcomeImage>()
 
@@ -104,7 +102,7 @@ class OngViewModelTest{
      *  y este trae un null, en el LiveData se deberia guardar una lista vacia.
      */
     @Test
-    fun `if getWellcomeImages return a null set a empty list on the LiveData`(){
+    fun `if getWellcomeImages return a null set a empty list on the LiveData`() {
         val emptyList = emptyList<WelcomeImage>()
 
         //Given
@@ -122,11 +120,11 @@ class OngViewModelTest{
      *  y este trae la lista con valores, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getNovedades return a list of images set on the LiveData`() = runTest{
+    fun `when getNovedades return a list of images set on the LiveData`() = runTest {
         //Given
         val list = listOf(Novedad("example.png", "Imagen 1", "Descripcion 1", 1))
 
-         coEvery {repositoryNovedad.getNovedades()} returns list
+        coEvery { repositoryNovedad.getNovedades() } returns list
 
 
         //When
@@ -142,7 +140,7 @@ class OngViewModelTest{
      *  y este falla trayendo una lista vacia, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getNovedades return a empty list set on the LiveData`(){
+    fun `when getNovedades return a empty list set on the LiveData`() {
 
         val emptyList = emptyList<Novedad>()
 
@@ -161,7 +159,7 @@ class OngViewModelTest{
      *  y este trae un null, en el LiveData se deberia guardar una lista vacia.
      */
     @Test
-    fun `if getNovedades return a null set a empty list on the LiveData`(){
+    fun `if getNovedades return a null set a empty list on the LiveData`() {
         val emptyList = emptyList<Novedad>()
 
         //Given
@@ -179,10 +177,10 @@ class OngViewModelTest{
      *  y este trae la lista, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getTestimonios return a list of images set on the LiveData`() = runTest{
+    fun `when getTestimonios return a list of images set on the LiveData`() = runTest {
         //Given
         val list = listOf(Testimonio(1, "Testimonio 1", "example.png", "descripcion 1"))
-        coEvery {repositoryTestimonio.getTestimonios()} returns list
+        coEvery { repositoryTestimonio.getTestimonios() } returns list
 
         //When
         ongViewModel.loadTestimonios()
@@ -197,7 +195,7 @@ class OngViewModelTest{
      *  y este falla trayendo una lista vacia, esta se guarda efectivamente en el LiveData
      */
     @Test
-    fun `when getTestimonios return a empty list set on the LiveData`(){
+    fun `when getTestimonios return a empty list set on the LiveData`() {
 
         val emptyList = emptyList<Testimonio>()
 
@@ -216,7 +214,7 @@ class OngViewModelTest{
      *  y este trae un null, en el LiveData se deberia guardar una lista vacia.
      */
     @Test
-    fun `if getTestimonios return a null set a empty list on the LiveData`(){
+    fun `if getTestimonios return a null set a empty list on the LiveData`() {
         val emptyList = emptyList<WelcomeImage>()
 
         //Given
@@ -227,7 +225,6 @@ class OngViewModelTest{
         //Then
         assert(emptyList == ongViewModel.listaTestimonios.value)
     }
-
 
 
     @Test
@@ -273,3 +270,4 @@ class OngViewModelTest{
 
 
 }
+
