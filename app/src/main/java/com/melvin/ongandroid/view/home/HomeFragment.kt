@@ -84,8 +84,10 @@ class HomeFragment : Fragment() {
             error.observe(viewLifecycleOwner, Observer { error ->
                 error?.let {
                     onLoadError()
+                    viewModel.doneError()
                 }
             })
+
             // observador cuando se falla los tres servicios
        errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
                 errorMassiva.let {
@@ -159,7 +161,6 @@ class HomeFragment : Fragment() {
                 .setAction("Reintentar") {
                     //el boton reintentar ejecutara el metodo "retry" implementado en el viewModel
                     viewModel.retry()
-
                 }
                 .show()
         }

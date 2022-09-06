@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showSppinner="@{viewmodel._spinnervisible}"
+            app:showSppinner="@{viewmodel.spinnervisible}"
             android:visibility="gone"
             app:indicatorColor="@color/blue"
             />
@@ -136,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.65"
+            app:layout_constraintGuide_percent="0.65"/>
 
     <Button
         android:id="@+id/btn_submit"
@@ -147,6 +147,18 @@
         android:text="@string/enviar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/mensaje_error_contacto"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_submit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

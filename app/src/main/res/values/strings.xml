@@ -20,6 +20,7 @@
     <string name="email">Email</string>
     <string name="mensaje">Mensaje</string>
     <string name="enviar">Enviar mensaje</string>
+    <string name="mensaje_error_contacto">Ha ocurrido un error. Intente nuevamente mas tarde.</string>
 
 
 </resources>

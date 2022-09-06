@@ -2,10 +2,7 @@ package com.melvin.ongandroid.model.repository.Network.retrofit
 
 
 import com.melvin.ongandroid.model.Novedad
-import com.melvin.ongandroid.model.data.ActividadData
-import com.melvin.ongandroid.model.data.NovedadData
-import com.melvin.ongandroid.model.data.TestimonioData
-import com.melvin.ongandroid.model.data.WelcomeData
+import com.melvin.ongandroid.model.data.*
 import com.melvin.ongandroid.view.contacto.ContactosDto
 import retrofit2.Response
 import retrofit2.http.Body
@@ -27,7 +24,7 @@ interface AlkemyAPIInterface {
     suspend fun getDataActividades() : Response<ActividadData>
 
     @POST("contacts")
-    suspend fun setDataContacto(@Body dto : ContactosDto) : Response<ContactosDto>
+    suspend fun setDataContacto(@Body dto : ContactosDto) : Response<ContactosData>
 
 
 
