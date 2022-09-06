@@ -172,6 +172,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 FirebaseLog.logMiembrosSuccess()
                 if(list.isNullOrEmpty()){
                     _listaMiembros.value = emptyList()
+                    _error.value = true
                 }else{
                     _listaMiembros.value = list
                 }
