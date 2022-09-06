@@ -8,7 +8,8 @@ import com.melvin.ongandroid.model.data.NovedadData
 import com.melvin.ongandroid.model.data.TestimonioData
 import com.melvin.ongandroid.model.data.WelcomeData
 import com.melvin.ongandroid.view.contacto.ContactosDto
-
+import com.melvin.ongandroid.model.data.MiembrosData
+import com.melvin.ongandroid.model.Miembros
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
