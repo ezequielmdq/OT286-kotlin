@@ -10,11 +10,17 @@ import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDatarepo
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
+import com.melvin.ongandroid.view.contacto.ContactoViewModel
+import com.melvin.ongandroid.view.contacto.ContactosDto
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -37,8 +43,77 @@ class OngViewModelTest {
     @RelaxedMockK
     private lateinit var repositoryMiembros: MiembrosDatarepository
 
+    @RelaxedMockK
+    private lateinit var dato : ContactosDto
+
 
     private lateinit var ongViewModel: OngViewModel
+
+    private lateinit var contactoViewModel: ContactoViewModel
+
+    /**
+     * Test Contacto Viewmodel
+     * */
+
+    @get:Rule
+    var rules: InstantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @Before
+    fun contactoBefore(){
+        MockKAnnotations.init(this)
+        contactoViewModel = ContactoViewModel(dato)
+
+        Dispatchers.setMain(Dispatchers.Unconfined)
+    }
+
+    @After
+    fun after() {
+        Dispatchers.resetMain()
+    }
+
+    @Test
+    fun `cuando los campos son completos` () = runTest{
+        val contact = ContactosDto("userName", "userEmail@mail.com", "a message")
+        coEvery { dato } returns contact
+
+        contactoViewModel.enviarDatos()
+
+        assert(contactoViewModel._spinnervisible.value == false)
+    }
+
+    @Test
+    fun `cuando los campos no son completos` () = runTest{
+        val contact = ContactosDto("", "userEmail@mail.com", "a message")
+       //GIVEN
+        coEvery { dato } returns contact
+        // WHEN
+        contactoViewModel.enviarDatos()
+        // THEN
+        assert(contactoViewModel._spinnervisible.value == true)
+    }
+
+    @Test
+    fun `cuando los campos no son completos otra vez` () = runTest{
+        val contact = ContactosDto("", "", "a message")
+        //GIVEN
+        coEvery { dato } returns contact
+    // WHEN
+        contactoViewModel.enviarDatos()
+    // THEN
+        assert(contactoViewModel._spinnervisible.value == true)
+    }
+
+    @Test
+    fun `cuando todos los campos no son completos` () = runTest{
+        val contact = ContactosDto("", "userEmail@mail.com", "")
+        coEvery { dato } returns contact
+
+        contactoViewModel.enviarDatos()
+
+        assert(contactoViewModel._spinnervisible.value == true)
+    }
+
+
 
     /**
      * Estas dos reglas son necesarias para que funcionen las corrutinas
