@@ -1,5 +1,6 @@
 package com.melvin.ongandroid.view.contacto
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
@@ -18,13 +20,13 @@ import kotlinx.coroutines.launch
 
 
 
-class ContactoFragment() : Fragment() {
+class ContactoFragment: Fragment() {
     private lateinit var binding : FragmentContactoBinding
-    private val viewModel: ContactoViewModel by activityViewModels(factoryProducer = {
-        ContactoViewModelFactory(ContactosDto())})
-
-
-
+    private val viewModel: ContactoViewModel by activityViewModels(
+        factoryProducer = {
+            ContactoViewModelFactory(ContactosDto())
+        }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,17 +45,44 @@ class ContactoFragment() : Fragment() {
 
         binding.btnSubmit.setOnClickListener(object : View.OnClickListener{
             override fun onClick(view: View?) {
-                viewModel._spinnervisible.value = true
-                viewModel.viewModelScope.launch {
-                   viewModel.enviarDatos()
-                    dialogCartel()
-                    }}})
+                viewModel.enviarDatos()
+            }
+        })
+
+        configObservers()
 
         return binding.root
 
-
     }
 
+    /**
+     * setea observadores
+     */
+    private fun configObservers() {
+        //observa al liveData isError, si es true entonces hubo un error de conexion o devolvio null
+        //si devuelve falso significa que no hubo error, o sea, fue exitoso
+        viewModel.isError.observe(viewLifecycleOwner, Observer{ isError ->
+            isError?.let {
+                if(isError){
+                    //caso error
+                    binding.tvError.visibility = View.VISIBLE
+                }else{
+                    //caso exito; muestro el error y limpio los campos de texto
+                    binding.apply {
+                        tvError.visibility = View.GONE
+                        etNombreYApellido.setText("")
+                        etEmail.setText("")
+                        etMensaje.setText("")
+                    }
+                    //muestro el dialogo de exito
+                    dialogCartel()
+                }
+                //nulleo el error por si la vista del fragment se recrea
+                viewModel.doneError()
+            }
+        })
+
+    }
 
     /**
      * Esta variable fue necesaria porque sino hubiese tenido que repetir el textWatcher en cada uno de los EditText
@@ -83,6 +112,10 @@ class ContactoFragment() : Fragment() {
             botonEnviarEstaActivado(etNombreYApellido.isNotEmpty() && etEmail.isNotEmpty()
                     && Validator.isEmailValid(etEmail) && etMensaje.isNotEmpty())
 
+            //si esta visible el mensaje de error, lo oculto
+            if(binding.tvError.visibility == View.VISIBLE){
+                binding.tvError.visibility = View.GONE
+            }
 
         }
 
@@ -110,14 +143,12 @@ class ContactoFragment() : Fragment() {
     }
 
     /** Modal dialog que indica que el mensaje fue enviado exitosamente*/
-
     fun dialogCartel(){
         context?.let {
             MaterialAlertDialogBuilder(it)
                 .setTitle("¡Gracias!")
                 .setMessage("Sus datos se han enviado.")
                 .setPositiveButton("Aceptar") { dialog, which ->
-                    viewModel._spinnervisible.value = false
                 }
                 .show()
         }

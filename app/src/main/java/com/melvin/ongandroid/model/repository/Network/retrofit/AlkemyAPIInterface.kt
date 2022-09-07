@@ -29,7 +29,10 @@ interface AlkemyAPIInterface {
     suspend fun getDataMiembros() : Response<MiembrosData<List<Miembros>>>
 
     @POST("contacts")
-    suspend fun setDataContacto(@Body dto : ContactosDto) : Response<ContactosDto>
+    suspend fun setDataContacto(@Body dto : ContactosDto) : Response<ContactosData>
+
+
+
 
 
 }

@@ -20,6 +20,7 @@ import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepos
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
 import com.melvin.ongandroid.view.home.NovedadListener
+
 import com.melvin.ongandroid.viewmodel.OngViewModel
 import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 
@@ -36,7 +37,7 @@ class HomeFragment : Fragment(), NovedadListener {
                 WelcomeDataRepository(),
                 NovedadDataRepository(),
                 TestimonioDataRepository(),
-                MiembrosDatarepository()
+                MiembrosDatarepository())
             )
         }
 
@@ -91,8 +92,10 @@ class HomeFragment : Fragment(), NovedadListener {
             error.observe(viewLifecycleOwner, Observer { error ->
                 error?.let {
                     onLoadError()
+                    viewModel.doneError()
                 }
             })
+
             // observador cuando se falla los tres servicios
            errorMassiva.observe(viewLifecycleOwner, Observer {  errorMassiva ->
                 errorMassiva.let {
@@ -102,10 +105,6 @@ class HomeFragment : Fragment(), NovedadListener {
 
         }
     }
-
-
-
-
 
     // funcion para el spinner en la seccion de inicio
     private fun progressBarVisibility(show: Boolean){
@@ -170,7 +169,6 @@ class HomeFragment : Fragment(), NovedadListener {
                 .setAction("Reintentar") {
                     //el boton reintentar ejecutara el metodo "retry" implementado en el viewModel
                     viewModel.retry()
-
                 }
                 .show()
         }
