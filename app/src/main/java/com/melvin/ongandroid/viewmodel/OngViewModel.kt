@@ -76,6 +76,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
             try {
                 val list = repositoryWelcomeImages.getWellcomeImages()
                 _listaSlide.value = list
+                _error.value = false
                 /**se genera el log de evento de conexion exitosa*/
                 FirebaseLog.logSliderSuccess()
                 if(list.isNullOrEmpty()){
@@ -105,7 +106,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
             try {
                 val list = repositoryNovedades.getNovedades()
                  _listaNovedad.value = list
-    
+                _error.value = false
                 /**se genera el log de evento de conexion exitosa*/
                 FirebaseLog.logNovedadesSuccess()
                 if(list.isNullOrEmpty()){
@@ -136,7 +137,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 val list = repositoryTestimonios
                     .getTestimonios()
                 _listaTestimonios.value = list
-                
+                _error.value = false
                  /**se genera el log de evento de conexion exitosa*/
                 FirebaseLog.logTestimonioSuccess()
                 if(list.isNullOrEmpty()){
@@ -167,7 +168,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 val list = repositoryMiembros
                     .getMiembros()
                 _listaMiembros.value = list
-
+                _error.value = false
                 /**se genera el log de evento de conexion exitosa*/
                 FirebaseLog.logMiembrosSuccess()
                 if(list.isNullOrEmpty()){

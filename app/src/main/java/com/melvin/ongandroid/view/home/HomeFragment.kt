@@ -150,13 +150,12 @@ class HomeFragment : Fragment(), NovedadListener {
      */
     private fun configNovedades(novedades: List<Novedad>) {
         novedadAdapter = NovedadAdapter(this)
+        novedadAdapter.novedades.addAll(novedades)
         binding?.let { binding ->
             binding.rvNovedades.apply {
                 adapter = novedadAdapter
             }
         }
-
-        novedadAdapter.actualizarData(novedades)
     }
 
 

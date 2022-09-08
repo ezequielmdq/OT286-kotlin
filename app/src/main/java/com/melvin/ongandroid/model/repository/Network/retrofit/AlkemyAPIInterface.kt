@@ -3,9 +3,9 @@ package com.melvin.ongandroid.model.repository.Network.retrofit
 
 import com.melvin.ongandroid.model.Miembros
 import com.melvin.ongandroid.model.Novedad
-import com.melvin.ongandroid.view.contacto.ContactosDto
-import com.melvin.ongandroid.model.Miembros
 import com.melvin.ongandroid.model.data.*
+import com.melvin.ongandroid.view.contacto.ContactosDto
+import com.melvin.ongandroid.model.data.MiembrosData
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
