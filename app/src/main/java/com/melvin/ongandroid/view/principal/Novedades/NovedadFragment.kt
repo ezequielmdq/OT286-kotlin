@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.Novedades
+package com.melvin.ongandroid.view.principal.Novedades
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

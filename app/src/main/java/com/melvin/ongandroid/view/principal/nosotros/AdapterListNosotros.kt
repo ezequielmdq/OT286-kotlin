@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.CardPersonalBinding
 import com.melvin.ongandroid.model.Personal
-import com.melvin.ongandroid.view.nosotros.MiembroClickListener
+import com.melvin.ongandroid.view.principal.nosotros.MiembroClickListener
 
 class AdapterListNosotros: RecyclerView.Adapter<AdapterListNosotros.PersonalHolder>(), MiembroClickListener {
 

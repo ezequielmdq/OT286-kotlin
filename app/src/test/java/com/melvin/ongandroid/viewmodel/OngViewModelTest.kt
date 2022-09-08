@@ -10,8 +10,8 @@ import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDatarepo
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
-import com.melvin.ongandroid.view.contacto.ContactoViewModel
-import com.melvin.ongandroid.view.contacto.ContactosDto
+import com.melvin.ongandroid.view.principal.contacto.ContactoViewModel
+import com.melvin.ongandroid.view.principal.contacto.ContactosDto
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK

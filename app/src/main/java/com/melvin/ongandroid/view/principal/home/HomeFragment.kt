@@ -19,7 +19,7 @@ import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDatarepo
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
-import com.melvin.ongandroid.view.home.NovedadListener
+import com.melvin.ongandroid.view.principal.home.NovedadListener
 
 import com.melvin.ongandroid.viewmodel.OngViewModel
 import com.melvin.ongandroid.viewmodel.OngViewModelFactory
@@ -38,7 +38,6 @@ class HomeFragment : Fragment(), NovedadListener {
                 NovedadDataRepository(),
                 TestimonioDataRepository(),
                 MiembrosDatarepository())
-            )
         }
 
     )
@@ -77,7 +76,9 @@ class HomeFragment : Fragment(), NovedadListener {
             //observador a la lista de testimonios
             listaTestimonios.observe(viewLifecycleOwner, Observer { testimonios ->
                 testimonios?.let {
-                    configTestimonios(testimonios)
+                    if(testimonios.size > 3){
+                        configTestimonios(testimonios)
+                    }
                 }
             })
 

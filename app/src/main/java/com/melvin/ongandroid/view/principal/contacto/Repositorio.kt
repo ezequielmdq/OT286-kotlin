@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.contacto
+package com.melvin.ongandroid.view.principal.contacto
 
 import com.melvin.ongandroid.model.data.ContactosData
 import com.melvin.ongandroid.model.repository.Network.retrofit.AlkemyAPIClient

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.model.Novedad
-import com.melvin.ongandroid.view.home.NovedadListener
+import com.melvin.ongandroid.view.principal.home.NovedadListener
 
 
 class NovedadAdapter(val novedadListener: NovedadListener) : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {

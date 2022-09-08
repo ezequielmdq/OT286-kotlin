@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.contacto
+package com.melvin.ongandroid.view.principal.contacto
 
 data class ContactosDto(
     var name : String ="",

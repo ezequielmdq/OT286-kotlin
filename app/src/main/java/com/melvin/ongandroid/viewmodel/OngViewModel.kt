@@ -1,6 +1,7 @@
 package com.melvin.ongandroid.viewmodel
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -86,6 +87,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 }
             }catch (e : Exception){
                 /**se genera el log de evento de error de conexion*/
+                e.message?.let { Log.d("error", it) }
                 FirebaseLog.logSliderError()
                 //seteo el observable error en true
                 _error.value = true
@@ -116,6 +118,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                 
             }catch (e : Exception){
                 /**se genera el log de evento de error de conexion*/
+                e.message?.let { Log.d("error", it) }
                 FirebaseLog.logNovedadesError()
                 //seteo el observable error en true
                 _error.value = true
@@ -148,6 +151,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
             }catch (e : Exception){
                 /**se genera el log de evento de error de conexion*/
                 FirebaseLog.logTestimonioError()
+                e.message?.let { Log.d("error", it) }
                 //seteo el observable error en true
                 _error.value = true
                 _listaTestimonios.value = emptyList()

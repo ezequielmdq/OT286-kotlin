@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.contacto
+package com.melvin.ongandroid.view.principal.contacto
 
 
 import android.view.View.*

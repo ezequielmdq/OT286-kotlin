@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.Actividades
+package com.melvin.ongandroid.view.principal.Actividades
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

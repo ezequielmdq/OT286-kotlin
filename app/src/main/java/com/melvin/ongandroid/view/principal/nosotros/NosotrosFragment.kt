@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.melvin.ongandroid.R
-import com.melvin.ongandroid.bindTestimonio
 import com.melvin.ongandroid.databinding.FragmentNosotrosBinding
 
 import com.melvin.ongandroid.model.Personal
-import com.melvin.ongandroid.view.nosotros.MiembroClickListener
+import com.melvin.ongandroid.view.principal.nosotros.MiembroClickListener
 
 /**
  *
