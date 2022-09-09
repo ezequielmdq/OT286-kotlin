@@ -16,7 +16,7 @@ import com.melvin.ongandroid.view.principal.home.NovedadListener
 
 class NovedadAdapter(val novedadListener: NovedadListener) : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {
 
-    private var novedades = ArrayList<Novedad>()
+    var novedades = mutableListOf<Novedad>()
     private lateinit var context : Context
     private lateinit var itemView: View
 
