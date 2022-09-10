@@ -3,6 +3,7 @@ package com.melvin.ongandroid.model.repository.Network.retrofit
 
 import com.melvin.ongandroid.model.Miembros
 import com.melvin.ongandroid.model.Novedad
+import com.melvin.ongandroid.view.principal.contacto.ContactosDto
 import com.melvin.ongandroid.model.data.*
 import com.melvin.ongandroid.view.contacto.ContactosDto
 import com.melvin.ongandroid.model.data.MiembrosData

@@ -21,10 +21,9 @@ class OngViewModelFactory(private val repositoryWelcomeImages: IWelcomeDataRepos
             repositoryWelcomeImages,
             repotoryNovedades,
             repositoryTestimonios,
-            repositoryMiembros ) as T
+            repositoryMiembros
+        ) as T
 
-        
-
-
+    }
 
 }

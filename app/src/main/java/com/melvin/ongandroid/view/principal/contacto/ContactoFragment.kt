@@ -1,6 +1,5 @@
-package com.melvin.ongandroid.view.contacto
+package com.melvin.ongandroid.view.principal.contacto
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,13 +10,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.Validator
 import com.melvin.ongandroid.databinding.FragmentContactoBinding
-import kotlinx.coroutines.launch
-
 
 
 class ContactoFragment: Fragment() {

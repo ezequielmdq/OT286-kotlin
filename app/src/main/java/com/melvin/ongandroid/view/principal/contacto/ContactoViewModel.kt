@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.contacto
+package com.melvin.ongandroid.view.principal.contacto
 
 
 import androidx.databinding.Bindable
@@ -31,7 +31,7 @@ class ContactoViewModel(private val dto: ContactosDto) : ViewModel(), Observable
     private val mensaje = MutableLiveData<String>()
     val _mensaje : MutableLiveData<String> = mensaje
     @Bindable
-    private val _spinnervisible = MutableLiveData<Boolean?>()
+    val _spinnervisible = MutableLiveData<Boolean?>()
     val spinnervisible : LiveData<Boolean?> = _spinnervisible
 
     private val servicio = MutableLiveData<ContactosData?>()

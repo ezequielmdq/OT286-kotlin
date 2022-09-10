@@ -1,4 +1,4 @@
-package com.melvin.ongandroid.view.nosotros
+package com.melvin.ongandroid.view.principal.nosotros
 
 import android.os.Bundle
 import android.view.LayoutInflater
