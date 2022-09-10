@@ -54,5 +54,12 @@
         android:name="com.melvin.ongandroid.view.principal.nosotros.MiembroFragment"
         android:label="Detalle"
         tools:layout="@layout/miembro_fragment"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.melvin.ongandroid.view.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"
+        />
+
 
 </navigation>
