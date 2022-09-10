@@ -32,26 +32,26 @@
 
     <fragment
         android:id="@+id/novedadFragment"
-        android:name="com.melvin.ongandroid.view.Novedades.NovedadFragment"
+        android:name="com.melvin.ongandroid.view.principal.Novedades.NovedadFragment"
         android:label="Novedades"
         tools:layout="@layout/fragment_novedad"
         />
 
     <fragment
         android:id="@+id/actividadFragment"
-        android:name="com.melvin.ongandroid.view.Actividades.ActividadFragment"
+        android:name="com.melvin.ongandroid.view.principal.Actividades.ActividadFragment"
         android:label="Actividades"
         tools:layout="@layout/fragment_actividad"
         />
 
     <fragment
         android:id="@+id/contactoFragment"
-        android:name="com.melvin.ongandroid.view.contacto.ContactoFragment"
+        android:name="com.melvin.ongandroid.view.principal.contacto.ContactoFragment"
         android:label="Contacto"
         tools:layout="@layout/fragment_contacto" />
     <fragment
         android:id="@+id/miembroFragment"
-        android:name="com.melvin.ongandroid.view.nosotros.MiembroFragment"
+        android:name="com.melvin.ongandroid.view.principal.nosotros.MiembroFragment"
         android:label="Detalle"
         tools:layout="@layout/miembro_fragment"/>
 

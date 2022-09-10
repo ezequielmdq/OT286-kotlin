@@ -8,7 +8,7 @@
     <string name="mensaje_Bienvenidos">Bienvenidos</string>
 
     <string name="retry">Ha ocurrido un error obteniendo la información</string>
-    
+
     <string name="tittleTestimonio">Testimonios</string>
     <string name="ver_mas_testimonios">Ver mas testimonios</string>
     <string name="novedades">Novedades</string>
@@ -20,7 +20,7 @@
     <string name="email">Email</string>
     <string name="mensaje">Mensaje</string>
     <string name="enviar">Enviar mensaje</string>
-    
+
     <string name="mensaje_error_contacto">Ha ocurrido un error. Intete nuevamente mas tarde.</string>
     <string name="detalle">Detalle</string>
 
