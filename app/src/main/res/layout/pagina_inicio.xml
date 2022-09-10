@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/email_layout_text"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="18dp"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -65,8 +65,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:layout_constraintBottom_toTopOf="@id/passwor_layout_text"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp">
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="18dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email_text_edit"
@@ -87,8 +87,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp">
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="18dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_text_edit"
@@ -108,8 +108,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp">
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="18dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/confirmPassword_text_edit"
@@ -126,8 +126,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
                 android:text="Confirm"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -141,8 +141,8 @@
                 android:id="@+id/textView_inicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="32dp"
                 android:text="Ya Tienes Cuenta? Ingresa!"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 app:layout_constraintEnd_toEndOf="parent"
