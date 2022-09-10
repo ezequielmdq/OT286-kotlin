@@ -110,6 +110,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btLogin" />
 
+
+                <LinearLayout
+                    android:id="@+id/second_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/tvOlvidoContrasenia"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/btnFacebook"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="80dp"
+                        android:background="@drawable/ic_facebook" />
+
+                    <ImageButton
+                        android:id="@+id/btnGoogle"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/ic_google"
+                        android:layout_marginEnd="80dp"
+                        android:layout_marginStart="80dp"
+                        android:cropToPadding="true" />
+
+
+                </LinearLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
