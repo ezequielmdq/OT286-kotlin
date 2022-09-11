@@ -100,4 +100,9 @@ dependencies {
     //material design
     implementation 'com.google.android.material:material:<version>'
 
+    //Facebook
+    implementation 'com.facebook.android:facebook-login:latest.release'
+
+
+
 }
