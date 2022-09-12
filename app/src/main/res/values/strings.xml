@@ -23,6 +23,11 @@
 
     <string name="mensaje_error_contacto">Ha ocurrido un error. Intete nuevamente mas tarde.</string>
     <string name="detalle">Detalle</string>
+    <string name="linkedin">linkedin</string>
+    <string name="facebook">Facebook</string>
+    <string name="descripcion">descripcion</string>
+    <string name="nombre">Nombre</string>
+    <string name="Detalle">Detalle</string>
 
     <string name="facebook_app_id">384594340512386</string>
     <string name="fb_login_protocol_scheme">fb384594340512386</string>

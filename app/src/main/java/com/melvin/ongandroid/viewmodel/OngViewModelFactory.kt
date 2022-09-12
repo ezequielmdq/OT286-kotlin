@@ -11,7 +11,7 @@ import com.melvin.ongandroid.model.repository.Network.interfaces.IWelcomeDataRep
 class OngViewModelFactory(private val repositoryWelcomeImages: IWelcomeDataRepository,
                           private val repotoryNovedades: INovedadDataRepository,
                           private val repositoryTestimonios: ITestimonioDataRepository,
-                          private val repositoryMiembros: IMiembrosDataRepository)
+)
 
 
     : ViewModelProvider.Factory {
@@ -21,7 +21,6 @@ class OngViewModelFactory(private val repositoryWelcomeImages: IWelcomeDataRepos
             repositoryWelcomeImages,
             repotoryNovedades,
             repositoryTestimonios,
-            repositoryMiembros
         ) as T
 
     }
