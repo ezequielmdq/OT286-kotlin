@@ -36,8 +36,7 @@ class HomeFragment : Fragment(), NovedadListener {
             OngViewModelFactory(
                 WelcomeDataRepository(),
                 NovedadDataRepository(),
-                TestimonioDataRepository(),
-                MiembrosDatarepository())
+                TestimonioDataRepository())
         }
 
     )
