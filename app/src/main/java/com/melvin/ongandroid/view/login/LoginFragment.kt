@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
+import com.melvin.ongandroid.view.LoginActivity
 
 import com.melvin.ongandroid.model.LogIn
 import com.melvin.ongandroid.model.repository.Network.implement.LogInDataRepository
@@ -33,6 +34,11 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        binding.btLogInGogle?.setOnClickListener {
+            val loginActivity = requireActivity() as LoginActivity
+            loginActivity.signIn()
+        }
 
         binding.btLogin.setOnClickListener {
             viewModel.logIn(LogIn(binding.tiEmail.text.toString(), binding.tiContrasenia.text.toString()))
