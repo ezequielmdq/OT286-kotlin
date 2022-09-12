@@ -50,6 +50,7 @@ dependencies {
 
     implementation 'androidx.fragment:fragment:1.5.2'
     implementation 'com.google.firebase:firebase-common-ktx:20.1.2'
+    implementation 'com.google.firebase:firebase-auth:21.0.8'
     def nav_version = "2.5.1"
     def lifecycle_version = "2.5.1"
     def coroutines_version = '1.6.4'
@@ -102,6 +103,16 @@ dependencies {
 
     //Facebook
     implementation 'com.facebook.android:facebook-login:latest.release'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth'
+
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
 
 

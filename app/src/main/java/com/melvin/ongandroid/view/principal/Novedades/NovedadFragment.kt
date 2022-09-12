@@ -79,10 +79,12 @@ class NovedadFragment : Fragment() {
             }
         /** si la variable error es true se muestra el modal dialog de error*/
         val error = viewModel.error.value
-        if(error == true) dialogCartel()}
+        if(error == true) dialogCartel()
+    }
 
     /**funcion reintentar*/
     private fun retry(){
         cargarDatos()
     }
+
 }

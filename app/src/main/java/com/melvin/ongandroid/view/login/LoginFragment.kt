@@ -16,6 +16,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
+import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
 import com.melvin.ongandroid.model.repository.Network.implement.LogInDataRepository
 import com.melvin.ongandroid.view.LoginActivity
@@ -44,6 +45,13 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
 
+
+        binding.btLogInGogle?.setOnClickListener {
+            val loginActivity = requireActivity() as LoginActivity
+            loginActivity.signIn()
+        }
+
+
         binding.btLogin.setOnClickListener {
             viewModel.logIn(LogIn(binding.tiEmail.text.toString(), binding.tiContrasenia.text.toString()))
         }
@@ -61,7 +69,7 @@ class LoginFragment : Fragment() {
                 }
 
                 override fun onError(error: FacebookException) {
-                    TODO("Not yet implemented")
+                    LoginManager.getInstance().logOut()
                 }
 
                 override fun onSuccess(result: LoginResult) {
