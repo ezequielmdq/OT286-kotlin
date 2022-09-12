@@ -14,8 +14,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.melvin.ongandroid.R
+import com.melvin.ongandroid.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
+
+
+    lateinit var binding: ActivityLoginBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
@@ -111,5 +121,6 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
+
     }
 }
