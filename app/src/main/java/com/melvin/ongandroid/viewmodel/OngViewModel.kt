@@ -23,7 +23,6 @@ import kotlinx.coroutines.launch
 class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
                    private val repositoryNovedades : INovedadDataRepository,
                    private val repositoryTestimonios : ITestimonioDataRepository,
-                   private val repositoryMiembros: IMiembrosDataRepository
 ) : ViewModel() {
 
     private val errorTestimonio = MutableLiveData(false)
@@ -43,9 +42,7 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
     private val _listaTestimonios = MutableLiveData<List<Testimonio>?>()
     val listaTestimonios : LiveData<List<Testimonio>?> = _listaTestimonios
 
-    //lista de miembros observable
-    private val _listaMiembros = MutableLiveData<List<Miembros>?>()
-    val listaMiembros : LiveData<List<Miembros>?> = _listaMiembros
+
 
     //observable que se cambiara a true si hay un error de carga
     private val _error = MutableLiveData<Boolean?>()
@@ -64,7 +61,6 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
         loadSlide()
         loadTestimonios()
         loadNovedades()
-        loadMiembros()
     }
 
     /**
@@ -160,37 +156,8 @@ class OngViewModel(private val repositoryWelcomeImages : IWelcomeDataRepository,
             }}
     }
 
-    /**
-     * hace la peticion de miembros con su repository correspondiente
-     * en caso de error setea el liveData "_onErrorLoad" en true
-     * para que los observadores se enteren del error
-     */
-    fun loadMiembros() {
-        viewModelScope.launch(coroutineExceptionHandler) {
-            try {
 
-                val list = repositoryMiembros
-                    .getMiembros()
-                _listaMiembros.value = list
-                _error.value = false
-                /**se genera el log de evento de conexion exitosa*/
-                FirebaseLog.logMiembrosSuccess()
-                if(list.isNullOrEmpty()){
-                    _listaMiembros.value = emptyList()
-                    _error.value = true
-                }else{
-                    _listaMiembros.value = list
-                }
 
-            }catch (e : Exception){
-                /**se genera el log de evento de error de conexion*/
-                FirebaseLog.logMiembrosError()
-                //seteo el observable error en true
-                _error.value = true
-                _listaMiembros.value = emptyList()
-
-            }}
-    }
         // funcion a llamar cuando se falla los tres servicios
     fun checkErrorMassiva(){
         if(errorNovedades.value == true && errorActividades.value == true && errorTestimonio.value == true){

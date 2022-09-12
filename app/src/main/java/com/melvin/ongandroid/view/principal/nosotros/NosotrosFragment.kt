@@ -12,6 +12,7 @@ import com.melvin.ongandroid.databinding.FragmentNosotrosBinding
 
 import com.melvin.ongandroid.model.Personal
 import com.melvin.ongandroid.view.principal.nosotros.MiembroClickListener
+import com.melvin.ongandroid.view.principal.nosotros.MiembroFragment
 
 /**
  *
