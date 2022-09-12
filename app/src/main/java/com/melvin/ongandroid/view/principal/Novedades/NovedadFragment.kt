@@ -14,6 +14,7 @@ import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDatarepo
 import com.melvin.ongandroid.model.repository.Network.implement.NovedadDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.TestimonioDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.WelcomeDataRepository
+import com.melvin.ongandroid.view.Novedades.NovedadesAdapter
 import com.melvin.ongandroid.viewmodel.OngViewModel
 import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 
@@ -21,7 +22,7 @@ class NovedadFragment : Fragment() {
 
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter :NovedadesAdapter
+    private lateinit var adapter : NovedadesAdapter
 
     private val viewModel: OngViewModel by activityViewModels(
         factoryProducer = {
@@ -78,10 +79,12 @@ class NovedadFragment : Fragment() {
             }
         /** si la variable error es true se muestra el modal dialog de error*/
         val error = viewModel.error.value
-        if(error == true) dialogCartel()}
+        if(error == true) dialogCartel()
+    }
 
     /**funcion reintentar*/
     private fun retry(){
         cargarDatos()
     }
+
 }

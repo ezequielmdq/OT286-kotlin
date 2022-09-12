@@ -11,6 +11,7 @@
         tools:context=".view.login.LoginFragment">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -93,7 +94,7 @@
                     android:layout_marginStart="64dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="64dp"
-                    android:text="Login"
+                    android:text="Iniciar sesion"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
@@ -113,6 +114,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
+
+
+        <Button
+            android:id="@+id/btLogInGogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Continuar con google"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
