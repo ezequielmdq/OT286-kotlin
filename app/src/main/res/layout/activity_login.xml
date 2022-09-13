@@ -7,15 +7,16 @@
     tools:context=".view.LoginActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/log_in_fragment"
-        android:name="com.melvin.ongandroid.view.login.LoginFragment"
+
+        android:id="@+id/containerLogin"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/login_navegacion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

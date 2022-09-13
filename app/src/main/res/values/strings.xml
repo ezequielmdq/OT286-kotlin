@@ -34,5 +34,11 @@
     <string name="nombre">Nombre</string>
     <string name="Detalle">Detalle</string>
 
+    <string name="facebook_app_id">384594340512386</string>
+    <string name="fb_login_protocol_scheme">fb384594340512386</string>
+    <string name="facebook_client_token">a0299d0962a319e35ee9e28abf086172</string>
+
+
+
 
 </resources>
