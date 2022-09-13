@@ -27,6 +27,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.MainActivity"
+            android:exported="false">
+
+        </activity>
+
         <service
             android:name=".businesslogic.FirebaseMessaging"
             android:exported="false">

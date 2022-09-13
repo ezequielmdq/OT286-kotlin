@@ -6,4 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/log_in_fragment"
+        android:name="com.melvin.ongandroid.view.login.LoginFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

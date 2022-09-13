@@ -55,6 +55,8 @@ class LoginFragment : Fragment() {
 
             prefs.saveToken(viewModel.token.value.toString())
 
+
+
         })
     }
 
