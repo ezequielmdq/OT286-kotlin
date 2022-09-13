@@ -23,6 +23,22 @@
 
     <string name="mensaje_error_contacto">Ha ocurrido un error. Intete nuevamente mas tarde.</string>
     <string name="detalle">Detalle</string>
+    <string name="text_email">Email</string>
+    <string name="text_contrase_a">Contraseña</string>
+    <string name="text_iniciar_sesion">Iniciar sesion</string>
+    <string name="text_ha_olvidado_su_contrase_a">¿Ha olvidado su contraseña?</string>
+    <string name="text_ingrese_con">Ingrese con</string>
+    <string name="linkedin">linkedin</string>
+    <string name="facebook">Facebook</string>
+    <string name="descripcion">descripcion</string>
+    <string name="nombre">Nombre</string>
+    <string name="Detalle">Detalle</string>
+
+    <string name="facebook_app_id">384594340512386</string>
+    <string name="fb_login_protocol_scheme">fb384594340512386</string>
+    <string name="facebook_client_token">a0299d0962a319e35ee9e28abf086172</string>
+
+
 
 
 </resources>
