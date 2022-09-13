@@ -29,8 +29,7 @@ class NovedadFragment : Fragment() {
             OngViewModelFactory(
                 WelcomeDataRepository(),
                 NovedadDataRepository(),
-                TestimonioDataRepository(),
-                MiembrosDatarepository()
+                TestimonioDataRepository()
             )
         }
     )

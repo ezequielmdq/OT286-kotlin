@@ -19,7 +19,7 @@ import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
 import com.melvin.ongandroid.model.repository.Network.implement.LogInDataRepository
-import com.melvin.ongandroid.view.LoginActivity
+
 import com.melvin.ongandroid.view.MainActivity
 import com.melvin.ongandroid.viewmodel.LogInViewModel
 import com.melvin.ongandroid.viewmodel.LogInViewModelFactory
@@ -93,6 +93,8 @@ class LoginFragment : Fragment() {
         viewModel.token.observe(viewLifecycleOwner, Observer {
 
             prefs.saveToken(viewModel.token.value.toString())
+
+
 
         })
     }
