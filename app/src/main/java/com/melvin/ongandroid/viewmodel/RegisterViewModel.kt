@@ -9,10 +9,12 @@ import com.melvin.ongandroid.model.repository.Network.interfaces.IRegisterDataRe
 import com.melvin.ongandroid.model.repository.Network.interfaces.NewRegisterStatus
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
+import javax.inject.Inject
 import javax.net.ssl.SSLEngineResult
 
 
-class RegisterViewModel(private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
+class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
+
 
 
     // button
@@ -38,14 +40,17 @@ class RegisterViewModel(private val newRegisterStatus: NewRegisterStatus) : View
     fun saveNewRegister(name: String, email: String, password: String){
 
         viewModelScope.launch {
+            try{
+
                 val responseRegister = newRegisterStatus(Register(name, email, password))
-            if(responseRegister.success){
-                _statusNewRegister.postValue(true)
+                if(responseRegister.success){
+                    _statusNewRegister.postValue(true)
 
-
-
-
-
+                }else{
+                    _errorMessageIsEnabled.postValue(true)
+                }
+            }catch (e: Exception){
+                _errorMessageIsEnabled.postValue(true)
             }
 
         }
