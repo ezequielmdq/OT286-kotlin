@@ -1,5 +1,6 @@
 package com.melvin.ongandroid.businesslogic
 
+import androidx.lifecycle.LiveData
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
@@ -71,6 +72,26 @@ object FirebaseLog{
     fun logMiembrosClisk(){
         Firebase.analytics.logEvent("member_pressed"){
             param("text", "Member pressed")
+        }
+    }
+
+    fun logSignUpClick(){
+        Firebase.analytics.logEvent("register_pressed"){
+            param("text", "Register_pressed")
+        }
+    }
+
+    fun logSignUpSuccess(){
+        Firebase.analytics.logEvent("sign_up_success"){
+            param("log_sign_up", "Log_sign_up")
+            param("text", "La conexión con el servidor fue satisfactoria.")
+        }
+    }
+
+    fun logSignUpError() {
+        Firebase.analytics.logEvent("sign_up_error"){
+            param("log_sign_up", "Log_sign_up")
+            param("text", "La conexión con el servidor no pudo ser establecida.")
         }
     }
 
