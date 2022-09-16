@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.model.Register
 import com.melvin.ongandroid.model.repository.Network.interfaces.IRegisterDataRepository
 import com.melvin.ongandroid.model.repository.Network.interfaces.NewRegisterStatus
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import javax.inject.Inject
-import javax.net.ssl.SSLEngineResult
+
 
 
 class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
@@ -27,6 +26,9 @@ class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : Vie
 
     private val _statusNewRegister = MutableLiveData<Boolean>()
     val statusNewRegister : LiveData<Boolean> = _statusNewRegister
+
+    private val _listaRegister = MutableLiveData<List<Register>?>()
+    val listaRegister: MutableLiveData<List<Register>?> = _listaRegister
 
 
 
@@ -49,8 +51,23 @@ class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : Vie
                 }else{
                     _errorMessageIsEnabled.postValue(true)
                 }
+
+                FirebaseLog.logSignUpSuccess()
+                if (responseRegister.success) {
+                    _listaRegister.value = emptyList()
+                    _errorMessageIsEnabled.value = true
+                } else {
+                    _listaRegister.value = responseRegister
+                }
+
             }catch (e: Exception){
-                _errorMessageIsEnabled.postValue(true)
+
+                FirebaseLog.logSignUpError()
+
+                _errorMessageIsEnabled.value = true
+                _listaRegister.value = emptyList()
+
+
             }
 
         }
