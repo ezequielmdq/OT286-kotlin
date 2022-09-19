@@ -8,11 +8,14 @@ import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.model.Register
 import com.melvin.ongandroid.model.repository.Network.interfaces.IRegisterDataRepository
 import com.melvin.ongandroid.model.repository.Network.interfaces.NewRegisterStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
 
 
-
-class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
+class RegisterViewModel @Inject constructor (private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
 
 
 
@@ -39,6 +42,7 @@ class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : Vie
 // Para registrar usuario pero la funcion no está completo todavia
     // la parte errores y
 
+
     fun saveNewRegister(name: String, email: String, password: String){
 
         viewModelScope.launch {
@@ -57,7 +61,9 @@ class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : Vie
                     _listaRegister.value = emptyList()
                     _errorMessageIsEnabled.value = true
                 } else {
+
                     //_listaRegister.value = responseRegister
+
                 }
 
             }catch (e: Exception){
@@ -72,6 +78,9 @@ class RegisterViewModel (private val newRegisterStatus: NewRegisterStatus) : Vie
 
         }
     }
+
+
+
 
 }
 

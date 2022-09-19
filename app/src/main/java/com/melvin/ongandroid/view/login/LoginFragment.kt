@@ -164,7 +164,8 @@ class LoginFragment : Fragment() {
 
             if(email.isNotEmpty() && password.isNotEmpty()
                 && Validator.isEmailValid(email) ==  true
-                && Validator.isPasswordValid(password) == true){
+                ){
+                //&& Validator.isPasswordValid(password) == true
                 binding.btLogin.setBackgroundColor(Color.RED)
                 binding.btLogin.setTextColor(Color.WHITE)
                 binding.btLogin.isEnabled =  true

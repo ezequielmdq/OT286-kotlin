@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 const val BASE_URL = "https://ongapi.alkemy.org/api/"
 
 object AlkemyAPIClient {
-    private fun getRetrofit(): Retrofit {
+    fun getRetrofit(): Retrofit {
         val requestInterceptor = Interceptor { chain ->
             val url = chain.request()
                 .url
