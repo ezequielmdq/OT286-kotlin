@@ -14,6 +14,18 @@ class Validator {
             return Pattern.compile(EMAIL_PATTERN)
                 .matcher(email).matches()
         }
+
+
+        private const val PASSWORD_PATTERN =
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
+                    "(?=.*[a-zA-Z])(?=.*[@#$%^&+=])" +
+                    "(?=\\S+$).{8,}$"
+
+            fun isPasswordValid(password: String): Boolean{
+                return Pattern.compile(PASSWORD_PATTERN)
+                    .matcher(password).matches()
+            }
+
+        }
     }
 
-}
