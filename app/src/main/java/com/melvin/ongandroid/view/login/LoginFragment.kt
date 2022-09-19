@@ -1,7 +1,10 @@
 package com.melvin.ongandroid.view.login
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -141,13 +144,13 @@ class LoginFragment : Fragment() {
             val email = binding.tiEmail.text.toString().trim()
             val password = binding.tiContrasenia.text.toString().trim()
 
-            if(email.isNotEmpty() && password.isNotEmpty()
-                && Validator.isEmailValid(email) ==  true
-                && Validator.isPasswordValid(password) == true){
-                binding.btLogin.setBackgroundColor(Color.RED)
-                binding.btLogin.setTextColor(Color.WHITE)
-                binding.btLogin.isEnabled =  true
-            }
+            //if(email.isNotEmpty() && password.isNotEmpty()
+            //    && Validator.isEmailValid(email) ==  true
+            //    && Validator.isPasswordValid() == true){
+            //    binding.btLogin.setBackgroundColor(Color.RED)
+            //    binding.btLogin.setTextColor(Color.WHITE)
+            //    binding.btLogin.isEnabled =  true
+            //}
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -167,6 +170,6 @@ class LoginFragment : Fragment() {
 
 
         //show error dialog if there's an issue with the login api
-
+   }
 
 }

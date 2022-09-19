@@ -1,11 +1,15 @@
 package com.melvin.ongandroid.view.newRegister
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.FragmentRegisterBinding
 import com.melvin.ongandroid.viewmodel.RegisterViewModel
@@ -16,8 +20,6 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding
     private val viewModel: RegisterViewModel by viewModels()
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,9 +29,6 @@ class RegisterFragment : Fragment() {
             .inflate(inflater, container, false)
 
         configObservers()
-
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-
         registerListener()
         setearTextWatcher()
 
@@ -37,6 +36,17 @@ class RegisterFragment : Fragment() {
     }
 
     private fun configObservers() {
+
+        viewModel.errorMessageIsEnabled.observe(viewLifecycleOwner, Observer{ error ->
+            if (error){
+                showDialog("Ha ocurrido un error obteniendo la informacion")
+                binding.username.error = "*campo obligatorio"
+                binding.email.error = "*campo obligatorio"
+                binding.password.error = "*campo obligatorio"
+            }
+        })
+
+        //confiogro un observador para el boton
         viewModel.bottonEnable.observe(viewLifecycleOwner, Observer {
             if(it) {
                 binding.apply {
@@ -53,17 +63,19 @@ class RegisterFragment : Fragment() {
                 binding.tvErrorContraseniasDistintas.visibility = View.GONE
             }
         })
+
+
     }
 
-    private val textWatcher = object : TextWatcher{
+    private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            binding.usernameTextEdit.error = null
-            binding.emailTextEdit.error = null
-            binding.passwordTextEdit.error = null
+            binding.username.error = null
+            binding.email.error = null
+            binding.password.error = null
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -73,20 +85,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setearTextWatcher() {
-        binding.usernameTextEdit.addTextChangedListener(textWatcher)
-        binding.emailTextEdit.addTextChangedListener(textWatcher)
-        binding.passwordTextEdit.addTextChangedListener(textWatcher)
-    }
-
-    private fun configObservers() {
-        viewModel.errorMessageIsEnabled.observe(viewLifecycleOwner, Observer{ error ->
-            if (error){
-                showDialog("Ha ocurrido un error obteniendo la informacion")
-                binding.usernameTextEdit.error = "*campo obligatorio"
-                binding.emailTextEdit.error = "*campo obligatorio"
-                binding.passwordTextEdit.error = "*campo obligatorio"
-            }
-        })
+        binding.username.addTextChangedListener(textWatcher)
+        binding.email.addTextChangedListener(textWatcher)
+        binding.password.addTextChangedListener(textWatcher)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
