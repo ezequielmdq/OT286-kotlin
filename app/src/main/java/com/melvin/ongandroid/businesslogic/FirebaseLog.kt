@@ -74,4 +74,46 @@ object FirebaseLog{
         }
     }
 
+    fun logLogInPressed(){
+        Firebase.analytics.logEvent("log_in_pressed") {
+            param("log_login", "Log Login")
+            param("text", "El boton Log in ha sido presionado.")
+        }
+    }
+
+    fun logSignUpPressed(){
+        Firebase.analytics.logEvent("sign_up_pressed") {
+            param("log_login", "Log Login")
+            param("text", "El boton Sign up in ha sido presionado.")
+        }
+    }
+
+    fun logGmailPressed(){
+        Firebase.analytics.logEvent("gmail_pressed") {
+            param("log_login", "Log Login")
+            param("text", "El boton de inicio de sesion con google ha sido presionado.")
+        }
+    }
+
+    fun logFacebookPressed(){
+        Firebase.analytics.logEvent("facebook_pressed") {
+            param("log_login", "Log Login")
+            param("text", "El boton de inicio de sesion con facebook ha sido presionado.")
+        }
+    }
+
+    fun logLogInSuccess(){
+        Firebase.analytics.logEvent("log_in_success") {
+            param("log_login", "Log Login")
+            param("text", "El usuario se ha logueado exitosamente.")
+        }
+    }
+
+    fun logLogInError(){
+        Firebase.analytics.logEvent("log_in_error") {
+            param("log_login", "Log Login")
+            param("text", "Ha ocurrido un error con el logueo del usuario.")
+        }
+    }
+
 }
