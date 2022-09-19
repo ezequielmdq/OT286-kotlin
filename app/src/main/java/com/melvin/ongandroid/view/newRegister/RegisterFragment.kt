@@ -14,13 +14,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.FragmentRegisterBinding
 import com.melvin.ongandroid.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private lateinit var _binding: FragmentRegisterBinding
     private val binding get() = _binding
     private val viewModel: RegisterViewModel by viewModels()
-
 
 
     override fun onCreateView(

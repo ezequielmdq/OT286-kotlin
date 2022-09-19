@@ -1,5 +1,6 @@
 package com.melvin.ongandroid.application
 
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 /**
@@ -15,17 +16,13 @@ class Validator {
                 .matcher(email).matches()
         }
 
-
-        private const val PASSWORD_PATTERN =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
-                    "(?=.*[a-zA-Z])(?=.*[@#$%^&+=])" +
-                    "(?=\\S+$).{8,}$"
-
-            fun isPasswordValid(password: String): Boolean{
-                return Pattern.compile(PASSWORD_PATTERN)
-                    .matcher(password).matches()
-            }
-
+        fun isPassowrdValid(): Boolean {
+            var pattern: Pattern? = null
+            var match: Matcher? =null
+            pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[~`!@#\$%^&*()_+={[}]-|\\:;\"'<,>.?/])(?=\\S+\$).{8,15}\$")
+            match = pattern!!.matcher(this.toString())
+            return match!!.find()
         }
     }
 
+}

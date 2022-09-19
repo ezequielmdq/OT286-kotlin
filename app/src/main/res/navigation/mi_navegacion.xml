@@ -60,6 +60,12 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login"
         />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.melvin.ongandroid.view.newRegister.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register"
+        />
 
 
 </navigation>
