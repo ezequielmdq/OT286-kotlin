@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.newRegister.RegisterFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.melvin.ongandroid.viewmodel.RegisterViewModel" />
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,13 +53,14 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/username_text_edit"
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
                     android:hint="Put Username"
                     android:drawablePadding="16dp"
                     android:textSize="16sp"
+                    android:afterTextChanged="@{(s) -> viewModel.validButtonRegister(s.toString(), email.getText().toString(), password.getText().toString(), confirmPassword.getText().toString())}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,14 +76,16 @@
                 android:layout_marginTop="18dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_text_edit"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textEmailAddress"
                     android:hint="Put Email"
                     android:textSize="16sp"
                     android:drawablePadding="16dp"
+                    android:afterTextChanged="@{(s) -> viewModel.validButtonRegister(username.getText().toString(), s.toString(), password.getText().toString(), confirmPassword.getText().toString())}"
                     />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -92,12 +100,13 @@
                 android:layout_marginTop="18dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_text_edit"
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
                     android:hint="Put Password"
                     android:drawablePadding="16dp"
+                    android:afterTextChanged="@{(s) -> viewModel.validButtonRegister(username.getText().toString(), email.getText().toString(), s.toString(), confirmPassword.getText().toString())}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,12 +122,13 @@
                 android:layout_marginTop="18dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/confirmPassword_text_edit"
+                    android:id="@+id/confirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
                     android:hint="Confirm Password"
                     android:drawablePadding="16dp"
+                    android:afterTextChanged="@{(s) -> viewModel.validButtonRegister(username.getText().toString(), email.getText().toString(), password.getText().toString(), s.toString())}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,8 +145,8 @@
                 app:layout_constraintBottom_toTopOf="@id/textView_inicio"
                 android:textSize="16sp"
                 android:textColor="@color/white"
-                android:backgroundTint="#FF0000"
-                android:enabled="false"/>
+                android:backgroundTint="@color/botom_disable"
+                android:enabled="false" />
 
             <TextView
                 android:id="@+id/textView_inicio"
@@ -150,6 +160,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
+            <TextView
+                android:id="@+id/tvErrorContraseniasDistintas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/red"
+                android:text="¡Las contraseñas no coinciden!"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/btn_inicio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/confirmPassword_layout_text" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

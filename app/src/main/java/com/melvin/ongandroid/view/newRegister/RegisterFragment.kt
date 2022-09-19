@@ -1,27 +1,21 @@
 package com.melvin.ongandroid.view.newRegister
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.FragmentRegisterBinding
 import com.melvin.ongandroid.viewmodel.RegisterViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class RegisterFragment : Fragment() {
     private lateinit var _binding: FragmentRegisterBinding
     private val binding get() = _binding
     private val viewModel: RegisterViewModel by viewModels()
+
 
 
     override fun onCreateView(
@@ -29,13 +23,36 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        _binding = FragmentRegisterBinding
+            .inflate(inflater, container, false)
+
+        configObservers()
+
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         registerListener()
         setearTextWatcher()
-        configObservers()
 
         return binding.root
+    }
+
+    private fun configObservers() {
+        viewModel.bottonEnable.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                binding.apply {
+                    btnInicio.setBackgroundColor(resources.getColor(R.color.red))
+                    btnInicio.isEnabled = true
+                }
+            }
+        })
+
+        viewModel.passwordAreDiferent.observe(viewLifecycleOwner, Observer {
+            if(it){
+                binding.tvErrorContraseniasDistintas.visibility = View.VISIBLE
+            }else{
+                binding.tvErrorContraseniasDistintas.visibility = View.GONE
+            }
+        })
     }
 
     private val textWatcher = object : TextWatcher{
@@ -81,11 +98,17 @@ class RegisterFragment : Fragment() {
 
     private fun registerListener(){
         binding.btnInicio.setOnClickListener {
-            viewModel.saveNewRegister(binding.usernameTextEdit.text.toString(),
-                binding.emailTextEdit.text.toString(),
-                binding.passwordTextEdit.text.toString())
+            viewModel.saveNewRegister(
+                binding.username.text.toString(),
+                binding.email.text.toString(),
+                binding.password.text.toString())
         }
+
+        binding.confirmPassword.text.toString()
+
     }
+
+
 
     //Muestra el cuadro de dialogo al aparecer un error obteniendo informacion de la api
     private fun showDialog(message: String) {
