@@ -39,6 +39,8 @@
     <string name="facebook_client_token">a0299d0962a319e35ee9e28abf086172</string>
 
 
+    <string name="error_login">Ha ocurrido un error. Verifica tu email y tu contraseña</string>
+
 
 
 </resources>
