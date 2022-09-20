@@ -20,7 +20,6 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
-
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
@@ -64,7 +63,6 @@ class LoginFragment : Fragment() {
 
 
         binding.btLogin.setOnClickListener {
-            FirebaseLog.logLogInPressed()
             viewModel.logIn(LogIn(binding.tiEmail.text.toString(), binding.tiContrasenia.text.toString()))
         }
 
@@ -81,7 +79,6 @@ class LoginFragment : Fragment() {
                 }
 
                 override fun onError(error: FacebookException) {
-                    FirebaseLog.logLogInError()
                     LoginManager.getInstance().logOut()
                 }
 
@@ -105,11 +102,11 @@ class LoginFragment : Fragment() {
 
     //Configura los observables del viewmodel
     private fun configObservables() {
-
         viewModel.token.observe(viewLifecycleOwner, Observer {
             FirebaseLog.logLogInSuccess()
 
             prefs.saveToken(viewModel.token.value.toString())
+
 
 
         })
@@ -160,7 +157,6 @@ class LoginFragment : Fragment() {
             //    binding.btLogin.setTextColor(Color.WHITE)
             //    binding.btLogin.isEnabled =  true
             //}
-
         }
 
         override fun afterTextChanged(p0: Editable?) {

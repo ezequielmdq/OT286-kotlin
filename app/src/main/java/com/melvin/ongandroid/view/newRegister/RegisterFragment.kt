@@ -13,7 +13,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.databinding.FragmentRegisterBinding
-import com.melvin.ongandroid.viewmodel.RegisterViewModel
+import com.melvin.ongandroid.viewmodel.RegisterViewModel 
 
 
 class RegisterFragment : Fragment() {
@@ -24,11 +24,12 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View
+    {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding
             .inflate(inflater, container, false)
-
+0
         configObservers()
         registerListener()
         setearTextWatcher()
