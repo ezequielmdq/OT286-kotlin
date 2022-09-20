@@ -47,21 +47,25 @@ class RegisterFragment : Fragment() {
         })
 
         //confiogro un observador para el boton
-        viewModel.bottonEnable.observe(viewLifecycleOwner, Observer {
-            if(it) {
-                binding.apply {
-                    btnInicio.setBackgroundColor(resources.getColor(R.color.red))
-                    btnInicio.isEnabled = true
-                }
+        viewModel.bottonEnable.observe(viewLifecycleOwner, Observer {enable ->
+            val color = if(enable) {
+                R.color.red
+            }else {
+                R.color.botom_disable
+            }
+            binding.apply {
+                btnInicio.setBackgroundColor(resources.getColor(color))
+                btnInicio.isEnabled = enable
             }
         })
-
-        viewModel.passwordAreDiferent.observe(viewLifecycleOwner, Observer {
-            if(it){
-                binding.tvErrorContraseniasDistintas.visibility = View.VISIBLE
-            }else{
-                binding.tvErrorContraseniasDistintas.visibility = View.GONE
+        //confiogro un observador para el mensaje de contraseñas diferentes
+        viewModel.passwordAreDiferent.observe(viewLifecycleOwner, Observer { areDiferent ->
+            val visibility = if(areDiferent){
+                View.VISIBLE
+            } else {
+                View.GONE
             }
+            binding.tvErrorContraseniasDistintas.visibility = visibility
         })
 
 
