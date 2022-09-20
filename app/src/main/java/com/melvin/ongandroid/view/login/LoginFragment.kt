@@ -2,6 +2,7 @@ package com.melvin.ongandroid.view.login
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +21,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
+import com.melvin.ongandroid.application.Validator
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
@@ -144,13 +146,13 @@ class LoginFragment : Fragment() {
             val email = binding.tiEmail.text.toString().trim()
             val password = binding.tiContrasenia.text.toString().trim()
 
-            //if(email.isNotEmpty() && password.isNotEmpty()
-            //    && Validator.isEmailValid(email) ==  true
-            //    && Validator.isPasswordValid() == true){
-            //    binding.btLogin.setBackgroundColor(Color.RED)
-            //    binding.btLogin.setTextColor(Color.WHITE)
-            //    binding.btLogin.isEnabled =  true
-            //}
+            if(email.isNotEmpty() && password.isNotEmpty()
+                && Validator.isEmailValid(email) == true
+                ){
+                binding.btLogin.setBackgroundColor(Color.RED)
+                binding.btLogin.setTextColor(Color.WHITE)
+                binding.btLogin.isEnabled =  true
+            }
         }
 
         override fun afterTextChanged(p0: Editable?) {
