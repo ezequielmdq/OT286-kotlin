@@ -20,6 +20,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
+
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
@@ -52,15 +53,18 @@ class LoginFragment : Fragment() {
 
 
         binding.btLogInGogle?.setOnClickListener {
+            FirebaseLog.logGmailPressed()
             val loginActivity = requireActivity() as LoginActivity
             loginActivity.signIn()
         }
         binding.tvOlvidoContrasenia.setOnClickListener{
+            FirebaseLog.logSignUpPressed()
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
 
         binding.btLogin.setOnClickListener {
+            FirebaseLog.logLogInPressed()
             viewModel.logIn(LogIn(binding.tiEmail.text.toString(), binding.tiContrasenia.text.toString()))
         }
 
@@ -77,10 +81,12 @@ class LoginFragment : Fragment() {
                 }
 
                 override fun onError(error: FacebookException) {
+                    FirebaseLog.logLogInError()
                     LoginManager.getInstance().logOut()
                 }
 
                 override fun onSuccess(result: LoginResult) {
+                    FirebaseLog.logLogInSuccess()
                     val intent = Intent(context, MainActivity::class.java)
                     startActivity(intent)
                 }
@@ -89,6 +95,7 @@ class LoginFragment : Fragment() {
         /** listener boton de facebook para inicio de sesion*/
 
         binding.btnFacebook?.setOnClickListener{
+            FirebaseLog.logFacebookPressed()
             LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
         }
 
@@ -98,10 +105,11 @@ class LoginFragment : Fragment() {
 
     //Configura los observables del viewmodel
     private fun configObservables() {
+
         viewModel.token.observe(viewLifecycleOwner, Observer {
+            FirebaseLog.logLogInSuccess()
 
             prefs.saveToken(viewModel.token.value.toString())
-
 
 
         })
@@ -119,6 +127,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun showDialog(title: String, message: String) {
+        FirebaseLog.logLogInError()
         val dialog: Unit? =
             context?.let {
                 AlertDialog.Builder(it).setMessage(message).setTitle(title)
@@ -151,6 +160,7 @@ class LoginFragment : Fragment() {
             //    binding.btLogin.setTextColor(Color.WHITE)
             //    binding.btLogin.isEnabled =  true
             //}
+
         }
 
         override fun afterTextChanged(p0: Editable?) {

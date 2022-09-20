@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
+import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.databinding.FragmentRegisterBinding
 import com.melvin.ongandroid.viewmodel.RegisterViewModel
 
@@ -103,10 +104,12 @@ class RegisterFragment : Fragment() {
 
     private fun registerListener(){
         binding.btnInicio.setOnClickListener {
-            viewModel.saveNewRegister(
-                binding.username.text.toString(),
-                binding.email.text.toString(),
-                binding.password.text.toString())
+
+            FirebaseLog.logSignUpClick()
+            viewModel.saveNewRegister(binding.usernameTextEdit.text.toString(),
+                binding.emailTextEdit.text.toString(),
+                binding.passwordTextEdit.text.toString())
+
         }
 
         binding.confirmPassword.text.toString()
