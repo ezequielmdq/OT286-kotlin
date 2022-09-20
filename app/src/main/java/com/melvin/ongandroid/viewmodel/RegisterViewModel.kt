@@ -61,7 +61,9 @@ class RegisterViewModel @Inject constructor (private val newRegisterStatus: NewR
                     _listaRegister.value = emptyList()
                     _errorMessageIsEnabled.value = true
                 } else {
-                   // _listaRegister.value = responseRegister
+
+                    //_listaRegister.value = responseRegister
+
                 }
 
             }catch (e: Exception){
