@@ -1,36 +1,31 @@
 package com.melvin.ongandroid.view.login
 
+import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.load.engine.Resource
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
-
-import com.melvin.ongandroid.businesslogic.FirebaseLog
-
-import com.melvin.ongandroid.application.Validator
 
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
 import com.melvin.ongandroid.model.repository.Network.implement.LogInDataRepository
+
 import com.melvin.ongandroid.view.MainActivity
 import com.melvin.ongandroid.viewmodel.LogInViewModel
 import com.melvin.ongandroid.viewmodel.LogInViewModelFactory
@@ -73,8 +68,6 @@ class LoginFragment : Fragment() {
             viewModel.logIn(LogIn(binding.tiEmail.text.toString(), binding.tiContrasenia.text.toString()))
         }
 
-
-
         /** estos metodos maneja el resultado del icinio de sesion. Si es satisfactorio se ejecutara lo
          * que esta en onSucces, sy se cancela lo que esta en on Cancel y si hay algun error
          * lo que esta en on error
@@ -109,8 +102,6 @@ class LoginFragment : Fragment() {
         configObservables()
         return binding.root
     }
-
-
 
     //Configura los observables del viewmodel
     private fun configObservables() {
@@ -162,14 +153,14 @@ class LoginFragment : Fragment() {
             val email = binding.tiEmail.text.toString().trim()
             val password = binding.tiContrasenia.text.toString().trim()
 
-            if(email.isNotEmpty() && password.isNotEmpty()
-                && Validator.isEmailValid(email) ==  true
-                ){
-                //&& Validator.isPasswordValid(password) == true
-                binding.btLogin.setBackgroundColor(Color.RED)
-                binding.btLogin.setTextColor(Color.WHITE)
-                binding.btLogin.isEnabled =  true
-            }
+            //if(email.isNotEmpty() && password.isNotEmpty()
+            //    && Validator.isEmailValid(email) ==  true
+            //    && Validator.isPasswordValid() == true){
+            //    binding.btLogin.setBackgroundColor(Color.RED)
+            //    binding.btLogin.setTextColor(Color.WHITE)
+            //    binding.btLogin.isEnabled =  true
+            //}
+
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -189,7 +180,6 @@ class LoginFragment : Fragment() {
 
 
         //show error dialog if there's an issue with the login api
+   }
 
-
-    }
 }
