@@ -19,9 +19,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
+   
+    private val viewModel: RegisterViewModel by viewModels()
     private lateinit var _binding: FragmentRegisterBinding
     private val binding get() = _binding
-    private val viewModel: RegisterViewModel by viewModels()
+
 
 
     override fun onCreateView(

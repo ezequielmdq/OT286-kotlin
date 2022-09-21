@@ -30,9 +30,10 @@ import com.melvin.ongandroid.model.repository.Network.implement.LogInDataReposit
 import com.melvin.ongandroid.view.MainActivity
 import com.melvin.ongandroid.viewmodel.LogInViewModel
 import com.melvin.ongandroid.viewmodel.LogInViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
      lateinit var binding: FragmentLoginBinding
