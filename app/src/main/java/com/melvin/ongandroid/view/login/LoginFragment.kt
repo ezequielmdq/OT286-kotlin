@@ -20,6 +20,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
+import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
@@ -48,6 +49,9 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+
+
 
 
 
@@ -107,7 +111,9 @@ class LoginFragment : Fragment() {
 
             prefs.saveToken(viewModel.token.value.toString())
 
-
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
 
         })
     }

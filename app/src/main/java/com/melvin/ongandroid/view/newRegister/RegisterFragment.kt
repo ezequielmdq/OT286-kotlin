@@ -13,9 +13,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.databinding.FragmentRegisterBinding
-import com.melvin.ongandroid.viewmodel.RegisterViewModel 
+import com.melvin.ongandroid.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private lateinit var _binding: FragmentRegisterBinding
     private val binding get() = _binding
@@ -29,7 +30,7 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding
             .inflate(inflater, container, false)
-0
+
         configObservers()
         registerListener()
         setearTextWatcher()
@@ -107,9 +108,9 @@ class RegisterFragment : Fragment() {
         binding.btnInicio.setOnClickListener {
 
             FirebaseLog.logSignUpClick()
-            viewModel.saveNewRegister(binding.usernameTextEdit.text.toString(),
-                binding.emailTextEdit.text.toString(),
-                binding.passwordTextEdit.text.toString())
+            viewModel.saveNewRegister(binding.username.text.toString(),
+                binding.email.text.toString(),
+                binding.password.text.toString())
 
         }
 

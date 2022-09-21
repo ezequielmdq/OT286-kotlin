@@ -9,12 +9,14 @@ import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.model.Register
 import com.melvin.ongandroid.model.repository.Network.interfaces.IRegisterDataRepository
 import com.melvin.ongandroid.model.repository.Network.interfaces.NewRegisterStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
+import javax.inject.Inject
 import javax.net.ssl.SSLEngineResult
 
-
-class RegisterViewModel(private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
 
     private val _bottonEnable = MutableLiveData(false)
     val bottonEnable: LiveData<Boolean> = _bottonEnable
