@@ -21,7 +21,11 @@ class ActividadesViewModel(private val repositoryActividades: IActividadesDataRe
     private val _error: MutableLiveData<Boolean> = MutableLiveData()
     val error: LiveData<Boolean> = _error
 
-    private fun loadActividades(){
+    init {
+        loadActividades()
+    }
+
+     fun loadActividades(){
         viewModelScope.launch {
             try {
                 val list = repositoryActividades.getActividadesData()

@@ -42,7 +42,7 @@ class NovedadFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_novedad, container, false)
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.rvNovedad)
-        recyclerView.layoutManager = layoutManager
+        //recyclerView.layoutManager = layoutManager
         adapter = NovedadesAdapter()
         adapter.novedades.addAll(emptyList())
         adapter.notifyDataSetChanged()
