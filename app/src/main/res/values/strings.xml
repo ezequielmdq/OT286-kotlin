@@ -38,9 +38,11 @@
     <string name="fb_login_protocol_scheme">fb384594340512386</string>
     <string name="facebook_client_token">a0299d0962a319e35ee9e28abf086172</string>
 
+    <string name="cuenta">No tienes cuenta? Registrate</string>
+
 
     <string name="error_login">Ha ocurrido un error. Verifica tu email y tu contraseña</string>
 
-
+    <string name="logo_content_description">SOMOS MAS</string>
 
 </resources>

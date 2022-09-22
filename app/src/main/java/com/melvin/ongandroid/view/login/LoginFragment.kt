@@ -3,6 +3,7 @@ package com.melvin.ongandroid.view.login
 import android.graphics.Color
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -55,19 +57,23 @@ class LoginFragment : Fragment() {
 
 
 
+
         binding.btLogInGogle?.setOnClickListener {
+
+      
             FirebaseLog.logGmailPressed()
             val loginActivity = requireActivity() as LoginActivity
             loginActivity.signIn()
         }
-        binding.tvOlvidoContrasenia.setOnClickListener{
+        binding.tvOlvidoContrasenia?.setOnClickListener{
             FirebaseLog.logSignUpPressed()
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
 
-        binding.btLogin.setOnClickListener {
-            viewModel.logIn(LogIn(binding.tiEmail.text.toString(), binding.tiContrasenia.text.toString()))
+        binding.loginBtn?.setOnClickListener {
+
+            viewModel.logIn(LogIn(binding.etEmailLogin?.text.toString(), binding.etPasswordLogin?.text.toString()))
         }
 
 
@@ -102,10 +108,15 @@ class LoginFragment : Fragment() {
             LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
         }
 
+        validarCampos()
         configObservables()
         return binding.root
     }
 
+    private fun validarCampos() {
+        binding.etEmailLogin?.addTextChangedListener(textWatcher)
+        binding.etPasswordLogin?.addTextChangedListener(textWatcher)
+    }
 
 
     //Configura los observables del viewmodel
@@ -115,35 +126,43 @@ class LoginFragment : Fragment() {
 
             prefs.saveToken(viewModel.token.value.toString())
 
-            val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
 
+            if(viewModel.token.value != null){
+                val intent = Intent(context, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            }
+
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            FirebaseLog.logLogInError()
+            showDialog()
         })
     }
 
     private fun configObservers() {
-        viewModel.token.observe(this, Observer {
+        /*viewModel.token.observe(this, Observer {
             when(it){
-                binding.tiEmail.error -> showDialog("","")
-                binding.tiContrasenia.error -> showDialog("","")
+                binding.etEmailLogin?.error -> showDialog("","")
+                binding.etPasswordLogin?.error -> showDialog("","")
                 else -> "Success"
 
             }
-        })
+        })*/
     }
 
-    private fun showDialog(title: String, message: String) {
-        FirebaseLog.logLogInError()
-        val dialog: Unit? =
+    private fun showDialog() {
+
             context?.let {
-                AlertDialog.Builder(it).setMessage(message).setTitle(title)
+                AlertDialog.Builder(it).setMessage(getString(R.string.error_login)).setTitle("Error")
                     .setNeutralButton(
-                        R.string.error_login
+                        "Aceptar"
                     ) { _, _ -> }
                     .create()
+                    .show()
             }
-                ?.show()
+
 
 
     }
@@ -151,14 +170,15 @@ class LoginFragment : Fragment() {
     /**
      * Funcion que verifica si el email y la contraseña cumplen con las ocndiciones
      */
-    private fun logInTextWatcher() : TextWatcher = object  : TextWatcher {
+    private val textWatcher : TextWatcher = object  : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            val email = binding.tiEmail.text.toString().trim()
-            val password = binding.tiContrasenia.text.toString().trim()
+
+          //  val email = binding.tiEmail.text.toString().trim()
+          //  val password = binding.tiContrasenia.text.toString().trim()
 
             if(email.isNotEmpty() && password.isNotEmpty()
                 && Validator.isEmailValid(email) ==  true
@@ -166,10 +186,25 @@ class LoginFragment : Fragment() {
                 binding.btLogin.setBackgroundColor(Color.RED)
                 binding.btLogin.setTextColor(Color.WHITE)
                 binding.btLogin.isEnabled =  true
-            }
+
+            val email = binding.etEmailLogin?.text.toString().trim()
+            val password = binding.etPasswordLogin?.text.toString().trim()
+
+            //Sin la validacion de contraseña por ahora mientras la api siga funcionando mal para registrarse
+            if(email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(password)){
+                binding.loginBtn?.setBackgroundColor(Color.RED)
+                binding.loginBtn?.setTextColor(Color.WHITE)
+                binding.loginBtn?.isEnabled =  true
+            }else{
+                binding.loginBtn?.setBackgroundColor(resources.getColor(R.color.botom_disable))
+                binding.loginBtn?.setTextColor(Color.BLACK)
+                binding.loginBtn?.isEnabled =  false
+
+           }
         }
 
         override fun afterTextChanged(p0: Editable?) {
+
         }
 
     }

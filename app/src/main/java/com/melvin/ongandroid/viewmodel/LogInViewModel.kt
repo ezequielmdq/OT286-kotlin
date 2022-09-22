@@ -26,6 +26,9 @@ class LogInViewModel(private val repositoryLogIn: ILogInDataRepository) : ViewMo
     private val _token = MutableLiveData<String?>()
     val token: LiveData<String?> = _token
 
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> = _error
+
     private var emailEnter: Boolean = false
     private var passwordEnter: Boolean = false
 
@@ -64,10 +67,14 @@ class LogInViewModel(private val repositoryLogIn: ILogInDataRepository) : ViewMo
                 _loginError.postValue(TextInputError(Inputype.Email, !checkValidation, msg))
             }
             Inputype.Password -> {
+
                 val checkValidation = Validator.isPasswordValid(inputText)
+
+                /*val checkValidation = Validator.isPassowrdValid()
+
                 val msg = if(checkValidation) "" else "Passowrd is not matching"
                 passwordEnter = checkValidation
-                _loginError.postValue(TextInputError(Inputype.Password, !checkValidation, msg))
+                _loginError.postValue(TextInputError(Inputype.Password, !checkValidation, msg))*/
             }
 
         }
@@ -82,7 +89,13 @@ class LogInViewModel(private val repositoryLogIn: ILogInDataRepository) : ViewMo
 
             val response = repositoryLogIn.postLogin(sesion)
 
-            _token.value = response?.data?.token
+            if(response!!.success){
+                _token.value = response?.data?.token
+            }else{
+                _error.postValue(true)
+            }
+
+
 
         }
     }
