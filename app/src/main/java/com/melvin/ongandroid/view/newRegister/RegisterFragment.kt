@@ -17,6 +17,7 @@ import com.melvin.ongandroid.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+
 class RegisterFragment : Fragment() {
    
     private val viewModel: RegisterViewModel by viewModels()
