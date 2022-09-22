@@ -62,7 +62,7 @@ class LogInViewModel(private val repositoryLogIn: ILogInDataRepository) : ViewMo
                 _loginError.postValue(TextInputError(Inputype.Email, !checkValidation, msg))
             }
             Inputype.Password -> {
-                val checkValidation = Validator.isPassowrdValid()
+                val checkValidation = Validator.isPasswordValid(inputText)
                 val msg = if(checkValidation) "" else "Passowrd is not matching"
                 passwordEnter = checkValidation
                 _loginError.postValue(TextInputError(Inputype.Password, !checkValidation, msg))
