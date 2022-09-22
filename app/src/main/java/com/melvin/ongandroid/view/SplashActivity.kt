@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication
 import kotlinx.coroutines.*
 
@@ -17,8 +18,10 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setTheme(R.style.SplashTheme_NoActionBar)
+
         activityScope.launch {
-            delay(5000)
+            //delay(1000)
             verificacionDeUsuario()
         }
     }
@@ -40,6 +43,6 @@ class SplashActivity : AppCompatActivity() {
     override fun finish() {
         activityScope.cancel()
         super.finish()
-        Toast.makeText(this, "Timer has finish", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "Timer has finish", Toast.LENGTH_LONG).show()
     }
 }

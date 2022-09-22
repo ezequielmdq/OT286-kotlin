@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         Thread.sleep(1000)
-        setTheme(R.style.Theme_ONGAndroid)
+        setTheme(R.style.Theme_AppCompat_Light_NoActionBar)
 
         super.onCreate(savedInstanceState)
 
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         //configuro el navControler con el actionBar
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
         //configuro el bottomNavigation con el navControler
 
         binding.bottomNavigation.setupWithNavController(navController)

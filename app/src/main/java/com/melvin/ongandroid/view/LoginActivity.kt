@@ -41,6 +41,9 @@ class LoginActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
+
+            setTheme(R.style.Theme_AppCompat_Light_NoActionBar)
+
             // [START config_signin]
             // Configure Google Sign In
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
