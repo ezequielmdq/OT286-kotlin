@@ -24,7 +24,7 @@ import com.melvin.ongandroid.view.principal.home.NovedadListener
 import com.melvin.ongandroid.viewmodel.OngViewModel
 import com.melvin.ongandroid.viewmodel.OngViewModelFactory
 
-class HomeFragment : Fragment(), NovedadListener {
+class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
 
     private lateinit var novedadAdapter: NovedadAdapter
@@ -52,11 +52,17 @@ class HomeFragment : Fragment(), NovedadListener {
 
         //inicializo observadores
         configObservers()
+        configBtn()
 
 
         return binding?.root
     }
 
+    private fun configBtn() {
+        binding?.btnNovedades?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_novedadFragment)
+        }
+    }
 
 
     /**
@@ -149,8 +155,9 @@ class HomeFragment : Fragment(), NovedadListener {
      * configura la lista de novedades
      */
     private fun configNovedades(novedades: List<Novedad>) {
-        novedadAdapter = NovedadAdapter(this)
-        novedadAdapter.novedades.addAll(novedades)
+        novedadAdapter = NovedadAdapter()
+        //novedadAdapter.novedades.addAll(novedades)
+        novedadAdapter.actualizarData(novedades)
         binding?.let { binding ->
             binding.rvNovedades.apply {
                 adapter = novedadAdapter
@@ -190,9 +197,9 @@ class HomeFragment : Fragment(), NovedadListener {
     /**
      * Setea la flecha para que te diriga al fragment novedades
      */
-    override fun onFlechaClick() {
+    /*override fun onFlechaClick() {
         findNavController().navigate(R.id.action_homeFragment_to_novedadFragment)
-    }
+    }*/
 
 
 }
