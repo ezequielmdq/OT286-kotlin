@@ -14,7 +14,7 @@ import com.melvin.ongandroid.model.Novedad
 import com.melvin.ongandroid.view.principal.home.NovedadListener
 
 
-class NovedadAdapter(val novedadListener: NovedadListener) : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {
+class NovedadAdapter() : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>() {
 
     var novedades = mutableListOf<Novedad>()
     private lateinit var context : Context
@@ -40,13 +40,14 @@ class NovedadAdapter(val novedadListener: NovedadListener) : RecyclerView.Adapte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NovedadViewHolder {
         context = parent.context
 
-        itemView = if(viewType == R.layout.item_novedad){
-            LayoutInflater.from(parent.context).inflate(R.layout.item_novedad, parent, false)
+        itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_novedad, parent, false)
 
-        }else{
+            /*
+            if(viewType == R.layout.item_novedad){
+            } else{
             LayoutInflater.from(parent.context).inflate(R.layout.flecha, parent, false)
 
-        }
+        }*/
 
         return NovedadViewHolder(itemView)
 
@@ -58,27 +59,29 @@ class NovedadAdapter(val novedadListener: NovedadListener) : RecyclerView.Adapte
             holder.itemView.isVisible = false
         }
 
-        if(position == novedades.size){
+        val item = novedades[position]
+        holder.bind(item, context)
+
+        /*if(position == novedades.size){
             //aca iria la implementacion de la flecha que permite pasar a otra pantalla
             holder.itemView.setOnClickListener{
                 novedadListener.onFlechaClick()
             }
         }else{
-            val item = novedades[position]
-            holder.bind(item, context)
-        }
+
+        }*/
 
     }
 
-    override fun getItemCount(): Int = novedades.size + 1
+    override fun getItemCount(): Int = novedades.size
 
-    override fun getItemViewType(position: Int): Int {
+    /*override fun getItemViewType(position: Int): Int {
         return if(position == novedades.size){
             R.layout.flecha
         }else{
             R.layout.item_novedad
         }
-    }
+    }*/
 
     //Recibe una lista y la carga en el recycler view
     fun actualizarData(data: List<Novedad>) {

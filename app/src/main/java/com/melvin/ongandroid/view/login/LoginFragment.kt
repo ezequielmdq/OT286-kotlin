@@ -23,6 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
 import com.melvin.ongandroid.application.Validator
+import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
@@ -55,10 +56,12 @@ class LoginFragment : Fragment() {
 
 
         binding.btLogInGogle?.setOnClickListener {
+            FirebaseLog.logGmailPressed()
             val loginActivity = requireActivity() as LoginActivity
             loginActivity.signIn()
         }
         binding.tvOlvidoContrasenia.setOnClickListener{
+            FirebaseLog.logSignUpPressed()
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
@@ -112,7 +115,9 @@ class LoginFragment : Fragment() {
 
             prefs.saveToken(viewModel.token.value.toString())
 
-
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
 
         })
     }
@@ -181,7 +186,6 @@ class LoginFragment : Fragment() {
 
 
         //show error dialog if there's an issue with the login api
+   }
 
-
-    }
 }
