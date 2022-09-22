@@ -172,7 +172,7 @@ class LoginFragment : Fragment() {
             val password = binding.etPasswordLogin?.text.toString().trim()
 
             //Sin la validacion de contraseña por ahora mientras la api siga funcionando mal para registrarse
-            if(email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email)){
+            if(email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(password)){
                 binding.loginBtn?.setBackgroundColor(Color.RED)
                 binding.loginBtn?.setTextColor(Color.WHITE)
                 binding.loginBtn?.isEnabled =  true
