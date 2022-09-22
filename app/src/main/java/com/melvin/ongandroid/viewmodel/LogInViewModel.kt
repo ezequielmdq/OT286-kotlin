@@ -28,8 +28,10 @@ class LogInViewModel(private val repositoryLogIn: ILogInDataRepository) : ViewMo
 
     private var emailEnter: Boolean = false
     private var passwordEnter: Boolean = false
+
     private val _loginError = MutableLiveData<TextInputError<Inputype>>()
     val loginError: LiveData<TextInputError<Inputype>> = _loginError
+
     private val _buttonLogin = MutableLiveData(false)
     val buttonLogin: LiveData<Boolean> = _buttonLogin
 
@@ -73,7 +75,7 @@ class LogInViewModel(private val repositoryLogIn: ILogInDataRepository) : ViewMo
     }
 
 
-//llama al metodo post desde una corrutina y guarda el valor en un livedata
+    //llama al metodo post desde una corrutina y guarda el valor en un livedata
     fun logIn(sesion : LogIn){
 
         viewModelScope.launch(coroutineExceptionHandler) {

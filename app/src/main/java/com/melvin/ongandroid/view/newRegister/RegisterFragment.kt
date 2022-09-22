@@ -7,17 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
+import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.databinding.FragmentRegisterBinding
-import com.melvin.ongandroid.viewmodel.RegisterViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import com.melvin.ongandroid.viewmodel.RegisterViewModel 
 
-@AndroidEntryPoint
+
 class RegisterFragment : Fragment() {
    
     private val viewModel: RegisterViewModel by viewModels()
@@ -25,30 +23,67 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View
+    {
         // Inflate the layout for this fragment
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-
+        _binding = FragmentRegisterBinding
+            .inflate(inflater, container, false)
+0
+        configObservers()
         registerListener()
         setearTextWatcher()
-        configObservers()
 
         return binding.root
     }
 
-    private val textWatcher = object : TextWatcher{
+    private fun configObservers() {
+
+        viewModel.errorMessageIsEnabled.observe(viewLifecycleOwner, Observer{ error ->
+            if (error){
+                showDialog("Ha ocurrido un error obteniendo la informacion")
+                binding.username.error = "*campo obligatorio"
+                binding.email.error = "*campo obligatorio"
+                binding.password.error = "*campo obligatorio"
+            }
+        })
+
+        //confiogro un observador para el boton
+        viewModel.bottonEnable.observe(viewLifecycleOwner, Observer {enable ->
+            val color = if(enable) {
+                R.color.red
+            }else {
+                R.color.botom_disable
+            }
+            binding.apply {
+                btnInicio.setBackgroundColor(resources.getColor(color))
+                btnInicio.isEnabled = enable
+            }
+        })
+        //confiogro un observador para el mensaje de contraseñas diferentes
+        viewModel.passwordAreDiferent.observe(viewLifecycleOwner, Observer { areDiferent ->
+            val visibility = if(areDiferent){
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            binding.tvErrorContraseniasDistintas.visibility = visibility
+        })
+
+
+    }
+
+    private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            binding.usernameTextEdit.error = null
-            binding.emailTextEdit.error = null
-            binding.passwordTextEdit.error = null
+            binding.username.error = null
+            binding.email.error = null
+            binding.password.error = null
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -58,20 +93,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setearTextWatcher() {
-        binding.usernameTextEdit.addTextChangedListener(textWatcher)
-        binding.emailTextEdit.addTextChangedListener(textWatcher)
-        binding.passwordTextEdit.addTextChangedListener(textWatcher)
-    }
-
-    private fun configObservers() {
-        viewModel.errorMessageIsEnabled.observe(viewLifecycleOwner, Observer{ error ->
-            if (error){
-                showDialog("Ha ocurrido un error obteniendo la informacion")
-                binding.usernameTextEdit.error = "*campo obligatorio"
-                binding.emailTextEdit.error = "*campo obligatorio"
-                binding.passwordTextEdit.error = "*campo obligatorio"
-            }
-        })
+        binding.username.addTextChangedListener(textWatcher)
+        binding.email.addTextChangedListener(textWatcher)
+        binding.password.addTextChangedListener(textWatcher)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,11 +107,19 @@ class RegisterFragment : Fragment() {
 
     private fun registerListener(){
         binding.btnInicio.setOnClickListener {
+
+            FirebaseLog.logSignUpClick()
             viewModel.saveNewRegister(binding.usernameTextEdit.text.toString(),
                 binding.emailTextEdit.text.toString(),
                 binding.passwordTextEdit.text.toString())
+
         }
+
+        binding.confirmPassword.text.toString()
+
     }
+
+
 
     //Muestra el cuadro de dialogo al aparecer un error obteniendo informacion de la api
     private fun showDialog(message: String) {

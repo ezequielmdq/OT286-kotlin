@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.melvin.ongandroid.R
+import com.melvin.ongandroid.businesslogic.FirebaseLog
 import com.melvin.ongandroid.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -84,6 +85,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
                     firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
+                    FirebaseLog.logLogInError()
                     // Google Sign In failed, update UI appropriately
                     Toast.makeText(this, "conexion fallida", Toast.LENGTH_LONG).show()
                     Log.w(TAG, "Google sign in failed", e)
@@ -98,11 +100,13 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        FirebaseLog.logLogInSuccess()
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success")
                         val user = auth.currentUser
                         updateUI(user)
                     } else {
+                        FirebaseLog.logLogInError()
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
                         updateUI(null)
