@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Thread.sleep(1000)
 
-        supportActionBar?.hide()
+        //supportActionBar?.hide()
 
         super.onCreate(savedInstanceState)
 
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.log_out, menu)
         return true
@@ -88,6 +88,6 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    }*/
+    }
 
 }

@@ -33,8 +33,6 @@
                     android:text="@string/mensaje_Bienvenidos"
                     android:textColor="@color/black"
                     android:textSize="24sp"
-
-
                     app:fontFamily="@font/poppins_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
