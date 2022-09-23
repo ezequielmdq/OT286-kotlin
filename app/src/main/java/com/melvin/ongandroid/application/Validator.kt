@@ -24,7 +24,7 @@ class Validator {
             pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[~`!@#\$%^&*()_+={[}]-|\\:;\"'<,>.?/])(?=\\S+\$).{8,15}\$")
 
             match = pattern!!.matcher(password)
-            return match!!.find()*/
+            return match!!.find()
 
             return Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}\$")
                 .matcher(password).matches()

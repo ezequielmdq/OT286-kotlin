@@ -1,6 +1,5 @@
 package com.melvin.ongandroid.view.login
 
-import android.graphics.Color
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
@@ -10,8 +9,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -21,7 +18,6 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
 import com.melvin.ongandroid.application.Validator
@@ -39,8 +35,8 @@ import java.util.*
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-     lateinit var binding: FragmentLoginBinding
-     private val callbackManager = CallbackManager.Factory.create()
+    lateinit var binding: FragmentLoginBinding
+    private val callbackManager = CallbackManager.Factory.create()
 
     private val viewModel : LogInViewModel by activityViewModels(
         factoryProducer = {
@@ -53,30 +49,22 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding
+            .inflate(inflater, container, false)
 
-
-
-
-        binding.btLogInGogle?.setOnClickListener {
-
-      
+        binding.btnGoogle.setOnClickListener {
             FirebaseLog.logGmailPressed()
             val loginActivity = requireActivity() as LoginActivity
             loginActivity.signIn()
         }
-        binding.tvOlvidoContrasenia?.setOnClickListener{
+        binding.tvOlvidoContrasenia.setOnClickListener{
             FirebaseLog.logSignUpPressed()
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-
-        binding.loginBtn?.setOnClickListener {
-
+        binding.loginBtn.setOnClickListener {
             viewModel.logIn(LogIn(binding.etEmailLogin?.text.toString(), binding.etPasswordLogin?.text.toString()))
         }
-
-
 
         /** estos metodos maneja el resultado del icinio de sesion. Si es satisfactorio se ejecutara lo
          * que esta en onSucces, sy se cancela lo que esta en on Cancel y si hay algun error
@@ -102,13 +90,11 @@ class LoginFragment : Fragment() {
             })
 
         /** listener boton de facebook para inicio de sesion*/
-
         binding.btnFacebook?.setOnClickListener{
             FirebaseLog.logFacebookPressed()
             LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
         }
 
-        validarCampos()
         configObservables()
         return binding.root
     }
@@ -142,14 +128,14 @@ class LoginFragment : Fragment() {
     }
 
     private fun configObservers() {
-        /*viewModel.token.observe(this, Observer {
+        viewModel.token.observe(this, Observer {
             when(it){
-                binding.etEmailLogin?.error -> showDialog("","")
-                binding.etPasswordLogin?.error -> showDialog("","")
+                binding.etEmailLogin?.error -> showDialog()
+                binding.etPasswordLogin?.error -> showDialog()
                 else -> "Success"
 
             }
-        })*/
+        })
     }
 
     private fun showDialog() {
@@ -177,50 +163,44 @@ class LoginFragment : Fragment() {
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-          //  val email = binding.tiEmail.text.toString().trim()
-          //  val password = binding.tiContrasenia.text.toString().trim()
-
-            if(email.isNotEmpty() && password.isNotEmpty()
-                && Validator.isEmailValid(email) ==  true
-                && Validator.isPasswordValid(password) == true){
-                binding.btLogin.setBackgroundColor(Color.RED)
-                binding.btLogin.setTextColor(Color.WHITE)
-                binding.btLogin.isEnabled =  true
-
             val email = binding.etEmailLogin?.text.toString().trim()
             val password = binding.etPasswordLogin?.text.toString().trim()
 
             //Sin la validacion de contraseña por ahora mientras la api siga funcionando mal para registrarse
-            if(email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(password)){
+            if (email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(
+                    password
+                )
+            ) {
                 binding.loginBtn?.setBackgroundColor(Color.RED)
                 binding.loginBtn?.setTextColor(Color.WHITE)
-                binding.loginBtn?.isEnabled =  true
-            }else{
+                binding.loginBtn?.isEnabled = true
+            } else {
                 binding.loginBtn?.setBackgroundColor(resources.getColor(R.color.botom_disable))
                 binding.loginBtn?.setTextColor(Color.BLACK)
-                binding.loginBtn?.isEnabled =  false
+                binding.loginBtn?.isEnabled = false
 
-           }
+            }
+
         }
 
-        override fun afterTextChanged(p0: Editable?) {
-
+        override fun afterTextChanged(s: Editable?) {
+            TODO("Not yet implemented")
         }
 
     }
 
 
 
-    /** el método onActivityResult, llama a callbackManager.onActivityResult para pasar
+        /** el método onActivityResult, llama a callbackManager.onActivityResult para pasar
     los resultados del inicio de sesión al objeto LoginManager mediante callbackManager.*/
 
     @Override
-   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
 
 
         //show error dialog if there's an issue with the login api
-   }
+    }
 
 }
