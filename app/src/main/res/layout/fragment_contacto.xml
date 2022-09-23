@@ -17,6 +17,11 @@
         android:layout_marginEnd="16dp"
         tools:context=".view.principal.contacto.ContactoFragment">
 
+        <include
+            android:id="@+id/imageView_logoSomos"
+            layout="@layout/logo_implement" />
+
+
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/spinnerCarga"
             android:layout_width="wrap_content"
@@ -36,14 +41,16 @@
             android:id="@+id/tv_contribuir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/contribuir"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:layout_marginTop="70dp"
 
 
             app:fontFamily="@font/poppins_medium"
+
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

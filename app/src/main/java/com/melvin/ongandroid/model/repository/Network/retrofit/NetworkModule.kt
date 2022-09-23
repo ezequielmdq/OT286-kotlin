@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 
 object NetworkModule {
-
+  private  const val BASE_URL = "https://ongapi.alkemy.org/api/"
     //get retrofit
     @Singleton
     @Provides
@@ -45,8 +45,7 @@ object NetworkModule {
             .build()
     }
 
-    @Singleton
-    @Provides
+
     fun getClient(): AlkemyAPIInterface {
         return getClient
     }

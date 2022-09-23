@@ -1,8 +1,8 @@
 package com.melvin.ongandroid.view.login
 
+import android.graphics.Color
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +20,7 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
 import com.melvin.ongandroid.application.Validator
@@ -28,13 +29,13 @@ import com.melvin.ongandroid.databinding.FragmentLoginBinding
 import com.melvin.ongandroid.view.LoginActivity
 import com.melvin.ongandroid.model.LogIn
 import com.melvin.ongandroid.model.repository.Network.implement.LogInDataRepository
-
 import com.melvin.ongandroid.view.MainActivity
 import com.melvin.ongandroid.viewmodel.LogInViewModel
 import com.melvin.ongandroid.viewmodel.LogInViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
      lateinit var binding: FragmentLoginBinding
@@ -55,7 +56,10 @@ class LoginFragment : Fragment() {
 
 
 
-        binding.btnGoogle?.setOnClickListener {
+
+        binding.btLogInGogle?.setOnClickListener {
+
+      
             FirebaseLog.logGmailPressed()
             val loginActivity = requireActivity() as LoginActivity
             loginActivity.signIn()
@@ -70,6 +74,8 @@ class LoginFragment : Fragment() {
 
             viewModel.logIn(LogIn(binding.etEmailLogin?.text.toString(), binding.etPasswordLogin?.text.toString()))
         }
+
+
 
         /** estos metodos maneja el resultado del icinio de sesion. Si es satisfactorio se ejecutara lo
          * que esta en onSucces, sy se cancela lo que esta en on Cancel y si hay algun error
@@ -110,6 +116,7 @@ class LoginFragment : Fragment() {
         binding.etEmailLogin?.addTextChangedListener(textWatcher)
         binding.etPasswordLogin?.addTextChangedListener(textWatcher)
     }
+
 
     //Configura los observables del viewmodel
     private fun configObservables() {
@@ -170,6 +177,10 @@ class LoginFragment : Fragment() {
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+          //  val email = binding.tiEmail.text.toString().trim()
+          //  val password = binding.tiContrasenia.text.toString().trim()
+
             val email = binding.etEmailLogin?.text.toString().trim()
             val password = binding.etPasswordLogin?.text.toString().trim()
 
@@ -182,13 +193,13 @@ class LoginFragment : Fragment() {
                 binding.loginBtn?.setBackgroundColor(resources.getColor(R.color.botom_disable))
                 binding.loginBtn?.setTextColor(Color.BLACK)
                 binding.loginBtn?.isEnabled =  false
+
             }
 
 
+           }
 
 
-
-        }
 
         override fun afterTextChanged(p0: Editable?) {
 
