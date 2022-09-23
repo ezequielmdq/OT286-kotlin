@@ -5,21 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.FragmentNosotrosBinding
 import com.melvin.ongandroid.model.Miembros
 
-import com.melvin.ongandroid.model.Personal
-import com.melvin.ongandroid.model.repository.Network.implement.LogInDataRepository
 import com.melvin.ongandroid.model.repository.Network.implement.MiembrosDatarepository
 import com.melvin.ongandroid.view.principal.nosotros.MiembroClickListener
-import com.melvin.ongandroid.view.principal.nosotros.MiembroFragment
-import com.melvin.ongandroid.viewmodel.LogInViewModel
-import com.melvin.ongandroid.viewmodel.LogInViewModelFactory
+import com.melvin.ongandroid.view.principal.nosotros.MiembroDialogo
 import com.melvin.ongandroid.viewmodel.MiembrosViewModel
 import com.melvin.ongandroid.viewmodel.MiembrosViewModelFactory
 
@@ -41,12 +37,22 @@ class NosotrosFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentNosotrosBinding.inflate(inflater, container, false)
         adapterNosotros = AdapterListNosotros()
         adapterNosotros.setOnclicklistener(object : MiembroClickListener{
             override fun itemClick(position: Int) {
-                findNavController().navigate(R.id.action_nosotrosFragment_to_miembroFragment)
+                /** Se capturan los datos de la api y se envian al dialog fragment*/
+                val resultImagen = viewModel.listaMiembros.value?.get(position)?.image
+                setFragmentResult("requestKey1", bundleOf("bundleKey1" to resultImagen))
+                val resultNombre = viewModel.listaMiembros.value?.get(position)?.name
+                setFragmentResult("requestKey2", bundleOf("bundleKey2" to resultNombre))
+                val resultDescripcion = viewModel.listaMiembros.value?.get(position)?.description
+                setFragmentResult("requestKey3", bundleOf("bundleKey3" to resultDescripcion))
+                val resultUrlFace = viewModel.listaMiembros.value?.get(position)?.facebookUrl
+                setFragmentResult("requestKey4", bundleOf("bundleKey4" to resultUrlFace))
+                val resultUrlLi = viewModel.listaMiembros.value?.get(position)?.linkedinUrl
+                setFragmentResult("requestKey5", bundleOf("bundleKey5" to resultUrlLi))
+                getFragmentManager()?.let { MiembroDialogo().show(it, "DialogFragment") }
             }
         })
 
@@ -64,7 +70,7 @@ class NosotrosFragment : Fragment() {
         })
     }
 
-    private fun configList(list: List<Miembros>){
+    private fun configList(list: List<Miembros>) {
         adapterNosotros.list = list
         binding.apply {
             rvNosotros.adapter = adapterNosotros

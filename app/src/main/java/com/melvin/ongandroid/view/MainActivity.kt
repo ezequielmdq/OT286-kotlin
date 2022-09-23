@@ -27,10 +27,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         Thread.sleep(1000)
-
-        //supportActionBar?.hide()
-
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.hide()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
