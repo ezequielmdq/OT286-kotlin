@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/imageView_logoSomos"
+            layout="@layout/logo_implement"
+            />
+
+
     <TextView
         android:id="@+id/tvNovedad"
         android:layout_width="match_parent"
@@ -20,6 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNovedad"
@@ -41,6 +60,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+        </TableLayout>
+    </ScrollView>
 
 </LinearLayout>

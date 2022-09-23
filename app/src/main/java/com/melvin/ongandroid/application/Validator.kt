@@ -17,7 +17,9 @@ class Validator {
         }
 
         fun isPasswordValid(password: String): Boolean {
-            /*var pattern: Pattern? = null
+
+            var pattern: Pattern? = null
+
             var match: Matcher? =null
             pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[~`!@#\$%^&*()_+={[}]-|\\:;\"'<,>.?/])(?=\\S+\$).{8,15}\$")
 

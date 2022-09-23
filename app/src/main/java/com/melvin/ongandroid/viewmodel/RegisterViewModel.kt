@@ -16,6 +16,7 @@ import javax.inject.Inject
 import javax.net.ssl.SSLEngineResult
 
 @HiltViewModel
+
 class RegisterViewModel @Inject constructor(private val newRegisterStatus: NewRegisterStatus) : ViewModel() {
 
     private val _bottonEnable = MutableLiveData(false)

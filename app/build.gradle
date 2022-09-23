@@ -47,6 +47,10 @@ android {
     }
 }
 
+    kapt{
+        correctErrorTypes = true
+    }
+
 dependencies {
 
     implementation 'androidx.fragment:fragment:1.5.2'
