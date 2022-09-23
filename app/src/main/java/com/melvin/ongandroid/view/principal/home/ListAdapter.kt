@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.CardviewBienvenidosBinding
 import com.melvin.ongandroid.model.WelcomeImage
+import com.melvin.ongandroid.removeTags
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
 
@@ -53,6 +54,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.WelcomeViewHolder>() {
 
             binding.apply {
                 welcomeImage = item
+                descripcionImagen.text = removeTags(item.description)
                 Glide.with(context)
                     .load(item.image)
                     .placeholder(R.drawable.loading_animation)

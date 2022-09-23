@@ -156,8 +156,8 @@ class HomeFragment : Fragment() {
      */
     private fun configNovedades(novedades: List<Novedad>) {
         novedadAdapter = NovedadAdapter()
-        //novedadAdapter.novedades.addAll(novedades)
-        novedadAdapter.actualizarData(novedades)
+        novedadAdapter.novedades.addAll(novedades)
+        //novedadAdapter.actualizarData(novedades)
         binding?.let { binding ->
             binding.rvNovedades.apply {
                 adapter = novedadAdapter

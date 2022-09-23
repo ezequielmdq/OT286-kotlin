@@ -18,8 +18,8 @@ class ActividadesViewModel(private val repositoryActividades: IActividadesDataRe
     val isLoad: LiveData<Boolean> = _isLoad
 
     //observable de estado de error
-    private val _error: MutableLiveData<Boolean> = MutableLiveData()
-    val error: LiveData<Boolean> = _error
+    private val _error: MutableLiveData<Boolean?> = MutableLiveData()
+    val error: LiveData<Boolean?> = _error
 
     init {
         loadActividades()
@@ -42,6 +42,10 @@ class ActividadesViewModel(private val repositoryActividades: IActividadesDataRe
 
     private fun showError(){
         _error.value = true
+    }
+
+    fun doneError(){
+        _error.value = null
     }
 
 }

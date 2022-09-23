@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#CDCDCD"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTittleTestimonio">
@@ -41,21 +41,21 @@
                     layout="@layout/cardview_item_testimonio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/espacioDeSeparacion"/>
+                    android:layout_marginVertical="10dp"/>
 
                 <include
                     android:id="@+id/cardTestimonio2"
                     layout="@layout/cardview_item_testimonio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/espacioDeSeparacion"/>
+                    android:layout_marginBottom="10dp"/>
 
                 <include
                     android:id="@+id/cardTestimonio3"
                     layout="@layout/cardview_item_testimonio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/espacioDeSeparacion"/>
+                    android:layout_marginBottom="10dp"/>
 
                 <include
                     android:id="@+id/cardTestimonio4"

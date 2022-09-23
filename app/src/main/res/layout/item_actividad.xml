@@ -15,47 +15,55 @@
         android:padding="12dp"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:text="ActividadNombre"
-            android:textAlignment="center"
-            app:fontFamily="@font/poppins_medium"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivFoto" />
-
-        <ImageView
-            android:id="@+id/ivFoto"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_marginTop="12dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/tvNameDescripcion"
-            app:layout_constraintEnd_toEndOf="@+id/tvNameDescripcion"
-            app:layout_constraintStart_toStartOf="@+id/tvNameDescripcion"
-            app:layout_constraintTop_toBottomOf="@+id/tvNombre"
-            tools:srcCompat= "@mipmap/ic_launcher"/>
-
-        <TextView
-            android:id="@+id/tvNameDescripcion"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:orientation="vertical"
 
-            android:textAllCaps="false"
-
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNombre"
-            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla..." />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivFoto"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginTop="12dp"
+                android:scaleType="centerCrop"
+
+                tools:srcCompat="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:paddingStart="12dp"
+                android:text="ActividadNombre"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:fontFamily="@font/poppins_medium"
+
+                 />
+
+
+            <TextView
+                android:id="@+id/tvNameDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textAllCaps="false"
+
+                android:textSize="12sp"
+
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla...aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+        </LinearLayout>
 
 
 

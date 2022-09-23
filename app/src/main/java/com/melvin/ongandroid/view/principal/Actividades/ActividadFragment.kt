@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.FragmentActividadBinding
 import com.melvin.ongandroid.model.Actividad
@@ -51,6 +52,23 @@ class ActividadFragment : Fragment() {
                 }
 
             })
+
+            error.observe(viewLifecycleOwner, Observer { error ->
+                onLoadError()
+                viewModel.doneError()
+            })
+        }
+    }
+
+    private fun onLoadError() {
+        binding?.let {
+            Snackbar
+                .make(it.root, resources.getString(R.string.retry), Snackbar.LENGTH_INDEFINITE)
+                .setAction("Reintentar") {
+
+                    viewModel.loadActividades()
+                }
+                .show()
         }
     }
 

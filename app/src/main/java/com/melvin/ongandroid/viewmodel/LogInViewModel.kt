@@ -5,11 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
 import com.melvin.ongandroid.application.Prefs
 import com.melvin.ongandroid.application.Validator
 import com.melvin.ongandroid.model.LogIn
-import com.melvin.ongandroid.model.data.LogInData
 import com.melvin.ongandroid.model.repository.Network.interfaces.ILogInDataRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
@@ -90,6 +88,8 @@ class LogInViewModel(private val repositoryLogIn: ILogInDataRepository) : ViewMo
             }else{
                 _error.postValue(true)
             }
+
+
 
 
 

@@ -129,6 +129,8 @@ class LoginFragment : Fragment() {
 
         viewModel.error.observe(viewLifecycleOwner, Observer {
             FirebaseLog.logLogInError()
+            /*binding.etEmailLogin?.error = "*campo obligatorio"
+            binding.etPasswordLogin?.error = "*campo obligatorio"*/
             showDialog()
         })
     }
@@ -171,7 +173,7 @@ class LoginFragment : Fragment() {
             val email = binding.etEmailLogin?.text.toString().trim()
             val password = binding.etPasswordLogin?.text.toString().trim()
 
-            //Sin la validacion de contraseña por ahora mientras la api siga funcionando mal para registrarse
+
             if(email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(password)){
                 binding.loginBtn?.setBackgroundColor(Color.RED)
                 binding.loginBtn?.setTextColor(Color.WHITE)
@@ -181,6 +183,11 @@ class LoginFragment : Fragment() {
                 binding.loginBtn?.setTextColor(Color.BLACK)
                 binding.loginBtn?.isEnabled =  false
             }
+
+
+
+
+
         }
 
         override fun afterTextChanged(p0: Editable?) {
