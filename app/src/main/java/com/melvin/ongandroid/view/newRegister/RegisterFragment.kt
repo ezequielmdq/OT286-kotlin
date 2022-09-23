@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.businesslogic.FirebaseLog
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 class RegisterFragment : Fragment() {
    
-    private val viewModel: RegisterViewModel by viewModels()
+    private val registerViewModel: RegisterViewModel by viewModels()
     private lateinit var _binding: FragmentRegisterBinding
     private val binding get() = _binding
 
@@ -38,22 +39,27 @@ class RegisterFragment : Fragment() {
         registerListener()
         setearTextWatcher()
 
+        binding.apply {
+            viewModel = registerViewModel
+        }
+
         return binding.root
     }
 
     private fun configObservers() {
 
-        viewModel.errorMessageIsEnabled.observe(viewLifecycleOwner, Observer{ error ->
+        registerViewModel.errorMessageIsEnabled.observe(viewLifecycleOwner, Observer{ error ->
             if (error){
                 showDialog("Ha ocurrido un error obteniendo la informacion")
                 binding.username.error = "*campo obligatorio"
                 binding.email.error = "*campo obligatorio"
                 binding.password.error = "*campo obligatorio"
+                binding.confirmPassword.error = "*campo obligatorio"
             }
         })
 
         //confiogro un observador para el boton
-        viewModel.bottonEnable.observe(viewLifecycleOwner, Observer {enable ->
+        registerViewModel.bottonEnable.observe(viewLifecycleOwner, Observer { enable ->
             val color = if(enable) {
                 R.color.red
             }else {
@@ -65,7 +71,7 @@ class RegisterFragment : Fragment() {
             }
         })
         //confiogro un observador para el mensaje de contraseñas diferentes
-        viewModel.passwordAreDiferent.observe(viewLifecycleOwner, Observer { areDiferent ->
+        registerViewModel.passwordAreDiferent.observe(viewLifecycleOwner, Observer { areDiferent ->
             val visibility = if(areDiferent){
                 View.VISIBLE
             } else {
@@ -83,8 +89,25 @@ class RegisterFragment : Fragment() {
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+           /* val username = binding.username.text.toString().trim()
+            val email = binding.email.text.toString().trim()
+            val password = binding.password.text.toString().trim()
+
+            if(email.isNotEmpty() && password.isNotEmpty() && username.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(password)){
+                binding.btnInicio.setBackgroundColor(Color.RED)
+                binding.btnInicio.setTextColor(Color.WHITE)
+                binding.btnInicio.isEnabled =  true
+            }else{
+                binding.btnInicio.setBackgroundColor(resources.getColor(R.color.botom_disable))
+                binding.btnInicio.setTextColor(Color.BLACK)
+                binding.btnInicio.isEnabled =  false
+
+            }*/
+
             binding.username.error = null
             binding.email.error = null
+            binding.password.error = null
             binding.password.error = null
         }
 
@@ -111,10 +134,14 @@ class RegisterFragment : Fragment() {
         binding.btnInicio.setOnClickListener {
 
             FirebaseLog.logSignUpClick()
-            viewModel.saveNewRegister(binding.username.text.toString(),
+            registerViewModel.saveNewRegister(binding.username.text.toString(),
                 binding.email.text.toString(),
                 binding.password.text.toString())
 
+        }
+
+        binding.textViewInicio.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
         binding.confirmPassword.text.toString()

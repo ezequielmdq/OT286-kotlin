@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
 
 
 
-        binding.btLogInGogle?.setOnClickListener {
+        binding.btnGoogle?.setOnClickListener {
 
       
             FirebaseLog.logGmailPressed()

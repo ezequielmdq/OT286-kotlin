@@ -1,5 +1,6 @@
 package com.melvin.ongandroid.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -70,13 +71,14 @@ class RegisterViewModel @Inject constructor(private val newRegisterStatus: NewRe
                     _statusNewRegister.postValue(true)
 
                 }else{
+                    Log.d("REGISTER", "No funciono estoy en la 74")
                     _errorMessageIsEnabled.postValue(true)
                 }
 
-                FirebaseLog.logSignUpSuccess()
                 if (responseRegister.success) {
+                    FirebaseLog.logSignUpSuccess()
                     _listaRegister.value = emptyList()
-                    _errorMessageIsEnabled.value = true
+                    //_errorMessageIsEnabled.value = true
                 } else {
 
                     //_listaRegister.value = responseRegister
@@ -86,6 +88,8 @@ class RegisterViewModel @Inject constructor(private val newRegisterStatus: NewRe
             }catch (e: Exception){
 
                 FirebaseLog.logSignUpError()
+
+                Log.d("REGISTER", "No funciono estoy en la 92")
 
                 _errorMessageIsEnabled.value = true
                 _listaRegister.value = emptyList()
