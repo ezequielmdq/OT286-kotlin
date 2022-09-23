@@ -26,6 +26,9 @@ class MiembrosViewModel( private val repositoryMiembros: IMiembrosDataRepository
         throwable.printStackTrace()
     }
 
+    init {
+        loadMiembros()
+    }
 
     fun loadMiembros() {
         viewModelScope.launch(coroutineExceptionHandler) {
@@ -36,9 +39,7 @@ class MiembrosViewModel( private val repositoryMiembros: IMiembrosDataRepository
                 _listaMiembros.value = list
                 _error.value = false
 
-
-/**se genera el log de evento de conexion exitosa*/
-
+                /**se genera el log de evento de conexion exitosa*/
                 FirebaseLog.logMiembrosSuccess()
                 if (list.isNullOrEmpty()) {
                     _listaMiembros.value = emptyList()
@@ -49,8 +50,7 @@ class MiembrosViewModel( private val repositoryMiembros: IMiembrosDataRepository
 
             } catch (e: Exception) {
 
-/**se genera el log de evento de error de conexion*/
-
+                /**se genera el log de evento de error de conexion*/
                 FirebaseLog.logMiembrosError()
                 //seteo el observable error en true
                 _error.value = true
@@ -60,15 +60,17 @@ class MiembrosViewModel( private val repositoryMiembros: IMiembrosDataRepository
         }
     }
 
-    class MiembrosViewModelFactory(
-        private val repositoryMiembros: IMiembrosDataRepository
+
+}
+
+class MiembrosViewModelFactory(
+    private val repositoryMiembros: IMiembrosDataRepository
     ) : ViewModelProvider.Factory {
 
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MiembrosViewModel(repositoryMiembros) as T
-        }
-
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return MiembrosViewModel(repositoryMiembros) as T
     }
+
 }
 
 

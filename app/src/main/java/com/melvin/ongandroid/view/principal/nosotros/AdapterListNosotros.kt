@@ -7,19 +7,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.CardPersonalBinding
-import com.melvin.ongandroid.model.Personal
+import com.melvin.ongandroid.model.Miembros
 import com.melvin.ongandroid.view.principal.nosotros.MiembroClickListener
 
 class AdapterListNosotros: RecyclerView.Adapter<AdapterListNosotros.PersonalHolder>(), MiembroClickListener {
 
     private lateinit var context: Context
-    var list: List<Personal>? = null
+    var list: List<Miembros>? = null
     private lateinit var listener : MiembroClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonalHolder {
         context = parent.context
         val inflater = LayoutInflater.from(context)
-        val binding = CardPersonalBinding.inflate(inflater, parent, false)
+        val binding = CardPersonalBinding
+            .inflate(inflater, parent, false)
         return PersonalHolder(binding, listener)
     }
 
@@ -34,18 +35,18 @@ class AdapterListNosotros: RecyclerView.Adapter<AdapterListNosotros.PersonalHold
     class PersonalHolder(private val binding: CardPersonalBinding, val listener: MiembroClickListener)
         : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: Personal?, context: Context){
+        fun bind(item: Miembros?, context: Context){
             item?.let {
                 binding.apply {
                     Glide.with(context)
                         .load(item.image)
                         .placeholder(R.drawable.loading_animation)
-                        .into(circleImageView)
+                        .into(image)
 
-                    personal = item
+                    miembro = item
                 }
             }
-            binding.circleImageView.setOnClickListener{
+            binding.image.setOnClickListener{
                 listener.itemClick(adapterPosition)
             }
         }
