@@ -41,11 +41,12 @@ class LoginActivity : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+            supportActionBar?.hide()
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
             //setTheme(R.style.Theme_AppCompat_Light_NoActionBar)
-            supportActionBar?.hide()
+
 
             // [START config_signin]
             // Configure Google Sign In
