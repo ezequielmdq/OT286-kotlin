@@ -8,11 +8,24 @@
             type="com.melvin.ongandroid.model.Testimonio" />
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/yellow"
+        app:cardCornerRadius="8dp"
+
+        >
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@color/white">
+        android:background="@color/yellow"
+
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageViewTestimonio"
@@ -54,7 +67,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
-            android:text="@{testimonio.description}"
+
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -63,5 +76,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </layout>

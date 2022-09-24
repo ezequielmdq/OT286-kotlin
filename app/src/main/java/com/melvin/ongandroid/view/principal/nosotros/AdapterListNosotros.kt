@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.databinding.CardPersonalBinding
+
 import com.melvin.ongandroid.model.Miembros
+import com.melvin.ongandroid.removeTags
 import com.melvin.ongandroid.view.principal.nosotros.MiembroClickListener
 
 class AdapterListNosotros: RecyclerView.Adapter<AdapterListNosotros.PersonalHolder>(), MiembroClickListener {
@@ -44,6 +46,7 @@ class AdapterListNosotros: RecyclerView.Adapter<AdapterListNosotros.PersonalHold
                         .into(image)
 
                     miembro = item
+                    tvPuesto.text = removeTags(item.description!!)
                 }
             }
             binding.image.setOnClickListener{

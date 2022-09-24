@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.model.Novedad
+import com.melvin.ongandroid.removeTags
 import com.melvin.ongandroid.view.principal.home.NovedadListener
 
 
@@ -31,7 +32,10 @@ class NovedadAdapter() : RecyclerView.Adapter<NovedadAdapter.NovedadViewHolder>(
         fun bind(novedad: Novedad, context: Context){
 
                 tvTitulo.text = novedad.titulo
-                tvDescripcion.text = novedad.descripcion
+
+                val descripcion = removeTags(novedad.descripcion)
+
+                tvDescripcion.text = descripcion
                 Glide.with(context).load(novedad.imagen).into(ivNovedad)
 
         }

@@ -14,28 +14,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/miembros"
-            android:textStyle="bold"
             android:textSize="24sp"
+            android:textColor="@color/black"
             app:fontFamily="@font/poppins_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView_logoSomos" />
 
-        <View
-            android:id="@+id/linea"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="8dp"
-            android:background="#CDCDCD"
-            app:layout_constraintTop_toBottomOf="@+id/tvNosotros"
-            tools:layout_editor_absoluteX="8dp" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNosotros"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linea" />
+            app:layout_constraintTop_toBottomOf="@+id/tvNosotros" />
 
         <include
             android:id="@+id/imageView_logoSomos"

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 
 import com.melvin.ongandroid.databinding.ItemActividadBinding
 import com.melvin.ongandroid.model.Actividad
-
+import com.melvin.ongandroid.removeTags
 
 
 class ActividadAdapter: RecyclerView.Adapter<ActividadAdapter.ActividadViewHolder>() {
@@ -25,7 +25,8 @@ class ActividadAdapter: RecyclerView.Adapter<ActividadAdapter.ActividadViewHolde
 
             binding.apply {
                 tvNombre.text = actividad.name
-                tvNameDescripcion.text = actividad.description
+
+                tvNameDescripcion.text = removeTags(actividad.description)
                 Glide.with(context).load(actividad.image).into(ivFoto)
             }
 

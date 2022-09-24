@@ -38,7 +38,7 @@ class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
     private val callbackManager = CallbackManager.Factory.create()
 
-    private val viewModel : LogInViewModel by activityViewModels(
+    private val viewModel: LogInViewModel by activityViewModels(
         factoryProducer = {
             LogInViewModelFactory(LogInDataRepository())
         }
@@ -52,18 +52,28 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding
             .inflate(inflater, container, false)
 
+
+
+
+
         binding.btnGoogle.setOnClickListener {
+
             FirebaseLog.logGmailPressed()
             val loginActivity = requireActivity() as LoginActivity
             loginActivity.signIn()
         }
-        binding.tvOlvidoContrasenia.setOnClickListener{
+        binding.tvOlvidoContrasenia.setOnClickListener {
             FirebaseLog.logSignUpPressed()
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.loginBtn.setOnClickListener {
-            viewModel.logIn(LogIn(binding.etEmailLogin?.text.toString(), binding.etPasswordLogin?.text.toString()))
+            viewModel.logIn(
+                LogIn(
+                    binding.etEmailLogin?.text.toString(),
+                    binding.etPasswordLogin?.text.toString()
+                )
+            )
         }
 
         /** estos metodos maneja el resultado del icinio de sesion. Si es satisfactorio se ejecutara lo
@@ -90,11 +100,13 @@ class LoginFragment : Fragment() {
             })
 
         /** listener boton de facebook para inicio de sesion*/
-        binding.btnFacebook?.setOnClickListener{
+        binding.btnFacebook?.setOnClickListener {
             FirebaseLog.logFacebookPressed()
-            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+            LoginManager.getInstance()
+                .logInWithReadPermissions(this, Arrays.asList("public_profile"));
         }
 
+        validarCampos()
         configObservables()
         return binding.root
     }
@@ -113,7 +125,7 @@ class LoginFragment : Fragment() {
             prefs.saveToken(viewModel.token.value.toString())
 
 
-            if(viewModel.token.value != null){
+            if (viewModel.token.value != null) {
                 val intent = Intent(context, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
@@ -123,13 +135,15 @@ class LoginFragment : Fragment() {
 
         viewModel.error.observe(viewLifecycleOwner, Observer {
             FirebaseLog.logLogInError()
+            /*binding.etEmailLogin?.error = "*campo obligatorio"
+            binding.etPasswordLogin?.error = "*campo obligatorio"*/
             showDialog()
         })
     }
 
     private fun configObservers() {
         viewModel.token.observe(this, Observer {
-            when(it){
+            when (it) {
                 binding.etEmailLogin?.error -> showDialog()
                 binding.etPasswordLogin?.error -> showDialog()
                 else -> "Success"
@@ -140,15 +154,14 @@ class LoginFragment : Fragment() {
 
     private fun showDialog() {
 
-            context?.let {
-                AlertDialog.Builder(it).setMessage(getString(R.string.error_login)).setTitle("Error")
-                    .setNeutralButton(
-                        "Aceptar"
-                    ) { _, _ -> }
-                    .create()
-                    .show()
-            }
-
+        context?.let {
+            AlertDialog.Builder(it).setMessage(getString(R.string.error_login)).setTitle("Error")
+                .setNeutralButton(
+                    "Aceptar"
+                ) { _, _ -> }
+                .create()
+                .show()
+        }
 
 
     }
@@ -156,21 +169,19 @@ class LoginFragment : Fragment() {
     /**
      * Funcion que verifica si el email y la contraseña cumplen con las ocndiciones
      */
-    private val textWatcher : TextWatcher = object  : TextWatcher {
+    private val textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             val email = binding.etEmailLogin?.text.toString().trim()
             val password = binding.etPasswordLogin?.text.toString().trim()
 
-            //Sin la validacion de contraseña por ahora mientras la api siga funcionando mal para registrarse
-            if (email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(
-                    password
-                )
-            ) {
+
+
+            if (email.isNotEmpty() && password.isNotEmpty() && Validator.isEmailValid(email) && Validator.isPasswordValid(password)) {
+
                 binding.loginBtn?.setBackgroundColor(Color.RED)
                 binding.loginBtn?.setTextColor(Color.WHITE)
                 binding.loginBtn?.isEnabled = true
@@ -180,18 +191,16 @@ class LoginFragment : Fragment() {
                 binding.loginBtn?.isEnabled = false
 
             }
+        }
+
+        override fun afterTextChanged(p0: Editable?) {
 
         }
 
-        override fun afterTextChanged(s: Editable?) {
-            TODO("Not yet implemented")
-        }
 
     }
 
-
-
-        /** el método onActivityResult, llama a callbackManager.onActivityResult para pasar
+    /** el método onActivityResult, llama a callbackManager.onActivityResult para pasar
     los resultados del inicio de sesión al objeto LoginManager mediante callbackManager.*/
 
     @Override
@@ -203,4 +212,15 @@ class LoginFragment : Fragment() {
         //show error dialog if there's an issue with the login api
     }
 
+
 }
+
+
+
+
+
+
+
+
+
+

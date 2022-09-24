@@ -18,7 +18,11 @@
                 android:layout_height="wrap_content">
 
 
+                <include
+                    android:id="@+id/imageView_logoSomos"
+                    layout="@layout/logo_implement"
 
+                    />
 
                 <TextView
                     android:id="@+id/tvBienvenida"
@@ -32,7 +36,7 @@
                     app:fontFamily="@font/poppins_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/imageView_logoSomos" />
 
                 <include
                     android:id="@+id/errorMassivaLayout"
@@ -60,6 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"

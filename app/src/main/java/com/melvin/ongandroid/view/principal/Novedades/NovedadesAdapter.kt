@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.melvin.ongandroid.R
 import com.melvin.ongandroid.model.Novedad
+import com.melvin.ongandroid.removeTags
 
 class NovedadesAdapter : RecyclerView.Adapter<NovedadesAdapter.NovedadesViewHolder>() {
 
@@ -26,7 +28,11 @@ class NovedadesAdapter : RecyclerView.Adapter<NovedadesAdapter.NovedadesViewHold
         fun bind(novedad: Novedad, context: Context){
 
             tvTitulo.text = novedad.titulo
-            tvDescripcion.text = novedad.descripcion
+
+
+            val descripcion = removeTags(novedad.descripcion)
+
+            tvDescripcion.text = descripcion
             Glide.with(context).load(novedad.imagen).into(ivNovedad)
         }
     }
