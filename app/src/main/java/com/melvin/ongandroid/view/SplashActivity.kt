@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun verificacionDeUsuario() {
-        if(!ONGApplication.prefs.getToken().isNullOrEmpty()){
+        if(ONGApplication.prefs.getToken().isNullOrEmpty()){
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)

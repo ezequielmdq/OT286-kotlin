@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.ktx.Firebase
 import com.melvin.ongandroid.R
+import com.melvin.ongandroid.application.ONGApplication.Companion.prefs
 import com.melvin.ongandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
 
                 user.currentUser?.delete()
 
+                prefs.deleteToken()
                 startActivity(Intent(this, LoginActivity::class.java))
                 true
             }

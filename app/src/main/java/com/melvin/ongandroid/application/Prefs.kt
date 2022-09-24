@@ -16,4 +16,8 @@ class Prefs(context: Context) {
     fun getToken() : String? {
         return storage.getString(SHARED_TOKEN, "")
     }
+
+    fun deleteToken(){
+        storage.edit().putString(SHARED_TOKEN, "").apply()
+    }
 }
